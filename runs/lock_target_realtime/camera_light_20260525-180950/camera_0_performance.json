@@ -1,0 +1,1945 @@
+{
+  "mode": "realtime",
+  "runtime": {
+    "total_duration_sec": 40.714,
+    "processed_frames": 61,
+    "effective_fps": 1.498,
+    "platform": "Windows-10-10.0.17763-SP0",
+    "python_version": "3.10.11",
+    "psutil_available": true,
+    "torch_available": true,
+    "cuda_available": false,
+    "cuda_device_name": null
+  },
+  "stages": {
+    "detect_track_ms": {
+      "count": 61,
+      "avg_ms": 101.5,
+      "min_ms": 77.31,
+      "max_ms": 566.13,
+      "median_ms": 90.91
+    },
+    "face_detect_classical_ms": {
+      "count": 61,
+      "avg_ms": 114.8,
+      "min_ms": 70.07,
+      "max_ms": 208.33,
+      "median_ms": 111.22
+    },
+    "face_detect_profile_ms": {
+      "count": 61,
+      "avg_ms": 353.83,
+      "min_ms": 267.08,
+      "max_ms": 476.28,
+      "median_ms": 345.73
+    },
+    "face_detect_total_ms": {
+      "count": 61,
+      "avg_ms": 492.63,
+      "min_ms": 345.68,
+      "max_ms": 671.11,
+      "median_ms": 479.08
+    },
+    "collect_candidates_ms": {
+      "count": 61,
+      "avg_ms": 541.27,
+      "min_ms": 0.01,
+      "max_ms": 1060.68,
+      "median_ms": 506.64
+    },
+    "plot_base_ms": {
+      "count": 61,
+      "avg_ms": 1.44,
+      "min_ms": 1.2,
+      "max_ms": 2.1,
+      "median_ms": 1.4
+    },
+    "embedding_ms": {
+      "count": 8,
+      "avg_ms": 445.05,
+      "min_ms": 383.61,
+      "max_ms": 601.92,
+      "median_ms": 416.58
+    },
+    "state_update_ms": {
+      "count": 61,
+      "avg_ms": 9.99,
+      "min_ms": 0.01,
+      "max_ms": 603.18,
+      "median_ms": 0.09
+    },
+    "control_update_ms": {
+      "count": 61,
+      "avg_ms": 0.03,
+      "min_ms": 0.02,
+      "max_ms": 0.06,
+      "median_ms": 0.02
+    },
+    "draw_overlay_ms": {
+      "count": 61,
+      "avg_ms": 0.24,
+      "min_ms": 0.18,
+      "max_ms": 0.46,
+      "median_ms": 0.22
+    },
+    "copy_output_frame_ms": {
+      "count": 61,
+      "avg_ms": 1.1,
+      "min_ms": 0.73,
+      "max_ms": 10.14,
+      "median_ms": 0.93
+    },
+    "write_video_ms": {
+      "count": 61,
+      "avg_ms": 6.72,
+      "min_ms": 5.06,
+      "max_ms": 10.06,
+      "median_ms": 6.46
+    },
+    "frame_total_ms": {
+      "count": 61,
+      "avg_ms": 662.51,
+      "min_ms": 120.73,
+      "max_ms": 1842.61,
+      "median_ms": 610.77
+    },
+    "face_detect_mtcnn_ms": {
+      "count": 19,
+      "avg_ms": 72.62,
+      "min_ms": 62.29,
+      "max_ms": 86.99,
+      "median_ms": 71.35
+    }
+  },
+  "counts": {
+    "candidate_count": {
+      "total": 61,
+      "avg_per_frame": 1.0,
+      "max_per_frame": 1
+    },
+    "face_detect_calls": {
+      "total": 61,
+      "avg_per_frame": 1.0,
+      "max_per_frame": 1
+    },
+    "embedding_calls": {
+      "total": 8,
+      "avg_per_frame": 0.13,
+      "max_per_frame": 1
+    },
+    "face_detect_mtcnn_calls": {
+      "total": 19,
+      "avg_per_frame": 0.31,
+      "max_per_frame": 1
+    }
+  },
+  "resources": {
+    "system_cpu_percent": {
+      "avg": 45.38,
+      "max": 71.1
+    },
+    "process_cpu_percent": {
+      "avg": 471.86,
+      "max": 812.5
+    },
+    "process_rss_mb": {
+      "avg": 753.68,
+      "max": 798.68
+    }
+  },
+  "frame_records": [
+    {
+      "frame_index": 1,
+      "source_frame_id": 1,
+      "dropped_frames_before": 0,
+      "stage_times_ms": {
+        "detect_track_ms": 566.13,
+        "face_detect_classical_ms": 208.33,
+        "face_detect_profile_ms": 446.87,
+        "face_detect_total_ms": 655.99,
+        "collect_candidates_ms": 656.1,
+        "plot_base_ms": 1.37,
+        "embedding_ms": 601.92,
+        "state_update_ms": 603.18,
+        "control_update_ms": 0.02,
+        "draw_overlay_ms": 0.32,
+        "copy_output_frame_ms": 0.73,
+        "write_video_ms": 6.73,
+        "frame_total_ms": 1842.61
+      },
+      "counts": {
+        "candidate_count": 1,
+        "face_detect_calls": 1,
+        "embedding_calls": 1
+      },
+      "resources": {
+        "system_cpu_percent": 50.5,
+        "process_cpu_percent": 449.6,
+        "process_rss_mb": 676.39
+      }
+    },
+    {
+      "frame_index": 2,
+      "source_frame_id": 19,
+      "dropped_frames_before": 17,
+      "stage_times_ms": {
+        "detect_track_ms": 109.01,
+        "face_detect_classical_ms": 136.42,
+        "face_detect_profile_ms": 403.85,
+        "face_detect_total_ms": 541.35,
+        "collect_candidates_ms": 541.5,
+        "plot_base_ms": 1.26,
+        "state_update_ms": 0.08,
+        "control_update_ms": 0.02,
+        "draw_overlay_ms": 0.35,
+        "copy_output_frame_ms": 0.95,
+        "write_video_ms": 6.53,
+        "frame_total_ms": 659.78
+      },
+      "counts": {
+        "candidate_count": 1,
+        "face_detect_calls": 1
+      },
+      "resources": {
+        "system_cpu_percent": 38.9,
+        "process_cpu_percent": 393.0,
+        "process_rss_mb": 686.81
+      }
+    },
+    {
+      "frame_index": 3,
+      "source_frame_id": 26,
+      "dropped_frames_before": 6,
+      "stage_times_ms": {
+        "detect_track_ms": 84.4,
+        "face_detect_classical_ms": 131.74,
+        "face_detect_profile_ms": 412.7,
+        "face_detect_mtcnn_ms": 71.35,
+        "face_detect_total_ms": 617.59,
+        "collect_candidates_ms": 617.74,
+        "plot_base_ms": 1.62,
+        "state_update_ms": 0.06,
+        "control_update_ms": 0.02,
+        "draw_overlay_ms": 0.24,
+        "copy_output_frame_ms": 1.15,
+        "write_video_ms": 7.04,
+        "frame_total_ms": 712.33
+      },
+      "counts": {
+        "candidate_count": 1,
+        "face_detect_calls": 1,
+        "face_detect_mtcnn_calls": 1
+      },
+      "resources": {
+        "system_cpu_percent": 39.4,
+        "process_cpu_percent": 421.6,
+        "process_rss_mb": 693.39
+      }
+    },
+    {
+      "frame_index": 4,
+      "source_frame_id": 33,
+      "dropped_frames_before": 6,
+      "stage_times_ms": {
+        "detect_track_ms": 82.33,
+        "face_detect_classical_ms": 125.63,
+        "face_detect_profile_ms": 409.01,
+        "face_detect_total_ms": 535.72,
+        "collect_candidates_ms": 535.85,
+        "plot_base_ms": 1.5,
+        "state_update_ms": 0.08,
+        "control_update_ms": 0.02,
+        "draw_overlay_ms": 0.22,
+        "copy_output_frame_ms": 0.89,
+        "write_video_ms": 5.57,
+        "frame_total_ms": 626.52
+      },
+      "counts": {
+        "candidate_count": 1,
+        "face_detect_calls": 1
+      },
+      "resources": {
+        "system_cpu_percent": 36.6,
+        "process_cpu_percent": 405.0,
+        "process_rss_mb": 696.5
+      }
+    },
+    {
+      "frame_index": 5,
+      "source_frame_id": 39,
+      "dropped_frames_before": 5,
+      "stage_times_ms": {
+        "detect_track_ms": 85.18,
+        "face_detect_classical_ms": 118.71,
+        "face_detect_profile_ms": 424.21,
+        "face_detect_total_ms": 544.06,
+        "collect_candidates_ms": 544.2,
+        "plot_base_ms": 1.28,
+        "state_update_ms": 0.08,
+        "control_update_ms": 0.02,
+        "draw_overlay_ms": 0.2,
+        "copy_output_frame_ms": 1.23,
+        "write_video_ms": 5.68,
+        "frame_total_ms": 638.01
+      },
+      "counts": {
+        "candidate_count": 1,
+        "face_detect_calls": 1
+      },
+      "resources": {
+        "system_cpu_percent": 38.9,
+        "process_cpu_percent": 380.9,
+        "process_rss_mb": 696.76
+      }
+    },
+    {
+      "frame_index": 6,
+      "source_frame_id": 45,
+      "dropped_frames_before": 5,
+      "stage_times_ms": {
+        "detect_track_ms": 129.93,
+        "face_detect_classical_ms": 138.72,
+        "face_detect_profile_ms": 444.47,
+        "face_detect_mtcnn_ms": 83.43,
+        "face_detect_total_ms": 668.51,
+        "collect_candidates_ms": 668.7,
+        "plot_base_ms": 1.64,
+        "state_update_ms": 0.11,
+        "control_update_ms": 0.03,
+        "draw_overlay_ms": 0.46,
+        "copy_output_frame_ms": 1.31,
+        "write_video_ms": 8.74,
+        "frame_total_ms": 811.04
+      },
+      "counts": {
+        "candidate_count": 1,
+        "face_detect_calls": 1,
+        "face_detect_mtcnn_calls": 1
+      },
+      "resources": {
+        "system_cpu_percent": 52.0,
+        "process_cpu_percent": 448.6,
+        "process_rss_mb": 697.88
+      }
+    },
+    {
+      "frame_index": 7,
+      "source_frame_id": 54,
+      "dropped_frames_before": 8,
+      "stage_times_ms": {
+        "detect_track_ms": 98.75,
+        "face_detect_classical_ms": 117.31,
+        "face_detect_profile_ms": 394.05,
+        "face_detect_total_ms": 512.2,
+        "collect_candidates_ms": 512.32,
+        "plot_base_ms": 1.27,
+        "state_update_ms": 0.08,
+        "control_update_ms": 0.02,
+        "draw_overlay_ms": 0.19,
+        "copy_output_frame_ms": 0.9,
+        "write_video_ms": 5.43,
+        "frame_total_ms": 619.02
+      },
+      "counts": {
+        "candidate_count": 1,
+        "face_detect_calls": 1
+      },
+      "resources": {
+        "system_cpu_percent": 41.2,
+        "process_cpu_percent": 423.3,
+        "process_rss_mb": 700.99
+      }
+    },
+    {
+      "frame_index": 8,
+      "source_frame_id": 60,
+      "dropped_frames_before": 5,
+      "stage_times_ms": {
+        "detect_track_ms": 84.18,
+        "face_detect_classical_ms": 118.07,
+        "face_detect_profile_ms": 440.96,
+        "face_detect_total_ms": 559.92,
+        "embedding_ms": 500.57,
+        "collect_candidates_ms": 1060.68,
+        "plot_base_ms": 1.92,
+        "state_update_ms": 0.21,
+        "control_update_ms": 0.04,
+        "draw_overlay_ms": 0.24,
+        "copy_output_frame_ms": 0.99,
+        "write_video_ms": 6.23,
+        "frame_total_ms": 1154.57
+      },
+      "counts": {
+        "candidate_count": 1,
+        "face_detect_calls": 1,
+        "embedding_calls": 1
+      },
+      "resources": {
+        "system_cpu_percent": 59.7,
+        "process_cpu_percent": 559.9,
+        "process_rss_mb": 713.78
+      }
+    },
+    {
+      "frame_index": 9,
+      "source_frame_id": 71,
+      "dropped_frames_before": 10,
+      "stage_times_ms": {
+        "detect_track_ms": 77.31,
+        "face_detect_classical_ms": 118.5,
+        "face_detect_profile_ms": 435.88,
+        "face_detect_mtcnn_ms": 68.64,
+        "face_detect_total_ms": 624.81,
+        "collect_candidates_ms": 625.01,
+        "plot_base_ms": 1.25,
+        "state_update_ms": 0.07,
+        "control_update_ms": 0.03,
+        "draw_overlay_ms": 0.29,
+        "copy_output_frame_ms": 1.26,
+        "write_video_ms": 6.6,
+        "frame_total_ms": 711.9
+      },
+      "counts": {
+        "candidate_count": 1,
+        "face_detect_calls": 1,
+        "face_detect_mtcnn_calls": 1
+      },
+      "resources": {
+        "system_cpu_percent": 39.3,
+        "process_cpu_percent": 429.0,
+        "process_rss_mb": 715.82
+      }
+    },
+    {
+      "frame_index": 10,
+      "source_frame_id": 78,
+      "dropped_frames_before": 6,
+      "stage_times_ms": {
+        "detect_track_ms": 85.06,
+        "face_detect_classical_ms": 121.43,
+        "face_detect_profile_ms": 413.07,
+        "face_detect_total_ms": 535.39,
+        "collect_candidates_ms": 535.52,
+        "plot_base_ms": 1.43,
+        "state_update_ms": 0.08,
+        "control_update_ms": 0.02,
+        "draw_overlay_ms": 0.26,
+        "copy_output_frame_ms": 1.03,
+        "write_video_ms": 5.49,
+        "frame_total_ms": 628.98
+      },
+      "counts": {
+        "candidate_count": 1,
+        "face_detect_calls": 1
+      },
+      "resources": {
+        "system_cpu_percent": 39.1,
+        "process_cpu_percent": 402.2,
+        "process_rss_mb": 718.83
+      }
+    },
+    {
+      "frame_index": 11,
+      "source_frame_id": 85,
+      "dropped_frames_before": 6,
+      "stage_times_ms": {
+        "detect_track_ms": 84.51,
+        "face_detect_classical_ms": 125.42,
+        "face_detect_profile_ms": 437.66,
+        "face_detect_total_ms": 563.96,
+        "collect_candidates_ms": 564.08,
+        "plot_base_ms": 1.76,
+        "state_update_ms": 0.17,
+        "control_update_ms": 0.03,
+        "draw_overlay_ms": 0.44,
+        "copy_output_frame_ms": 1.11,
+        "write_video_ms": 7.49,
+        "frame_total_ms": 659.66
+      },
+      "counts": {
+        "candidate_count": 1,
+        "face_detect_calls": 1
+      },
+      "resources": {
+        "system_cpu_percent": 39.3,
+        "process_cpu_percent": 383.5,
+        "process_rss_mb": 718.95
+      }
+    },
+    {
+      "frame_index": 12,
+      "source_frame_id": 91,
+      "dropped_frames_before": 5,
+      "stage_times_ms": {
+        "detect_track_ms": 84.09,
+        "face_detect_classical_ms": 128.23,
+        "face_detect_profile_ms": 434.69,
+        "face_detect_mtcnn_ms": 62.67,
+        "face_detect_total_ms": 627.68,
+        "collect_candidates_ms": 627.83,
+        "plot_base_ms": 1.48,
+        "state_update_ms": 0.07,
+        "control_update_ms": 0.02,
+        "draw_overlay_ms": 0.2,
+        "copy_output_frame_ms": 1.08,
+        "write_video_ms": 6.0,
+        "frame_total_ms": 720.84
+      },
+      "counts": {
+        "candidate_count": 1,
+        "face_detect_calls": 1,
+        "face_detect_mtcnn_calls": 1
+      },
+      "resources": {
+        "system_cpu_percent": 49.2,
+        "process_cpu_percent": 436.4,
+        "process_rss_mb": 725.22
+      }
+    },
+    {
+      "frame_index": 13,
+      "source_frame_id": 99,
+      "dropped_frames_before": 7,
+      "stage_times_ms": {
+        "detect_track_ms": 87.07,
+        "face_detect_classical_ms": 135.51,
+        "face_detect_profile_ms": 396.47,
+        "face_detect_total_ms": 532.98,
+        "collect_candidates_ms": 533.11,
+        "plot_base_ms": 1.5,
+        "state_update_ms": 0.09,
+        "control_update_ms": 0.02,
+        "draw_overlay_ms": 0.18,
+        "copy_output_frame_ms": 0.88,
+        "write_video_ms": 5.68,
+        "frame_total_ms": 628.61
+      },
+      "counts": {
+        "candidate_count": 1,
+        "face_detect_calls": 1
+      },
+      "resources": {
+        "system_cpu_percent": 37.7,
+        "process_cpu_percent": 400.0,
+        "process_rss_mb": 727.8
+      }
+    },
+    {
+      "frame_index": 14,
+      "source_frame_id": 105,
+      "dropped_frames_before": 5,
+      "stage_times_ms": {
+        "detect_track_ms": 94.42,
+        "face_detect_classical_ms": 111.22,
+        "face_detect_profile_ms": 353.82,
+        "face_detect_total_ms": 466.09,
+        "collect_candidates_ms": 466.21,
+        "plot_base_ms": 1.34,
+        "state_update_ms": 0.12,
+        "control_update_ms": 0.02,
+        "draw_overlay_ms": 0.19,
+        "copy_output_frame_ms": 0.81,
+        "write_video_ms": 8.47,
+        "frame_total_ms": 571.67
+      },
+      "counts": {
+        "candidate_count": 1,
+        "face_detect_calls": 1
+      },
+      "resources": {
+        "system_cpu_percent": 44.5,
+        "process_cpu_percent": 408.2,
+        "process_rss_mb": 727.89
+      }
+    },
+    {
+      "frame_index": 15,
+      "source_frame_id": 111,
+      "dropped_frames_before": 5,
+      "stage_times_ms": {
+        "detect_track_ms": 97.13,
+        "face_detect_classical_ms": 129.78,
+        "face_detect_profile_ms": 313.78,
+        "face_detect_mtcnn_ms": 84.31,
+        "face_detect_total_ms": 529.97,
+        "collect_candidates_ms": 530.1,
+        "plot_base_ms": 1.24,
+        "state_update_ms": 0.07,
+        "control_update_ms": 0.03,
+        "draw_overlay_ms": 0.19,
+        "copy_output_frame_ms": 0.91,
+        "write_video_ms": 7.83,
+        "frame_total_ms": 637.57
+      },
+      "counts": {
+        "candidate_count": 1,
+        "face_detect_calls": 1,
+        "face_detect_mtcnn_calls": 1
+      },
+      "resources": {
+        "system_cpu_percent": 51.5,
+        "process_cpu_percent": 448.5,
+        "process_rss_mb": 730.27
+      }
+    },
+    {
+      "frame_index": 16,
+      "source_frame_id": 117,
+      "dropped_frames_before": 5,
+      "stage_times_ms": {
+        "detect_track_ms": 94.82,
+        "face_detect_classical_ms": 112.56,
+        "face_detect_profile_ms": 358.82,
+        "face_detect_total_ms": 472.54,
+        "embedding_ms": 420.56,
+        "collect_candidates_ms": 893.25,
+        "plot_base_ms": 1.27,
+        "state_update_ms": 0.17,
+        "control_update_ms": 0.03,
+        "draw_overlay_ms": 0.2,
+        "copy_output_frame_ms": 0.84,
+        "write_video_ms": 7.61,
+        "frame_total_ms": 998.26
+      },
+      "counts": {
+        "candidate_count": 1,
+        "face_detect_calls": 1,
+        "embedding_calls": 1
+      },
+      "resources": {
+        "system_cpu_percent": 60.5,
+        "process_cpu_percent": 573.4,
+        "process_rss_mb": 736.82
+      }
+    },
+    {
+      "frame_index": 17,
+      "source_frame_id": 127,
+      "dropped_frames_before": 9,
+      "stage_times_ms": {
+        "detect_track_ms": 98.37,
+        "face_detect_classical_ms": 107.24,
+        "face_detect_profile_ms": 324.65,
+        "face_detect_total_ms": 433.25,
+        "collect_candidates_ms": 433.41,
+        "plot_base_ms": 1.25,
+        "state_update_ms": 0.07,
+        "control_update_ms": 0.02,
+        "draw_overlay_ms": 0.19,
+        "copy_output_frame_ms": 0.81,
+        "write_video_ms": 6.65,
+        "frame_total_ms": 540.86
+      },
+      "counts": {
+        "candidate_count": 1,
+        "face_detect_calls": 1
+      },
+      "resources": {
+        "system_cpu_percent": 42.1,
+        "process_cpu_percent": 445.6,
+        "process_rss_mb": 737.81
+      }
+    },
+    {
+      "frame_index": 18,
+      "source_frame_id": 133,
+      "dropped_frames_before": 5,
+      "stage_times_ms": {
+        "detect_track_ms": 91.81,
+        "face_detect_classical_ms": 107.64,
+        "face_detect_profile_ms": 321.85,
+        "face_detect_mtcnn_ms": 77.3,
+        "face_detect_total_ms": 508.96,
+        "collect_candidates_ms": 509.15,
+        "plot_base_ms": 1.68,
+        "state_update_ms": 0.11,
+        "control_update_ms": 0.04,
+        "draw_overlay_ms": 0.35,
+        "copy_output_frame_ms": 1.05,
+        "write_video_ms": 6.48,
+        "frame_total_ms": 610.77
+      },
+      "counts": {
+        "candidate_count": 1,
+        "face_detect_calls": 1,
+        "face_detect_mtcnn_calls": 1
+      },
+      "resources": {
+        "system_cpu_percent": 49.3,
+        "process_cpu_percent": 513.1,
+        "process_rss_mb": 738.33
+      }
+    },
+    {
+      "frame_index": 19,
+      "source_frame_id": 139,
+      "dropped_frames_before": 5,
+      "stage_times_ms": {
+        "detect_track_ms": 96.16,
+        "face_detect_classical_ms": 127.44,
+        "face_detect_profile_ms": 364.81,
+        "face_detect_total_ms": 493.49,
+        "collect_candidates_ms": 493.67,
+        "plot_base_ms": 1.61,
+        "state_update_ms": 0.09,
+        "control_update_ms": 0.03,
+        "draw_overlay_ms": 0.19,
+        "copy_output_frame_ms": 0.82,
+        "write_video_ms": 6.71,
+        "frame_total_ms": 599.36
+      },
+      "counts": {
+        "candidate_count": 1,
+        "face_detect_calls": 1
+      },
+      "resources": {
+        "system_cpu_percent": 48.9,
+        "process_cpu_percent": 413.0,
+        "process_rss_mb": 738.9
+      }
+    },
+    {
+      "frame_index": 20,
+      "source_frame_id": 145,
+      "dropped_frames_before": 5,
+      "stage_times_ms": {
+        "detect_track_ms": 115.25,
+        "face_detect_classical_ms": 113.77,
+        "face_detect_profile_ms": 345.73,
+        "face_detect_total_ms": 460.6,
+        "collect_candidates_ms": 460.72,
+        "plot_base_ms": 1.39,
+        "state_update_ms": 0.1,
+        "control_update_ms": 0.02,
+        "draw_overlay_ms": 0.33,
+        "copy_output_frame_ms": 0.9,
+        "write_video_ms": 6.74,
+        "frame_total_ms": 585.53
+      },
+      "counts": {
+        "candidate_count": 1,
+        "face_detect_calls": 1
+      },
+      "resources": {
+        "system_cpu_percent": 45.6,
+        "process_cpu_percent": 439.3,
+        "process_rss_mb": 738.96
+      }
+    },
+    {
+      "frame_index": 21,
+      "source_frame_id": 151,
+      "dropped_frames_before": 5,
+      "stage_times_ms": {
+        "detect_track_ms": 122.17,
+        "face_detect_classical_ms": 115.74,
+        "face_detect_profile_ms": 333.82,
+        "face_detect_mtcnn_ms": 82.96,
+        "face_detect_total_ms": 535.18,
+        "collect_candidates_ms": 535.32,
+        "plot_base_ms": 1.22,
+        "state_update_ms": 0.06,
+        "control_update_ms": 0.02,
+        "draw_overlay_ms": 0.19,
+        "copy_output_frame_ms": 0.79,
+        "write_video_ms": 6.91,
+        "frame_total_ms": 666.76
+      },
+      "counts": {
+        "candidate_count": 1,
+        "face_detect_calls": 1,
+        "face_detect_mtcnn_calls": 1
+      },
+      "resources": {
+        "system_cpu_percent": 52.8,
+        "process_cpu_percent": 488.3,
+        "process_rss_mb": 740.36
+      }
+    },
+    {
+      "frame_index": 22,
+      "source_frame_id": 157,
+      "dropped_frames_before": 5,
+      "stage_times_ms": {
+        "detect_track_ms": 92.71,
+        "face_detect_classical_ms": 108.14,
+        "face_detect_profile_ms": 363.35,
+        "face_detect_total_ms": 472.61,
+        "collect_candidates_ms": 472.74,
+        "plot_base_ms": 1.29,
+        "state_update_ms": 0.1,
+        "control_update_ms": 0.04,
+        "draw_overlay_ms": 0.35,
+        "copy_output_frame_ms": 1.29,
+        "write_video_ms": 6.07,
+        "frame_total_ms": 574.69
+      },
+      "counts": {
+        "candidate_count": 1,
+        "face_detect_calls": 1
+      },
+      "resources": {
+        "system_cpu_percent": 39.9,
+        "process_cpu_percent": 440.6,
+        "process_rss_mb": 740.79
+      }
+    },
+    {
+      "frame_index": 23,
+      "source_frame_id": 163,
+      "dropped_frames_before": 5,
+      "stage_times_ms": {
+        "detect_track_ms": 91.37,
+        "face_detect_classical_ms": 118.42,
+        "face_detect_profile_ms": 358.31,
+        "face_detect_total_ms": 477.99,
+        "collect_candidates_ms": 478.12,
+        "plot_base_ms": 1.3,
+        "state_update_ms": 0.11,
+        "control_update_ms": 0.04,
+        "draw_overlay_ms": 0.29,
+        "copy_output_frame_ms": 1.16,
+        "write_video_ms": 6.22,
+        "frame_total_ms": 578.73
+      },
+      "counts": {
+        "candidate_count": 1,
+        "face_detect_calls": 1
+      },
+      "resources": {
+        "system_cpu_percent": 41.1,
+        "process_cpu_percent": 421.7,
+        "process_rss_mb": 740.79
+      }
+    },
+    {
+      "frame_index": 24,
+      "source_frame_id": 169,
+      "dropped_frames_before": 5,
+      "stage_times_ms": {
+        "detect_track_ms": 96.55,
+        "face_detect_classical_ms": 117.79,
+        "face_detect_profile_ms": 363.19,
+        "face_detect_mtcnn_ms": 74.35,
+        "face_detect_total_ms": 557.6,
+        "embedding_ms": 383.61,
+        "collect_candidates_ms": 941.37,
+        "plot_base_ms": 2.1,
+        "state_update_ms": 0.23,
+        "control_update_ms": 0.02,
+        "draw_overlay_ms": 0.21,
+        "copy_output_frame_ms": 0.99,
+        "write_video_ms": 9.35,
+        "frame_total_ms": 1050.91
+      },
+      "counts": {
+        "candidate_count": 1,
+        "face_detect_calls": 1,
+        "face_detect_mtcnn_calls": 1,
+        "embedding_calls": 1
+      },
+      "resources": {
+        "system_cpu_percent": 54.4,
+        "process_cpu_percent": 585.6,
+        "process_rss_mb": 747.77
+      }
+    },
+    {
+      "frame_index": 25,
+      "source_frame_id": 180,
+      "dropped_frames_before": 10,
+      "stage_times_ms": {
+        "detect_track_ms": 89.95,
+        "face_detect_classical_ms": 121.09,
+        "face_detect_profile_ms": 383.9,
+        "face_detect_total_ms": 506.49,
+        "collect_candidates_ms": 506.64,
+        "plot_base_ms": 1.38,
+        "state_update_ms": 0.1,
+        "control_update_ms": 0.02,
+        "draw_overlay_ms": 0.25,
+        "copy_output_frame_ms": 10.14,
+        "write_video_ms": 5.4,
+        "frame_total_ms": 613.97
+      },
+      "counts": {
+        "candidate_count": 1,
+        "face_detect_calls": 1
+      },
+      "resources": {
+        "system_cpu_percent": 38.3,
+        "process_cpu_percent": 409.8,
+        "process_rss_mb": 750.61
+      }
+    },
+    {
+      "frame_index": 26,
+      "source_frame_id": 186,
+      "dropped_frames_before": 5,
+      "stage_times_ms": {
+        "detect_track_ms": 87.81,
+        "face_detect_classical_ms": 117.19,
+        "face_detect_profile_ms": 377.08,
+        "face_detect_total_ms": 495.7,
+        "collect_candidates_ms": 495.89,
+        "plot_base_ms": 1.56,
+        "state_update_ms": 0.1,
+        "control_update_ms": 0.02,
+        "draw_overlay_ms": 0.28,
+        "copy_output_frame_ms": 0.85,
+        "write_video_ms": 5.92,
+        "frame_total_ms": 592.51
+      },
+      "counts": {
+        "candidate_count": 1,
+        "face_detect_calls": 1
+      },
+      "resources": {
+        "system_cpu_percent": 38.4,
+        "process_cpu_percent": 408.4,
+        "process_rss_mb": 750.73
+      }
+    },
+    {
+      "frame_index": 27,
+      "source_frame_id": 192,
+      "dropped_frames_before": 5,
+      "stage_times_ms": {
+        "detect_track_ms": 89.34,
+        "face_detect_classical_ms": 109.78,
+        "face_detect_profile_ms": 376.34,
+        "face_detect_mtcnn_ms": 86.99,
+        "face_detect_total_ms": 575.07,
+        "collect_candidates_ms": 575.21,
+        "plot_base_ms": 1.2,
+        "state_update_ms": 0.06,
+        "control_update_ms": 0.02,
+        "draw_overlay_ms": 0.19,
+        "copy_output_frame_ms": 0.79,
+        "write_video_ms": 6.46,
+        "frame_total_ms": 673.33
+      },
+      "counts": {
+        "candidate_count": 1,
+        "face_detect_calls": 1,
+        "face_detect_mtcnn_calls": 1
+      },
+      "resources": {
+        "system_cpu_percent": 42.6,
+        "process_cpu_percent": 474.7,
+        "process_rss_mb": 752.49
+      }
+    },
+    {
+      "frame_index": 28,
+      "source_frame_id": 198,
+      "dropped_frames_before": 5,
+      "stage_times_ms": {
+        "detect_track_ms": 98.86,
+        "face_detect_classical_ms": 116.56,
+        "face_detect_profile_ms": 378.66,
+        "face_detect_total_ms": 496.4,
+        "collect_candidates_ms": 496.54,
+        "plot_base_ms": 1.47,
+        "state_update_ms": 0.08,
+        "control_update_ms": 0.02,
+        "draw_overlay_ms": 0.2,
+        "copy_output_frame_ms": 0.97,
+        "write_video_ms": 8.32,
+        "frame_total_ms": 606.6
+      },
+      "counts": {
+        "candidate_count": 1,
+        "face_detect_calls": 1
+      },
+      "resources": {
+        "system_cpu_percent": 35.9,
+        "process_cpu_percent": 410.5,
+        "process_rss_mb": 754.28
+      }
+    },
+    {
+      "frame_index": 29,
+      "source_frame_id": 205,
+      "dropped_frames_before": 6,
+      "stage_times_ms": {
+        "detect_track_ms": 103.54,
+        "face_detect_classical_ms": 89.74,
+        "face_detect_profile_ms": 267.08,
+        "face_detect_total_ms": 357.9,
+        "collect_candidates_ms": 358.05,
+        "plot_base_ms": 1.31,
+        "state_update_ms": 0.08,
+        "control_update_ms": 0.03,
+        "draw_overlay_ms": 0.22,
+        "copy_output_frame_ms": 0.75,
+        "write_video_ms": 8.47,
+        "frame_total_ms": 472.53
+      },
+      "counts": {
+        "candidate_count": 1,
+        "face_detect_calls": 1
+      },
+      "resources": {
+        "system_cpu_percent": 48.9,
+        "process_cpu_percent": 496.4,
+        "process_rss_mb": 754.54
+      }
+    },
+    {
+      "frame_index": 30,
+      "source_frame_id": 209,
+      "dropped_frames_before": 3,
+      "stage_times_ms": {
+        "detect_track_ms": 86.96,
+        "face_detect_classical_ms": 97.88,
+        "face_detect_profile_ms": 277.67,
+        "face_detect_mtcnn_ms": 68.43,
+        "face_detect_total_ms": 446.23,
+        "collect_candidates_ms": 446.4,
+        "plot_base_ms": 1.38,
+        "state_update_ms": 0.07,
+        "control_update_ms": 0.04,
+        "draw_overlay_ms": 0.19,
+        "copy_output_frame_ms": 1.14,
+        "write_video_ms": 8.55,
+        "frame_total_ms": 544.84
+      },
+      "counts": {
+        "candidate_count": 1,
+        "face_detect_calls": 1,
+        "face_detect_mtcnn_calls": 1
+      },
+      "resources": {
+        "system_cpu_percent": 48.1,
+        "process_cpu_percent": 548.4,
+        "process_rss_mb": 756.27
+      }
+    },
+    {
+      "frame_index": 31,
+      "source_frame_id": 215,
+      "dropped_frames_before": 5,
+      "stage_times_ms": {
+        "detect_track_ms": 89.89,
+        "face_detect_classical_ms": 94.03,
+        "face_detect_profile_ms": 289.11,
+        "face_detect_total_ms": 384.13,
+        "collect_candidates_ms": 384.26,
+        "plot_base_ms": 1.26,
+        "state_update_ms": 0.09,
+        "control_update_ms": 0.02,
+        "draw_overlay_ms": 0.18,
+        "copy_output_frame_ms": 0.82,
+        "write_video_ms": 7.55,
+        "frame_total_ms": 484.15
+      },
+      "counts": {
+        "candidate_count": 1,
+        "face_detect_calls": 1
+      },
+      "resources": {
+        "system_cpu_percent": 44.1,
+        "process_cpu_percent": 487.5,
+        "process_rss_mb": 759.11
+      }
+    },
+    {
+      "frame_index": 32,
+      "source_frame_id": 220,
+      "dropped_frames_before": 4,
+      "stage_times_ms": {
+        "detect_track_ms": 91.35,
+        "face_detect_classical_ms": 105.87,
+        "face_detect_profile_ms": 284.82,
+        "face_detect_total_ms": 391.61,
+        "embedding_ms": 412.61,
+        "collect_candidates_ms": 804.36,
+        "plot_base_ms": 1.27,
+        "state_update_ms": 0.16,
+        "control_update_ms": 0.03,
+        "draw_overlay_ms": 0.2,
+        "copy_output_frame_ms": 1.02,
+        "write_video_ms": 7.69,
+        "frame_total_ms": 906.14
+      },
+      "counts": {
+        "candidate_count": 1,
+        "face_detect_calls": 1,
+        "embedding_calls": 1
+      },
+      "resources": {
+        "system_cpu_percent": 56.7,
+        "process_cpu_percent": 605.0,
+        "process_rss_mb": 759.44
+      }
+    },
+    {
+      "frame_index": 33,
+      "source_frame_id": 229,
+      "dropped_frames_before": 8,
+      "stage_times_ms": {
+        "detect_track_ms": 89.99,
+        "face_detect_classical_ms": 101.25,
+        "face_detect_profile_ms": 299.81,
+        "face_detect_mtcnn_ms": 69.94,
+        "face_detect_total_ms": 473.17,
+        "collect_candidates_ms": 473.36,
+        "plot_base_ms": 1.24,
+        "state_update_ms": 0.08,
+        "control_update_ms": 0.02,
+        "draw_overlay_ms": 0.19,
+        "copy_output_frame_ms": 0.93,
+        "write_video_ms": 6.38,
+        "frame_total_ms": 572.29
+      },
+      "counts": {
+        "candidate_count": 1,
+        "face_detect_calls": 1,
+        "face_detect_mtcnn_calls": 1
+      },
+      "resources": {
+        "system_cpu_percent": 47.7,
+        "process_cpu_percent": 532.9,
+        "process_rss_mb": 761.27
+      }
+    },
+    {
+      "frame_index": 34,
+      "source_frame_id": 234,
+      "dropped_frames_before": 4,
+      "stage_times_ms": {
+        "detect_track_ms": 89.6,
+        "face_detect_classical_ms": 101.44,
+        "face_detect_profile_ms": 300.87,
+        "face_detect_total_ms": 403.41,
+        "collect_candidates_ms": 403.56,
+        "plot_base_ms": 1.32,
+        "state_update_ms": 0.08,
+        "control_update_ms": 0.02,
+        "draw_overlay_ms": 0.19,
+        "copy_output_frame_ms": 0.84,
+        "write_video_ms": 6.39,
+        "frame_total_ms": 502.07
+      },
+      "counts": {
+        "candidate_count": 1,
+        "face_detect_calls": 1
+      },
+      "resources": {
+        "system_cpu_percent": 44.5,
+        "process_cpu_percent": 488.5,
+        "process_rss_mb": 763.67
+      }
+    },
+    {
+      "frame_index": 35,
+      "source_frame_id": 240,
+      "dropped_frames_before": 5,
+      "stage_times_ms": {
+        "detect_track_ms": 89.03,
+        "face_detect_classical_ms": 91.04,
+        "face_detect_profile_ms": 296.23,
+        "face_detect_total_ms": 388.37,
+        "collect_candidates_ms": 388.53,
+        "plot_base_ms": 1.47,
+        "state_update_ms": 0.09,
+        "control_update_ms": 0.02,
+        "draw_overlay_ms": 0.19,
+        "copy_output_frame_ms": 0.84,
+        "write_video_ms": 6.14,
+        "frame_total_ms": 486.39
+      },
+      "counts": {
+        "candidate_count": 1,
+        "face_detect_calls": 1
+      },
+      "resources": {
+        "system_cpu_percent": 42.7,
+        "process_cpu_percent": 489.7,
+        "process_rss_mb": 764.43
+      }
+    },
+    {
+      "frame_index": 36,
+      "source_frame_id": 244,
+      "dropped_frames_before": 3,
+      "stage_times_ms": {
+        "detect_track_ms": 90.91,
+        "face_detect_classical_ms": 96.81,
+        "face_detect_profile_ms": 304.44,
+        "face_detect_mtcnn_ms": 68.63,
+        "face_detect_total_ms": 471.85,
+        "collect_candidates_ms": 472.0,
+        "plot_base_ms": 1.49,
+        "state_update_ms": 0.09,
+        "control_update_ms": 0.03,
+        "draw_overlay_ms": 0.26,
+        "copy_output_frame_ms": 1.09,
+        "write_video_ms": 6.73,
+        "frame_total_ms": 572.68
+      },
+      "counts": {
+        "candidate_count": 1,
+        "face_detect_calls": 1,
+        "face_detect_mtcnn_calls": 1
+      },
+      "resources": {
+        "system_cpu_percent": 46.9,
+        "process_cpu_percent": 524.4,
+        "process_rss_mb": 765.88
+      }
+    },
+    {
+      "frame_index": 37,
+      "source_frame_id": 250,
+      "dropped_frames_before": 5,
+      "stage_times_ms": {
+        "detect_track_ms": 88.38,
+        "face_detect_classical_ms": 94.37,
+        "face_detect_profile_ms": 302.7,
+        "face_detect_total_ms": 398.15,
+        "collect_candidates_ms": 398.29,
+        "plot_base_ms": 1.46,
+        "state_update_ms": 0.1,
+        "control_update_ms": 0.03,
+        "draw_overlay_ms": 0.2,
+        "copy_output_frame_ms": 0.87,
+        "write_video_ms": 5.87,
+        "frame_total_ms": 495.29
+      },
+      "counts": {
+        "candidate_count": 1,
+        "face_detect_calls": 1
+      },
+      "resources": {
+        "system_cpu_percent": 44.0,
+        "process_cpu_percent": 481.3,
+        "process_rss_mb": 768.63
+      }
+    },
+    {
+      "frame_index": 38,
+      "source_frame_id": 255,
+      "dropped_frames_before": 4,
+      "stage_times_ms": {
+        "detect_track_ms": 88.46,
+        "face_detect_classical_ms": 96.9,
+        "face_detect_profile_ms": 306.42,
+        "face_detect_total_ms": 404.43,
+        "collect_candidates_ms": 404.58,
+        "plot_base_ms": 1.42,
+        "state_update_ms": 0.08,
+        "control_update_ms": 0.02,
+        "draw_overlay_ms": 0.22,
+        "copy_output_frame_ms": 0.86,
+        "write_video_ms": 5.68,
+        "frame_total_ms": 501.4
+      },
+      "counts": {
+        "candidate_count": 1,
+        "face_detect_calls": 1
+      },
+      "resources": {
+        "system_cpu_percent": 44.3,
+        "process_cpu_percent": 475.0,
+        "process_rss_mb": 768.63
+      }
+    },
+    {
+      "frame_index": 39,
+      "source_frame_id": 260,
+      "dropped_frames_before": 4,
+      "stage_times_ms": {
+        "detect_track_ms": 87.51,
+        "face_detect_classical_ms": 92.53,
+        "face_detect_profile_ms": 302.75,
+        "face_detect_mtcnn_ms": 62.29,
+        "face_detect_total_ms": 459.7,
+        "collect_candidates_ms": 459.85,
+        "plot_base_ms": 1.49,
+        "state_update_ms": 0.09,
+        "control_update_ms": 0.03,
+        "draw_overlay_ms": 0.26,
+        "copy_output_frame_ms": 1.2,
+        "write_video_ms": 6.01,
+        "frame_total_ms": 556.56
+      },
+      "counts": {
+        "candidate_count": 1,
+        "face_detect_calls": 1,
+        "face_detect_mtcnn_calls": 1
+      },
+      "resources": {
+        "system_cpu_percent": 46.9,
+        "process_cpu_percent": 533.8,
+        "process_rss_mb": 768.95
+      }
+    },
+    {
+      "frame_index": 40,
+      "source_frame_id": 266,
+      "dropped_frames_before": 5,
+      "stage_times_ms": {
+        "detect_track_ms": 88.2,
+        "face_detect_classical_ms": 105.46,
+        "face_detect_profile_ms": 291.12,
+        "face_detect_total_ms": 397.53,
+        "embedding_ms": 403.67,
+        "collect_candidates_ms": 801.35,
+        "plot_base_ms": 1.37,
+        "state_update_ms": 0.21,
+        "control_update_ms": 0.03,
+        "draw_overlay_ms": 0.26,
+        "copy_output_frame_ms": 1.05,
+        "write_video_ms": 6.96,
+        "frame_total_ms": 899.53
+      },
+      "counts": {
+        "candidate_count": 1,
+        "face_detect_calls": 1,
+        "embedding_calls": 1
+      },
+      "resources": {
+        "system_cpu_percent": 57.5,
+        "process_cpu_percent": 635.7,
+        "process_rss_mb": 771.47
+      }
+    },
+    {
+      "frame_index": 41,
+      "source_frame_id": 275,
+      "dropped_frames_before": 8,
+      "stage_times_ms": {
+        "detect_track_ms": 91.53,
+        "face_detect_classical_ms": 104.13,
+        "face_detect_profile_ms": 315.81,
+        "face_detect_total_ms": 421.02,
+        "collect_candidates_ms": 421.17,
+        "plot_base_ms": 1.24,
+        "state_update_ms": 0.07,
+        "control_update_ms": 0.02,
+        "draw_overlay_ms": 0.19,
+        "copy_output_frame_ms": 0.8,
+        "write_video_ms": 6.28,
+        "frame_total_ms": 521.37
+      },
+      "counts": {
+        "candidate_count": 1,
+        "face_detect_calls": 1
+      },
+      "resources": {
+        "system_cpu_percent": 43.6,
+        "process_cpu_percent": 467.2,
+        "process_rss_mb": 772.21
+      }
+    },
+    {
+      "frame_index": 42,
+      "source_frame_id": 280,
+      "dropped_frames_before": 4,
+      "stage_times_ms": {
+        "detect_track_ms": 89.7,
+        "face_detect_classical_ms": 106.57,
+        "face_detect_profile_ms": 314.38,
+        "face_detect_mtcnn_ms": 72.79,
+        "face_detect_total_ms": 495.71,
+        "collect_candidates_ms": 495.87,
+        "plot_base_ms": 1.62,
+        "state_update_ms": 0.1,
+        "control_update_ms": 0.03,
+        "draw_overlay_ms": 0.29,
+        "copy_output_frame_ms": 1.02,
+        "write_video_ms": 6.88,
+        "frame_total_ms": 595.6
+      },
+      "counts": {
+        "candidate_count": 1,
+        "face_detect_calls": 1,
+        "face_detect_mtcnn_calls": 1
+      },
+      "resources": {
+        "system_cpu_percent": 46.7,
+        "process_cpu_percent": 523.5,
+        "process_rss_mb": 773.84
+      }
+    },
+    {
+      "frame_index": 43,
+      "source_frame_id": 286,
+      "dropped_frames_before": 5,
+      "stage_times_ms": {
+        "detect_track_ms": 86.51,
+        "face_detect_classical_ms": 103.61,
+        "face_detect_profile_ms": 292.36,
+        "face_detect_total_ms": 396.96,
+        "collect_candidates_ms": 397.09,
+        "plot_base_ms": 1.81,
+        "state_update_ms": 0.09,
+        "control_update_ms": 0.02,
+        "draw_overlay_ms": 0.19,
+        "copy_output_frame_ms": 0.85,
+        "write_video_ms": 5.65,
+        "frame_total_ms": 492.3
+      },
+      "counts": {
+        "candidate_count": 1,
+        "face_detect_calls": 1
+      },
+      "resources": {
+        "system_cpu_percent": 47.9,
+        "process_cpu_percent": 500.0,
+        "process_rss_mb": 776.38
+      }
+    },
+    {
+      "frame_index": 44,
+      "source_frame_id": 291,
+      "dropped_frames_before": 4,
+      "stage_times_ms": {
+        "detect_track_ms": 95.93,
+        "face_detect_classical_ms": 101.48,
+        "face_detect_profile_ms": 292.29,
+        "face_detect_total_ms": 394.78,
+        "collect_candidates_ms": 394.95,
+        "plot_base_ms": 1.51,
+        "state_update_ms": 0.14,
+        "control_update_ms": 0.03,
+        "draw_overlay_ms": 0.22,
+        "copy_output_frame_ms": 0.97,
+        "write_video_ms": 6.4,
+        "frame_total_ms": 500.26
+      },
+      "counts": {
+        "candidate_count": 1,
+        "face_detect_calls": 1
+      },
+      "resources": {
+        "system_cpu_percent": 46.2,
+        "process_cpu_percent": 503.1,
+        "process_rss_mb": 777.12
+      }
+    },
+    {
+      "frame_index": 45,
+      "source_frame_id": 296,
+      "dropped_frames_before": 4,
+      "stage_times_ms": {
+        "detect_track_ms": 92.04,
+        "face_detect_classical_ms": 108.31,
+        "face_detect_profile_ms": 299.53,
+        "face_detect_mtcnn_ms": 68.41,
+        "face_detect_total_ms": 478.52,
+        "collect_candidates_ms": 478.76,
+        "plot_base_ms": 1.56,
+        "state_update_ms": 0.09,
+        "control_update_ms": 0.03,
+        "draw_overlay_ms": 0.26,
+        "copy_output_frame_ms": 1.0,
+        "write_video_ms": 6.43,
+        "frame_total_ms": 580.25
+      },
+      "counts": {
+        "candidate_count": 1,
+        "face_detect_calls": 1,
+        "face_detect_mtcnn_calls": 1
+      },
+      "resources": {
+        "system_cpu_percent": 47.0,
+        "process_cpu_percent": 502.4,
+        "process_rss_mb": 778.16
+      }
+    },
+    {
+      "frame_index": 46,
+      "source_frame_id": 302,
+      "dropped_frames_before": 5,
+      "stage_times_ms": {
+        "detect_track_ms": 85.17,
+        "face_detect_classical_ms": 107.68,
+        "face_detect_profile_ms": 311.9,
+        "face_detect_total_ms": 420.71,
+        "collect_candidates_ms": 420.84,
+        "plot_base_ms": 1.34,
+        "state_update_ms": 0.07,
+        "control_update_ms": 0.02,
+        "draw_overlay_ms": 0.23,
+        "copy_output_frame_ms": 1.07,
+        "write_video_ms": 5.72,
+        "frame_total_ms": 514.56
+      },
+      "counts": {
+        "candidate_count": 1,
+        "face_detect_calls": 1
+      },
+      "resources": {
+        "system_cpu_percent": 41.6,
+        "process_cpu_percent": 464.2,
+        "process_rss_mb": 780.38
+      }
+    },
+    {
+      "frame_index": 47,
+      "source_frame_id": 307,
+      "dropped_frames_before": 4,
+      "stage_times_ms": {
+        "detect_track_ms": 96.54,
+        "face_detect_classical_ms": 107.56,
+        "face_detect_profile_ms": 297.27,
+        "face_detect_total_ms": 405.99,
+        "collect_candidates_ms": 406.12,
+        "plot_base_ms": 1.21,
+        "state_update_ms": 0.07,
+        "control_update_ms": 0.02,
+        "draw_overlay_ms": 0.2,
+        "copy_output_frame_ms": 0.83,
+        "write_video_ms": 5.45,
+        "frame_total_ms": 510.51
+      },
+      "counts": {
+        "candidate_count": 1,
+        "face_detect_calls": 1
+      },
+      "resources": {
+        "system_cpu_percent": 39.1,
+        "process_cpu_percent": 448.2,
+        "process_rss_mb": 780.93
+      }
+    },
+    {
+      "frame_index": 48,
+      "source_frame_id": 312,
+      "dropped_frames_before": 4,
+      "stage_times_ms": {
+        "detect_track_ms": 88.57,
+        "face_detect_classical_ms": 101.8,
+        "face_detect_profile_ms": 298.42,
+        "face_detect_mtcnn_ms": 67.38,
+        "face_detect_total_ms": 469.3,
+        "embedding_ms": 410.07,
+        "collect_candidates_ms": 879.53,
+        "plot_base_ms": 1.55,
+        "state_update_ms": 0.22,
+        "control_update_ms": 0.04,
+        "draw_overlay_ms": 0.28,
+        "copy_output_frame_ms": 0.87,
+        "write_video_ms": 6.37,
+        "frame_total_ms": 977.5
+      },
+      "counts": {
+        "candidate_count": 1,
+        "face_detect_calls": 1,
+        "face_detect_mtcnn_calls": 1,
+        "embedding_calls": 1
+      },
+      "resources": {
+        "system_cpu_percent": 57.7,
+        "process_cpu_percent": 645.0,
+        "process_rss_mb": 781.48
+      }
+    },
+    {
+      "frame_index": 49,
+      "source_frame_id": 322,
+      "dropped_frames_before": 9,
+      "stage_times_ms": {
+        "detect_track_ms": 84.18,
+        "face_detect_classical_ms": 102.87,
+        "face_detect_profile_ms": 302.35,
+        "face_detect_total_ms": 406.3,
+        "collect_candidates_ms": 406.43,
+        "plot_base_ms": 1.31,
+        "state_update_ms": 0.07,
+        "control_update_ms": 0.02,
+        "draw_overlay_ms": 0.19,
+        "copy_output_frame_ms": 0.85,
+        "write_video_ms": 5.41,
+        "frame_total_ms": 498.53
+      },
+      "counts": {
+        "candidate_count": 1,
+        "face_detect_calls": 1
+      },
+      "resources": {
+        "system_cpu_percent": 47.0,
+        "process_cpu_percent": 461.2,
+        "process_rss_mb": 784.76
+      }
+    },
+    {
+      "frame_index": 50,
+      "source_frame_id": 327,
+      "dropped_frames_before": 4,
+      "stage_times_ms": {
+        "detect_track_ms": 86.74,
+        "face_detect_classical_ms": 110.37,
+        "face_detect_profile_ms": 303.39,
+        "face_detect_total_ms": 414.9,
+        "collect_candidates_ms": 415.07,
+        "plot_base_ms": 1.38,
+        "state_update_ms": 0.07,
+        "control_update_ms": 0.02,
+        "draw_overlay_ms": 0.19,
+        "copy_output_frame_ms": 0.97,
+        "write_video_ms": 5.65,
+        "frame_total_ms": 510.16
+      },
+      "counts": {
+        "candidate_count": 1,
+        "face_detect_calls": 1
+      },
+      "resources": {
+        "system_cpu_percent": 44.3,
+        "process_cpu_percent": 478.1,
+        "process_rss_mb": 785.34
+      }
+    },
+    {
+      "frame_index": 51,
+      "source_frame_id": 332,
+      "dropped_frames_before": 4,
+      "stage_times_ms": {
+        "detect_track_ms": 90.31,
+        "face_detect_classical_ms": 105.52,
+        "face_detect_profile_ms": 306.31,
+        "face_detect_mtcnn_ms": 65.45,
+        "face_detect_total_ms": 479.08,
+        "collect_candidates_ms": 479.2,
+        "plot_base_ms": 1.4,
+        "state_update_ms": 0.08,
+        "control_update_ms": 0.02,
+        "draw_overlay_ms": 0.3,
+        "copy_output_frame_ms": 0.97,
+        "write_video_ms": 5.97,
+        "frame_total_ms": 578.33
+      },
+      "counts": {
+        "candidate_count": 1,
+        "face_detect_calls": 1,
+        "face_detect_mtcnn_calls": 1
+      },
+      "resources": {
+        "system_cpu_percent": 45.1,
+        "process_cpu_percent": 510.3,
+        "process_rss_mb": 786.89
+      }
+    },
+    {
+      "frame_index": 52,
+      "source_frame_id": 338,
+      "dropped_frames_before": 5,
+      "stage_times_ms": {
+        "detect_track_ms": 94.31,
+        "face_detect_classical_ms": 105.24,
+        "face_detect_profile_ms": 291.34,
+        "face_detect_total_ms": 397.7,
+        "collect_candidates_ms": 397.86,
+        "plot_base_ms": 1.3,
+        "state_update_ms": 0.07,
+        "control_update_ms": 0.02,
+        "draw_overlay_ms": 0.18,
+        "copy_output_frame_ms": 0.8,
+        "write_video_ms": 6.1,
+        "frame_total_ms": 500.73
+      },
+      "counts": {
+        "candidate_count": 1,
+        "face_detect_calls": 1
+      },
+      "resources": {
+        "system_cpu_percent": 46.6,
+        "process_cpu_percent": 478.1,
+        "process_rss_mb": 789.79
+      }
+    },
+    {
+      "frame_index": 53,
+      "source_frame_id": 343,
+      "dropped_frames_before": 4,
+      "stage_times_ms": {
+        "detect_track_ms": 101.16,
+        "face_detect_classical_ms": 140.37,
+        "face_detect_profile_ms": 401.95,
+        "face_detect_total_ms": 543.32,
+        "collect_candidates_ms": 543.45,
+        "plot_base_ms": 1.75,
+        "state_update_ms": 0.09,
+        "control_update_ms": 0.02,
+        "draw_overlay_ms": 0.24,
+        "copy_output_frame_ms": 0.95,
+        "write_video_ms": 8.11,
+        "frame_total_ms": 655.87
+      },
+      "counts": {
+        "candidate_count": 1,
+        "face_detect_calls": 1
+      },
+      "resources": {
+        "system_cpu_percent": 41.0,
+        "process_cpu_percent": 381.1,
+        "process_rss_mb": 790.55
+      }
+    },
+    {
+      "frame_index": 54,
+      "source_frame_id": 350,
+      "dropped_frames_before": 6,
+      "stage_times_ms": {
+        "detect_track_ms": 125.42,
+        "face_detect_classical_ms": 142.08,
+        "face_detect_profile_ms": 394.29,
+        "face_detect_mtcnn_ms": 73.06,
+        "face_detect_total_ms": 611.45,
+        "collect_candidates_ms": 611.59,
+        "plot_base_ms": 1.42,
+        "state_update_ms": 0.1,
+        "control_update_ms": 0.03,
+        "draw_overlay_ms": 0.37,
+        "copy_output_frame_ms": 1.06,
+        "write_video_ms": 8.51,
+        "frame_total_ms": 748.58
+      },
+      "counts": {
+        "candidate_count": 1,
+        "face_detect_calls": 1,
+        "face_detect_mtcnn_calls": 1
+      },
+      "resources": {
+        "system_cpu_percent": 46.6,
+        "process_cpu_percent": 454.2,
+        "process_rss_mb": 791.42
+      }
+    },
+    {
+      "frame_index": 55,
+      "source_frame_id": 357,
+      "dropped_frames_before": 6,
+      "stage_times_ms": {
+        "detect_track_ms": 94.43,
+        "face_detect_classical_ms": 143.96,
+        "face_detect_profile_ms": 424.25,
+        "face_detect_total_ms": 569.42,
+        "collect_candidates_ms": 569.57,
+        "plot_base_ms": 1.24,
+        "state_update_ms": 0.07,
+        "control_update_ms": 0.02,
+        "draw_overlay_ms": 0.18,
+        "copy_output_frame_ms": 0.81,
+        "write_video_ms": 6.69,
+        "frame_total_ms": 673.12
+      },
+      "counts": {
+        "candidate_count": 1,
+        "face_detect_calls": 1
+      },
+      "resources": {
+        "system_cpu_percent": 41.4,
+        "process_cpu_percent": 395.3,
+        "process_rss_mb": 793.73
+      }
+    },
+    {
+      "frame_index": 56,
+      "source_frame_id": 364,
+      "dropped_frames_before": 6,
+      "stage_times_ms": {
+        "detect_track_ms": 104.33,
+        "face_detect_classical_ms": 142.06,
+        "face_detect_profile_ms": 455.86,
+        "face_detect_total_ms": 599.23,
+        "embedding_ms": 427.4,
+        "collect_candidates_ms": 1026.78,
+        "plot_base_ms": 1.48,
+        "state_update_ms": 0.18,
+        "control_update_ms": 0.03,
+        "draw_overlay_ms": 0.2,
+        "copy_output_frame_ms": 0.82,
+        "write_video_ms": 6.35,
+        "frame_total_ms": 1140.23
+      },
+      "counts": {
+        "candidate_count": 1,
+        "face_detect_calls": 1,
+        "embedding_calls": 1
+      },
+      "resources": {
+        "system_cpu_percent": 50.6,
+        "process_cpu_percent": 532.5,
+        "process_rss_mb": 794.54
+      }
+    },
+    {
+      "frame_index": 57,
+      "source_frame_id": 375,
+      "dropped_frames_before": 10,
+      "stage_times_ms": {
+        "detect_track_ms": 107.86,
+        "collect_candidates_ms": 0.01,
+        "plot_base_ms": 1.43,
+        "state_update_ms": 0.01,
+        "control_update_ms": 0.06,
+        "draw_overlay_ms": 0.24,
+        "copy_output_frame_ms": 0.98,
+        "write_video_ms": 10.06,
+        "frame_total_ms": 120.73
+      },
+      "counts": {},
+      "resources": {
+        "system_cpu_percent": 71.1,
+        "process_cpu_percent": 812.5,
+        "process_rss_mb": 794.79
+      }
+    },
+    {
+      "frame_index": 58,
+      "source_frame_id": 377,
+      "dropped_frames_before": 1,
+      "stage_times_ms": {
+        "detect_track_ms": 91.06,
+        "face_detect_classical_ms": 150.8,
+        "face_detect_profile_ms": 600.1,
+        "face_detect_total_ms": 752.41,
+        "collect_candidates_ms": 752.58,
+        "plot_base_ms": 1.67,
+        "state_update_ms": 0.07,
+        "control_update_ms": 0.03,
+        "draw_overlay_ms": 0.24,
+        "copy_output_frame_ms": 0.82,
+        "write_video_ms": 6.59,
+        "frame_total_ms": 853.14
+      },
+      "counts": {
+        "candidate_count": 2,
+        "face_detect_calls": 2
+      },
+      "resources": {
+        "system_cpu_percent": 31.8,
+        "process_cpu_percent": 325.8,
+        "process_rss_mb": 794.79
+      }
+    },
+    {
+      "frame_index": 59,
+      "source_frame_id": 385,
+      "dropped_frames_before": 7,
+      "stage_times_ms": {
+        "detect_track_ms": 108.51,
+        "face_detect_classical_ms": 135.9,
+        "face_detect_profile_ms": 418.76,
+        "face_detect_total_ms": 555.66,
+        "collect_candidates_ms": 555.82,
+        "plot_base_ms": 1.39,
+        "state_update_ms": 0.08,
+        "control_update_ms": 0.02,
+        "draw_overlay_ms": 0.19,
+        "copy_output_frame_ms": 0.79,
+        "write_video_ms": 7.39,
+        "frame_total_ms": 674.26
+      },
+      "counts": {
+        "candidate_count": 1,
+        "face_detect_calls": 1
+      },
+      "resources": {
+        "system_cpu_percent": 35.3,
+        "process_cpu_percent": 379.3,
+        "process_rss_mb": 794.95
+      }
+    },
+    {
+      "frame_index": 60,
+      "source_frame_id": 392,
+      "dropped_frames_before": 6,
+      "stage_times_ms": {
+        "detect_track_ms": 89.54,
+        "face_detect_classical_ms": 121.45,
+        "face_detect_profile_ms": 476.28,
+        "face_detect_mtcnn_ms": 71.43,
+        "face_detect_total_ms": 671.11,
+        "collect_candidates_ms": 671.27,
+        "plot_base_ms": 1.55,
+        "state_update_ms": 0.11,
+        "control_update_ms": 0.06,
+        "draw_overlay_ms": 0.29,
+        "copy_output_frame_ms": 0.98,
+        "write_video_ms": 8.32,
+        "frame_total_ms": 772.2
+      },
+      "counts": {
+        "candidate_count": 1,
+        "face_detect_calls": 1,
+        "face_detect_mtcnn_calls": 1
+      },
+      "resources": {
+        "system_cpu_percent": 39.9,
+        "process_cpu_percent": 422.8,
+        "process_rss_mb": 795.78
+      }
+    },
+    {
+      "frame_index": 61,
+      "source_frame_id": 400,
+      "dropped_frames_before": 7,
+      "stage_times_ms": {
+        "detect_track_ms": 89.11,
+        "face_detect_classical_ms": 135.1,
+        "face_detect_profile_ms": 451.76,
+        "face_detect_total_ms": 588.0,
+        "collect_candidates_ms": 588.14,
+        "plot_base_ms": 1.89,
+        "state_update_ms": 0.11,
+        "control_update_ms": 0.03,
+        "draw_overlay_ms": 0.21,
+        "copy_output_frame_ms": 0.84,
+        "write_video_ms": 5.06,
+        "frame_total_ms": 685.47
+      },
+      "counts": {
+        "candidate_count": 1,
+        "face_detect_calls": 1
+      },
+      "resources": {
+        "system_cpu_percent": 37.9,
+        "process_cpu_percent": 386.1,
+        "process_rss_mb": 798.68
+      }
+    }
+  ],
+  "summary": {
+    "source": "camera:0",
+    "output_video": "E:\\Downloads\\ultralytics\\runs\\lock_target_realtime\\camera_light_20260525-180950\\camera_0_locked.mp4",
+    "frame_metrics_json": "E:\\Downloads\\ultralytics\\runs\\lock_target_realtime\\camera_light_20260525-180950\\camera_0_frame_metrics.json",
+    "performance_json": "E:\\Downloads\\ultralytics\\runs\\lock_target_realtime\\camera_light_20260525-180950\\camera_0_performance.json",
+    "selected_at_frame": 1,
+    "target_initialized": true,
+    "target_name": "TARGET-1",
+    "final_tracker_id": 1,
+    "tracker_switches": 0,
+    "reacquired_count": 0,
+    "lost_frames": 0,
+    "face_detected_frames": 60,
+    "face_miss_frames": 0,
+    "total_face_misses": 0,
+    "max_face_miss_streak": 0,
+    "total_updates": 60,
+    "final_control_state": "TRACKING",
+    "final_lock_mode": "FACE_LOCK",
+    "final_filtered_target_center": {
+      "x": 518.27,
+      "y": 306.66
+    },
+    "control_alpha": 0.72,
+    "control_max_step": 40.0,
+    "control_deadband": 12.0,
+    "processed_frames": 61,
+    "session_duration_sec": 40.71,
+    "requested_camera_fps": 30,
+    "output_fps": 30.0,
+    "camera_fps": 10.01,
+    "process_fps": 1.49,
+    "display_fps": 75.71,
+    "process_latency_ms": 685.48,
+    "total_dropped_frames": 339,
+    "max_dropped_frames": 17
+  }
+}

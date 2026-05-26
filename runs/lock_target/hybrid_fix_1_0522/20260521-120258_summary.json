@@ -1,0 +1,16 @@
+{
+  "source": "Q:\\20260521-120258.mp4",
+  "output_video": "E:\\Downloads\\ultralytics\\runs\\lock_target\\hybrid_fix_1\\20260521-120258_locked.mp4",
+  "selected_at_frame": 1,
+  "target_initialized": true,
+  "target_name": "TARGET-1",
+  "final_tracker_id": 18,
+  "tracker_switches": 1,
+  "reacquired_count": 1,
+  "lost_frames": 0,
+  "face_detected_frames": 555,
+  "face_miss_frames": 0,
+  "total_face_misses": 109,
+  "max_face_miss_streak": 13,
+  "total_updates": 664
+}

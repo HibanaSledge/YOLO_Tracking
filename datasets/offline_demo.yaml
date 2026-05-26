@@ -1,0 +1,6 @@
+path: datasets/offline_demo
+train: images/train
+val: images/val
+
+names:
+  0: object

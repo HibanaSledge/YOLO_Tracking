@@ -1,0 +1,12 @@
+{
+  "source": "Q:\\20260521-113857.mp4",
+  "output_video": "E:\\Downloads\\ultralytics\\runs\\lock_target\\demo1\\20260521-113857_locked.mp4",
+  "selected_at_frame": 1,
+  "target_initialized": true,
+  "target_name": "TARGET-1",
+  "final_tracker_id": 1,
+  "tracker_switches": 8,
+  "reacquired_count": 0,
+  "lost_frames": 0,
+  "total_updates": 477
+}

@@ -1,0 +1,14 @@
+{
+  "source": "Q:\\20260521-113857.mp4",
+  "output_video": "E:\\Downloads\\ultralytics\\runs\\lock_target\\realtime_fix_1\\20260521-113857_locked.mp4",
+  "selected_at_frame": 1,
+  "target_initialized": true,
+  "target_name": "TARGET-1",
+  "final_tracker_id": 1,
+  "tracker_switches": 0,
+  "reacquired_count": 0,
+  "lost_frames": 0,
+  "face_detected_frames": 422,
+  "face_miss_frames": 0,
+  "total_updates": 481
+}
