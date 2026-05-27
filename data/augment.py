@@ -552,191 +552,161 @@ class Mosaic(BaseMixTransform):
             self._mosaic3(labels) if self.n == 3 else self._mosaic4(labels) if self.n == 4 else self._mosaic9(labels)
         )  # This code is modified for mosaic3 method.
 
+    def _mosaic_base(self, labels, n, canvas_size, calc_coords, crop_border=None, border_offset=False):
+        """Apply mosaic augmentation with a configurable layout strategy.
+
+        This is the unified base method for all mosaic variants. It handles the common processing flow:
+        image loading, coordinate calculation (delegated to the strategy function), image placement,
+        label updating, and final concatenation.
+
+        Args:
+            labels (dict[str, Any]): Input labels dictionary with 'img' and 'mix_labels' keys.
+            n (int): Number of images in the mosaic.
+            canvas_size (int): Size of the mosaic canvas (width and height).
+            calc_coords (Callable): A function with signature (i, h, w, canvas_size, state) -> tuple
+                that returns (x1a, y1a, x2a, y2a, x1b, y1b, x2b, y2b) for each image.
+            crop_border (tuple[int, int] | None): Optional border for cropping the final mosaic.
+            border_offset (bool): Whether to add self.border offset to padding values.
+
+        Returns:
+            (dict[str, Any]): A dictionary with the mosaic image and updated labels.
+        """
+        mosaic_labels = []
+        state = {}
+        for i in range(n):
+            labels_patch = labels if i == 0 else labels["mix_labels"][i - 1]
+            img = labels_patch["img"]
+            h, w = labels_patch.pop("resized_shape")
+
+            if i == 0:
+                img_canvas = np.full((canvas_size, canvas_size, img.shape[2]), 114, dtype=np.uint8)
+
+            x1a, y1a, x2a, y2a, x1b, y1b, x2b, y2b = calc_coords(i, h, w, canvas_size, state)
+
+            img_canvas[y1a:y2a, x1a:x2a] = img[y1b:y2b, x1b:x2b]
+            padw = x1a - x1b
+            padh = y1a - y1b
+            if border_offset:
+                padw += self.border[0]
+                padh += self.border[1]
+
+            labels_patch = self._update_labels(labels_patch, padw, padh)
+            mosaic_labels.append(labels_patch)
+
+        final_labels = self._cat_labels(mosaic_labels)
+        if crop_border is not None:
+            final_labels["img"] = img_canvas[-crop_border[0] : crop_border[0], -crop_border[1] : crop_border[1]]
+        else:
+            final_labels["img"] = img_canvas
+        return final_labels
+
     def _mosaic3(self, labels: dict[str, Any]) -> dict[str, Any]:
         """Create a 1x3 image mosaic by combining three images.
 
         This method arranges three images in a horizontal layout, with the main image in the center and two additional
-        images on either side. It's part of the Mosaic augmentation technique used in object detection.
+        images on either side.
 
         Args:
             labels (dict[str, Any]): A dictionary containing image and label information for the main (center) image.
-                Must include 'img' key with the image array, and 'mix_labels' key with a list of two dictionaries
-                containing information for the side images.
 
         Returns:
-            (dict[str, Any]): A dictionary with the mosaic image and updated labels. Keys include:
-                - 'img' (np.ndarray): The mosaic image array with shape (H, W, C).
-                - Other keys from the input labels, updated to reflect the new image dimensions.
-
-        Examples:
-            >>> mosaic = Mosaic(dataset, imgsz=640, p=1.0, n=3)
-            >>> labels = {
-            ...     "img": np.random.rand(480, 640, 3),
-            ...     "mix_labels": [{"img": np.random.rand(480, 640, 3)} for _ in range(2)],
-            ... }
-            >>> result = mosaic._mosaic3(labels)
-            >>> print(result["img"].shape)
-            (640, 640, 3)
+            (dict[str, Any]): A dictionary with the mosaic image and updated labels.
         """
-        mosaic_labels = []
         s = self.imgsz
-        for i in range(3):
-            labels_patch = labels if i == 0 else labels["mix_labels"][i - 1]
-            # Load image
-            img = labels_patch["img"]
-            h, w = labels_patch.pop("resized_shape")
 
-            # Place img in img3
+        def calc_coords(i, h, w, canvas_size, state):
             if i == 0:  # center
-                img3 = np.full((s * 3, s * 3, img.shape[2]), 114, dtype=np.uint8)  # base image with 3 tiles
-                h0, w0 = h, w
-                c = s, s, s + w, s + h  # xmin, ymin, xmax, ymax (base) coordinates
+                state["h0"], state["w0"] = h, w
+                xmin, ymin, xmax, ymax = s, s, s + w, s + h
             elif i == 1:  # right
-                c = s + w0, s, s + w0 + w, s + h
-            elif i == 2:  # left
-                c = s - w, s + h0 - h, s, s + h0
+                xmin, ymin, xmax, ymax = s + state["w0"], s, s + state["w0"] + w, s + h
+            else:  # left
+                xmin, ymin, xmax, ymax = s - w, s + state["h0"] - h, s, s + state["h0"]
 
-            padw, padh = c[:2]
-            x1, y1, x2, y2 = (max(x, 0) for x in c)  # allocate coordinates
+            padw, padh = xmin, ymin
+            x1a, y1a, x2a, y2a = (max(x, 0) for x in (xmin, ymin, xmax, ymax))
+            x1b, y1b, x2b, y2b = x1a - padw, y1a - padh, w, h
+            return x1a, y1a, x2a, y2a, x1b, y1b, x2b, y2b
 
-            img3[y1:y2, x1:x2] = img[y1 - padh :, x1 - padw :]  # img3[ymin:ymax, xmin:xmax]
-            # hp, wp = h, w  # height, width previous for next iteration
-
-            # Labels assuming imgsz*2 mosaic size
-            labels_patch = self._update_labels(labels_patch, padw + self.border[0], padh + self.border[1])
-            mosaic_labels.append(labels_patch)
-        final_labels = self._cat_labels(mosaic_labels)
-
-        final_labels["img"] = img3[-self.border[0] : self.border[0], -self.border[1] : self.border[1]]
-        return final_labels
+        return self._mosaic_base(labels, 3, s * 3, calc_coords, crop_border=self.border, border_offset=True)
 
     def _mosaic4(self, labels: dict[str, Any]) -> dict[str, Any]:
         """Create a 2x2 image mosaic from four input images.
 
-        This method combines four images into a single mosaic image by placing them in a 2x2 grid. It also updates the
-        corresponding labels for each image in the mosaic.
+        This method combines four images into a single mosaic image by placing them in a 2x2 grid.
 
         Args:
             labels (dict[str, Any]): A dictionary containing image data and labels for the base image (index 0) and
                 three additional images (indices 1-3) in the 'mix_labels' key.
 
         Returns:
-            (dict[str, Any]): A dictionary containing the mosaic image and updated labels. The 'img' key contains the
-                mosaic image as a numpy array, and other keys contain the combined and adjusted labels for all
-                four images.
-
-        Examples:
-            >>> mosaic = Mosaic(dataset, imgsz=640, p=1.0, n=4)
-            >>> labels = {
-            ...     "img": np.random.rand(480, 640, 3),
-            ...     "mix_labels": [{"img": np.random.rand(480, 640, 3)} for _ in range(3)],
-            ... }
-            >>> result = mosaic._mosaic4(labels)
-            >>> assert result["img"].shape == (1280, 1280, 3)
+            (dict[str, Any]): A dictionary containing the mosaic image and updated labels.
         """
-        mosaic_labels = []
         s = self.imgsz
         yc, xc = (int(random.uniform(-x, 2 * s + x)) for x in self.border)  # mosaic center x, y
-        for i in range(4):
-            labels_patch = labels if i == 0 else labels["mix_labels"][i - 1]
-            # Load image
-            img = labels_patch["img"]
-            h, w = labels_patch.pop("resized_shape")
 
-            # Place img in img4
+        def calc_coords(i, h, w, canvas_size, state):
             if i == 0:  # top left
-                img4 = np.full((s * 2, s * 2, img.shape[2]), 114, dtype=np.uint8)  # base image with 4 tiles
-                x1a, y1a, x2a, y2a = max(xc - w, 0), max(yc - h, 0), xc, yc  # xmin, ymin, xmax, ymax (large image)
-                x1b, y1b, x2b, y2b = w - (x2a - x1a), h - (y2a - y1a), w, h  # xmin, ymin, xmax, ymax (small image)
+                x1a, y1a, x2a, y2a = max(xc - w, 0), max(yc - h, 0), xc, yc
+                x1b, y1b, x2b, y2b = w - (x2a - x1a), h - (y2a - y1a), w, h
             elif i == 1:  # top right
                 x1a, y1a, x2a, y2a = xc, max(yc - h, 0), min(xc + w, s * 2), yc
                 x1b, y1b, x2b, y2b = 0, h - (y2a - y1a), min(w, x2a - x1a), h
             elif i == 2:  # bottom left
                 x1a, y1a, x2a, y2a = max(xc - w, 0), yc, xc, min(s * 2, yc + h)
                 x1b, y1b, x2b, y2b = w - (x2a - x1a), 0, w, min(y2a - y1a, h)
-            elif i == 3:  # bottom right
+            else:  # bottom right
                 x1a, y1a, x2a, y2a = xc, yc, min(xc + w, s * 2), min(s * 2, yc + h)
                 x1b, y1b, x2b, y2b = 0, 0, min(w, x2a - x1a), min(y2a - y1a, h)
+            return x1a, y1a, x2a, y2a, x1b, y1b, x2b, y2b
 
-            img4[y1a:y2a, x1a:x2a] = img[y1b:y2b, x1b:x2b]  # img4[ymin:ymax, xmin:xmax]
-            padw = x1a - x1b
-            padh = y1a - y1b
-
-            labels_patch = self._update_labels(labels_patch, padw, padh)
-            mosaic_labels.append(labels_patch)
-        final_labels = self._cat_labels(mosaic_labels)
-        final_labels["img"] = img4
-        return final_labels
+        return self._mosaic_base(labels, 4, s * 2, calc_coords, crop_border=None, border_offset=False)
 
     def _mosaic9(self, labels: dict[str, Any]) -> dict[str, Any]:
         """Create a 3x3 image mosaic from the input image and eight additional images.
 
-        This method combines nine images into a single mosaic image. The input image is placed at the center, and eight
-        additional images from the dataset are placed around it in a 3x3 grid pattern.
+        This method combines nine images into a single mosaic image. The input image is placed at the center,
+        and eight additional images from the dataset are placed around it in a 3x3 grid pattern.
 
         Args:
-            labels (dict[str, Any]): A dictionary containing the input image and its associated labels. It should have
-                the following keys: 'img' (np.ndarray) the input image, 'resized_shape' (tuple[int, int]) the shape
-                of the resized image (height, width), and 'mix_labels' (list[dict]) a list of dictionaries containing
-                information for the additional eight images, each with the same structure as the input labels.
+            labels (dict[str, Any]): A dictionary containing the input image and its associated labels.
 
         Returns:
-            (dict[str, Any]): A dictionary containing the mosaic image and updated labels. It includes the following
-            keys:
-                - 'img' (np.ndarray): The final mosaic image.
-                - Other keys from the input labels, updated to reflect the new mosaic arrangement.
-
-        Examples:
-            >>> mosaic = Mosaic(dataset, imgsz=640, p=1.0, n=9)
-            >>> input_labels = dataset[0]
-            >>> mosaic_result = mosaic._mosaic9(input_labels)
-            >>> mosaic_image = mosaic_result["img"]
+            (dict[str, Any]): A dictionary containing the mosaic image and updated labels.
         """
-        mosaic_labels = []
         s = self.imgsz
-        hp, wp = -1, -1  # height, width previous
-        for i in range(9):
-            labels_patch = labels if i == 0 else labels["mix_labels"][i - 1]
-            # Load image
-            img = labels_patch["img"]
-            h, w = labels_patch.pop("resized_shape")
 
-            # Place img in img9
+        def calc_coords(i, h, w, canvas_size, state):
             if i == 0:  # center
-                img9 = np.full((s * 3, s * 3, img.shape[2]), 114, dtype=np.uint8)  # base image with 4 tiles
-                h0, w0 = h, w
-                c = s, s, s + w, s + h  # xmin, ymin, xmax, ymax (base) coordinates
-            elif i == 1:  # top
-                c = s, s - h, s + w, s
-            elif i == 2:  # top right
-                c = s + wp, s - h, s + wp + w, s
-            elif i == 3:  # right
-                c = s + w0, s, s + w0 + w, s + h
-            elif i == 4:  # bottom right
-                c = s + w0, s + hp, s + w0 + w, s + hp + h
-            elif i == 5:  # bottom
-                c = s + w0 - w, s + h0, s + w0, s + h0 + h
-            elif i == 6:  # bottom left
-                c = s + w0 - wp - w, s + h0, s + w0 - wp, s + h0 + h
-            elif i == 7:  # left
-                c = s - w, s + h0 - h, s, s + h0
-            elif i == 8:  # top left
-                c = s - w, s + h0 - hp - h, s, s + h0 - hp
+                state["h0"], state["w0"] = h, w
+                xmin, ymin, xmax, ymax = s, s, s + w, s + h
+            else:
+                h0, w0 = state["h0"], state["w0"]
+                hp, wp = state.get("hp", -1), state.get("wp", -1)
+                if i == 1:  # top
+                    xmin, ymin, xmax, ymax = s, s - h, s + w, s
+                elif i == 2:  # top right
+                    xmin, ymin, xmax, ymax = s + wp, s - h, s + wp + w, s
+                elif i == 3:  # right
+                    xmin, ymin, xmax, ymax = s + w0, s, s + w0 + w, s + h
+                elif i == 4:  # bottom right
+                    xmin, ymin, xmax, ymax = s + w0, s + hp, s + w0 + w, s + hp + h
+                elif i == 5:  # bottom
+                    xmin, ymin, xmax, ymax = s + w0 - w, s + h0, s + w0, s + h0 + h
+                elif i == 6:  # bottom left
+                    xmin, ymin, xmax, ymax = s + w0 - wp - w, s + h0, s + w0 - wp, s + h0 + h
+                elif i == 7:  # left
+                    xmin, ymin, xmax, ymax = s - w, s + h0 - h, s, s + h0
+                else:  # top left
+                    xmin, ymin, xmax, ymax = s - w, s + h0 - hp - h, s, s + h0 - hp
 
-            padw, padh = c[:2]
-            x1, y1, x2, y2 = (max(x, 0) for x in c)  # allocate coordinates
+            state["hp"], state["wp"] = h, w
+            padw, padh = xmin, ymin
+            x1a, y1a, x2a, y2a = (max(x, 0) for x in (xmin, ymin, xmax, ymax))
+            x1b, y1b, x2b, y2b = x1a - padw, y1a - padh, w, h
+            return x1a, y1a, x2a, y2a, x1b, y1b, x2b, y2b
 
-            # Image
-            img9[y1:y2, x1:x2] = img[y1 - padh :, x1 - padw :]  # img9[ymin:ymax, xmin:xmax]
-            hp, wp = h, w  # height, width previous for next iteration
-
-            # Labels assuming imgsz*2 mosaic size
-            labels_patch = self._update_labels(labels_patch, padw + self.border[0], padh + self.border[1])
-            mosaic_labels.append(labels_patch)
-        final_labels = self._cat_labels(mosaic_labels)
-
-        final_labels["img"] = img9[-self.border[0] : self.border[0], -self.border[1] : self.border[1]]
-        return final_labels
+        return self._mosaic_base(labels, 9, s * 3, calc_coords, crop_border=self.border, border_offset=True)
 
     @staticmethod
     def _update_labels(labels, padw: int, padh: int) -> dict[str, Any]:
