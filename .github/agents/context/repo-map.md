@@ -7,7 +7,7 @@
 - `perf_utils.py`：离线与实时共享性能记录。
 - `lock_target_change_log.md`：每次关键修改的证据化记录。
 - `lock_target_project_report.md`：项目进度与技术路线报告。
-- `lock_target_parameter_table.md`：质量相关参数、调参路线和 corner case。
+- `docs/tuning/lock_target_parameter_table.md`：质量相关参数、调参路线和 corner case。
 - `README.md`：运行说明。
 - `yolo26n.pt`、`yolo26l.pt`：当前可用权重。
 

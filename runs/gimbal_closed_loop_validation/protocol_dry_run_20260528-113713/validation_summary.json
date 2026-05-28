@@ -1,0 +1,36 @@
+{
+  "run_dir": "E:\\Downloads\\ultralytics\\runs\\gimbal_closed_loop_validation\\protocol_dry_run_20260528-113713",
+  "created_at": "2026-05-28T11:37:18",
+  "mode": "dry_run",
+  "serial": {
+    "enabled": true,
+    "port": null,
+    "baudrate": 115200,
+    "dry_run": true,
+    "command_rate_hz": 20.0,
+    "max_speed": 150,
+    "pan_gain": 0.8,
+    "tilt_gain": 0.8,
+    "invert_pan": false,
+    "invert_tilt": false,
+    "sent_packets": 84,
+    "failed_packets": 0,
+    "open_error": null
+  },
+  "total_rows": 97,
+  "track_packets": 80,
+  "stop_packets": 3,
+  "sent_packets_recorded": 83,
+  "failed_packets": 0,
+  "direction_checks": {
+    "right_pan_positive": true,
+    "left_pan_negative": true,
+    "down_tilt_positive": true,
+    "up_tilt_negative": true,
+    "center_zero_speed": true,
+    "lost_stop": true,
+    "all_passed": true
+  },
+  "hardware_closed_loop_completed": false,
+  "evidence_gap": "未连接可识别的下位机反馈/真实云台画面闭环；本次为上位机协议 dry-run 验证。"
+}

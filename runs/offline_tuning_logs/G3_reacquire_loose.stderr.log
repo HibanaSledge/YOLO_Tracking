@@ -1,0 +1,1 @@
+[ WARN:0@6.849] global ocl.cpp:1030 cv::ocl::OpenCLExecutionContext::Impl::getInitializedExecutionContext OpenCL: Can't initialize OpenCL context/device/queue: unknown C++ exception

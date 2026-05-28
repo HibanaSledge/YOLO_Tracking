@@ -33,6 +33,7 @@ from lock_target import (
 )
 from ultralytics.perf_utils import NullPerformanceRecorder, PerformanceRecorder
 from ultralytics import YOLO
+from gimbal.serial_client import GimbalSerialClient
 
 
 def parse_args() -> argparse.Namespace:
@@ -68,6 +69,16 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--control-alpha", type=float, default=0.72, help="Smoothing factor for the control center.")
     parser.add_argument("--control-max-step", type=float, default=40.0, help="Maximum per-frame control-center movement in pixels.")
     parser.add_argument("--control-deadband", type=float, default=12.0, help="Deadband radius in pixels for pan-tilt control output.")
+    parser.add_argument("--gimbal-port", default=None, help="Serial port used to send gimbal tracking commands, e.g. COM3. Disabled by default.")
+    parser.add_argument("--gimbal-baud", type=int, default=115200, help="Gimbal serial baudrate.")
+    parser.add_argument("--gimbal-timeout", type=float, default=0.02, help="Gimbal serial write timeout in seconds.")
+    parser.add_argument("--gimbal-dry-run", action="store_true", help="Build gimbal commands without opening a real serial port.")
+    parser.add_argument("--gimbal-command-rate", type=float, default=20.0, help="Maximum gimbal command send rate in Hz.")
+    parser.add_argument("--gimbal-max-speed", type=int, default=500, help="Maximum absolute pan/tilt speed sent to the lower controller.")
+    parser.add_argument("--gimbal-pan-gain", type=float, default=0.8, help="Pan speed gain from normalized x offset to serial command.")
+    parser.add_argument("--gimbal-tilt-gain", type=float, default=0.8, help="Tilt speed gain from normalized y offset to serial command.")
+    parser.add_argument("--gimbal-invert-pan", action="store_true", help="Invert pan command direction if the lower controller direction is opposite.")
+    parser.add_argument("--gimbal-invert-tilt", action="store_true", help="Invert tilt command direction if the lower controller direction is opposite.")
     parser.add_argument("--lightweight", action="store_true", help="Enable lightweight runtime preset for faster processing.")
     parser.add_argument("--reid-interval", type=int, default=8, help="Refresh embeddings every N processed frames while tracking remains stable.")
     parser.add_argument("--mtcnn-interval", type=int, default=3, help="Run MTCNN at most once every N processed frames for the tracked target.")
@@ -371,6 +382,7 @@ def processing_worker(args: argparse.Namespace, shared: SharedState) -> None:
     max_dropped_frames = 0
     session_start = time.perf_counter()
     perf = PerformanceRecorder(mode="realtime") if save_performance_enabled(args) else NullPerformanceRecorder(mode="realtime")
+    gimbal = GimbalSerialClient.from_args(args)
 
     while not shared.stop_event.is_set():
         next_frame_id, frame = shared.raw_frames.get_latest(input_frame_id, timeout=0.1)
@@ -461,6 +473,10 @@ def processing_worker(args: argparse.Namespace, shared: SharedState) -> None:
                 metric = frame_metric(processed_index, max(1.0, float(getattr(args, "output_fps", args.camera_fps))), frame.shape, state, args.control_deadband)
                 metric["source_frame_id"] = next_frame_id
                 metric["dropped_frames_before"] = dropped_frames
+                with perf.time_stage("gimbal_serial_ms"):
+                    gimbal_command = gimbal.send_metric(metric)
+                if gimbal_command is not None:
+                    metric["gimbal_command"] = gimbal_command
                 draw_control_overlay(display_frame, metric)
                 if save_frame_metrics_enabled(args):
                     frame_metrics.append(metric)
@@ -547,6 +563,7 @@ def processing_worker(args: argparse.Namespace, shared: SharedState) -> None:
             "process_latency_ms": round(float(shared.latest_metrics.get("process_latency_ms", 0.0)), 2),
             "total_dropped_frames": total_dropped_frames,
             "max_dropped_frames": max_dropped_frames,
+            "gimbal_serial": gimbal.summary(),
         }
         if save_performance_enabled(args):
             performance_report = perf.build_report(summary)
@@ -557,6 +574,7 @@ def processing_worker(args: argparse.Namespace, shared: SharedState) -> None:
             shared.session_paths.output_json.write_text(json.dumps(summary, ensure_ascii=False, indent=2), encoding="utf-8")
         print(json.dumps(summary, ensure_ascii=False, indent=2))
 
+    gimbal.close()
     shared.processed_frames.close()
 
 

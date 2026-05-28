@@ -1,0 +1,58 @@
+WARNING not enough matching points
+WARNING not enough matching points
+WARNING not enough matching points
+WARNING not enough matching points
+WARNING not enough matching points
+WARNING not enough matching points
+WARNING not enough matching points
+WARNING not enough matching points
+WARNING not enough matching points
+WARNING not enough matching points
+WARNING not enough matching points
+WARNING not enough matching points
+WARNING not enough matching points
+WARNING not enough matching points
+WARNING not enough matching points
+WARNING not enough matching points
+WARNING not enough matching points
+WARNING not enough matching points
+WARNING not enough matching points
+WARNING not enough matching points
+WARNING not enough matching points
+WARNING not enough matching points
+WARNING not enough matching points
+WARNING not enough matching points
+WARNING not enough matching points
+WARNING not enough matching points
+WARNING not enough matching points
+WARNING not enough matching points
+{
+  "source": "Q:\\20260521-120258.mp4",
+  "output_video": "E:\\Downloads\\ultralytics\\runs\\lock_target_tuning\\detect_img1152\\20260521-120258_locked.mp4",
+  "frame_metrics_json": "E:\\Downloads\\ultralytics\\runs\\lock_target_tuning\\detect_img1152\\20260521-120258_frame_metrics.json",
+  "performance_json": "E:\\Downloads\\ultralytics\\runs\\lock_target_tuning\\detect_img1152\\20260521-120258_performance.json",
+  "selected_at_frame": 1,
+  "target_initialized": true,
+  "target_name": "TARGET-1",
+  "final_tracker_id": 51,
+  "tracker_switches": 11,
+  "reacquired_count": 4,
+  "lost_frames": 0,
+  "face_detected_frames": 545,
+  "face_miss_frames": 0,
+  "total_face_misses": 100,
+  "max_face_miss_streak": 18,
+  "total_updates": 645,
+  "final_control_state": "TRACKING",
+  "final_lock_mode": "FACE_LOCK",
+  "final_filtered_target_center": {
+    "x": 337.39,
+    "y": 745.55
+  },
+  "control_alpha": 0.72,
+  "control_max_step": 40.0,
+  "control_deadband": 12.0,
+  "processed_frames": 731,
+  "runtime_sec": 1311.694,
+  "effective_fps": 0.557
+}

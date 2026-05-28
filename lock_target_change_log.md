@@ -711,3 +711,85 @@
 - 每次修改 lock_target.py 后，都必须在本文档追加新的记录小节。
 - 每次新增记录时，保持相同结构：新增、减少或移除、技术细节、目的、有效性证据与指标、修改后仍存在的问题、证据缺口。
 - 如果某次修改没有独立实验结果，必须明确写出证据缺口，并在后续复跑后补录指标。
+
+## 记录 20：实时云台串口协议与 tracking 命令输出
+
+### 新增
+
+- 新增并整理 `gimbal/serial_client.py`，实现上位机到下位机的云台串口发送模块。
+- 新增并整理 `docs/gimbal/serial_protocol.md`，定义云台串口通信协议 v1，包括帧头、消息类型、payload、CRC16、状态码和下位机解析建议。
+- 在 `lock_target_realtime.py` 中新增可选串口参数：`--gimbal-port`、`--gimbal-baud`、`--gimbal-dry-run`、`--gimbal-command-rate`、`--gimbal-max-speed`、`--gimbal-pan-gain`、`--gimbal-tilt-gain`、`--gimbal-invert-pan`、`--gimbal-invert-tilt`。
+- 在实时处理链路中把 `frame_metric` 生成的 `control_offset` 转换为 `pan_speed` 和 `tilt_speed`，并按协议发送给下位机。
+- 在 realtime summary 中新增 `gimbal_serial` 配置和发送统计。
+
+### 减少或移除
+
+- 无。
+- 默认不启用串口，未提供 `--gimbal-port` 或 `--gimbal-dry-run` 时，不改变现有 camera tracking 行为。
+
+### 技术细节
+
+- 串口帧格式使用固定帧头 `0xAA 0x55`、协议版本、消息类型、序号、payload 长度、payload 和 CRC16-Modbus。
+- TRACK 消息携带 state、flags、frame_index、dx_px、dy_px、pan_speed、tilt_speed 和 distance_px。
+- STOP 消息用于目标丢失、未初始化或程序退出时清零下位机速度。
+- 速度命令由控制中心偏移归一化得到：x 偏移映射 pan，y 偏移映射 tilt，并受 `gimbal_max_speed` 限幅。
+- 支持 `--gimbal-invert-pan` 和 `--gimbal-invert-tilt` 适配实际云台电机方向。
+- 支持 `--gimbal-dry-run` 只构造协议帧和统计发送次数，不打开真实串口，便于无硬件验证上位机链路。
+
+### 目的
+
+- 打通实时 camera tracking 到下位机云台控制的通信出口，让视觉锁定结果可以驱动云台 yaw/pitch tracking。
+- 先建立稳定、可校验、可扩展的上位机协议，再进行真实下位机闭环调试。
+
+### 有效性证据与指标
+
+- 证据来源：代码静态检查和协议模块语法验证。
+- 已完成协议文档落地，明确下位机解析规则和安全 STOP 行为。
+- 已完成 realtime 可选接入，默认关闭，不影响原有实时显示、检测和保存链路。
+
+### 修改后仍存在的问题
+
+- 尚未连接真实下位机固件验证串口收发和电机方向。
+- `pan_speed` 和 `tilt_speed` 的单位仍是协议层抽象速度值，需要根据具体云台驱动实测标定。
+- 当前只实现上位机单向发送，尚未实现下位机 ACK、状态回传或故障码上报。
+
+### 证据缺口
+
+- 缺少真实串口硬件闭环测试结果。
+- 缺少云台实际跟踪效果指标，例如稳态误差、过冲、响应延迟和丢包恢复时间。
+
+## 记录 21：云台与离线调参文件结构整理
+
+### 新增
+
+- 新增 `docs/tuning/README.md`，集中说明离线调参文档、可复用脚本和运行输出目录。
+- 将离线调参脚本整理到 `tools/tuning/`，包括 G1-G7 全量运行、G1 后续跑和手动实验进度监控脚本。
+- 将离线调参参数表、进度、结果和最终分析报告整理到 `docs/tuning/`。
+
+### 减少或移除
+
+- 根目录不再散放 `run_offline_tuning.ps1`、`monitor_manual_offline_experiment.ps1`、`continue_offline_tuning_after_g1.ps1`、`offline_tuning_*.md` 和 `lock_target_parameter_table.md`。
+
+### 技术细节
+
+- 三个调参 PowerShell 脚本改为从脚本路径向上查找 `lock_target.py` 定位仓库根目录，避免移动到 `tools/tuning/` 后把脚本目录误当仓库根目录。
+- 调参进度和结果输出路径改为 `docs/tuning/offline_tuning_progress.md` 与 `docs/tuning/offline_tuning_results.md`。
+- 实验运行输出仍保留在 `runs/lock_target_tuning/`，实时日志仍保留在 `runs/offline_tuning_logs/`。
+
+### 目的
+
+- 将可复用脚本、任务文档和运行产物分层管理，减少根目录混乱，并保证后续调参实验可以直接复用现有脚本。
+
+### 有效性证据与指标
+
+- 文件已按 `tools/tuning/`、`docs/tuning/`、`runs/` 三类归档。
+- 脚本路径解析不再依赖脚本所在目录等于仓库根目录。
+
+### 修改后仍存在的问题
+
+- 未重新启动耗时 G1-G7 实验，避免重复长任务。
+- PowerShell 脚本仍绑定当前实验源视频 `Q:\20260521-120258.mp4` 和本机 Python 路径，迁移到其他机器时需要调整。
+
+### 证据缺口
+
+- 本次整理只做结构与脚本路径级验证，不提供新的调参质量或速度指标。

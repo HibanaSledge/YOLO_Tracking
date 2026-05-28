@@ -1,0 +1,98 @@
+frame_index,label,state,dx_px,dy_px,distance_px,control_active,deadband_active,msg_type,sent,pan_speed,tilt_speed,flags
+1,SEARCHING stop,SEARCHING,0.0,0.0,0.0,False,True,STOP,True,0,0,0
+2,SEARCHING stop,SEARCHING,0.0,0.0,0.0,False,True,RATE_LIMIT,False,0,0,0
+3,SEARCHING stop,SEARCHING,0.0,0.0,0.0,False,True,RATE_LIMIT,False,0,0,0
+4,SEARCHING stop,SEARCHING,0.0,0.0,0.0,False,True,RATE_LIMIT,False,0,0,0
+5,SEARCHING stop,SEARCHING,0.0,0.0,0.0,False,True,RATE_LIMIT,False,0,0,0
+6,SEARCHING stop,SEARCHING,0.0,0.0,0.0,False,True,RATE_LIMIT,False,0,0,0
+7,right,TRACKING,260.0,0.0,260.0,True,False,TRACK,True,49,0,11
+8,right,TRACKING,260.0,0.0,260.0,True,False,TRACK,True,49,0,11
+9,right,TRACKING,260.0,0.0,260.0,True,False,TRACK,True,49,0,11
+10,right,TRACKING,260.0,0.0,260.0,True,False,TRACK,True,49,0,11
+11,right,TRACKING,260.0,0.0,260.0,True,False,TRACK,True,49,0,11
+12,right,TRACKING,260.0,0.0,260.0,True,False,TRACK,True,49,0,11
+13,right,TRACKING,260.0,0.0,260.0,True,False,TRACK,True,49,0,11
+14,right,TRACKING,260.0,0.0,260.0,True,False,TRACK,True,49,0,11
+15,right_near,TRACKING,120.0,0.0,120.0,True,False,TRACK,True,22,0,11
+16,right_near,TRACKING,120.0,0.0,120.0,True,False,TRACK,True,22,0,11
+17,right_near,TRACKING,120.0,0.0,120.0,True,False,TRACK,True,22,0,11
+18,right_near,TRACKING,120.0,0.0,120.0,True,False,TRACK,True,22,0,11
+19,right_near,TRACKING,120.0,0.0,120.0,True,False,TRACK,True,22,0,11
+20,right_near,TRACKING,120.0,0.0,120.0,True,False,TRACK,True,22,0,11
+21,right_near,TRACKING,120.0,0.0,120.0,True,False,TRACK,True,22,0,11
+22,right_near,TRACKING,120.0,0.0,120.0,True,False,TRACK,True,22,0,11
+23,center,TRACKING,0.0,0.0,0.0,False,True,RATE_LIMIT,False,0,0,0
+24,center,TRACKING,0.0,0.0,0.0,False,True,TRACK,True,0,0,14
+25,center,TRACKING,0.0,0.0,0.0,False,True,TRACK,True,0,0,14
+26,center,TRACKING,0.0,0.0,0.0,False,True,TRACK,True,0,0,14
+27,center,TRACKING,0.0,0.0,0.0,False,True,TRACK,True,0,0,14
+28,down,TRACKING,0.0,180.0,180.0,True,False,TRACK,True,0,60,11
+29,down,TRACKING,0.0,180.0,180.0,True,False,TRACK,True,0,60,11
+30,down,TRACKING,0.0,180.0,180.0,True,False,TRACK,True,0,60,11
+31,down,TRACKING,0.0,180.0,180.0,True,False,TRACK,True,0,60,11
+32,down,TRACKING,0.0,180.0,180.0,True,False,RATE_LIMIT,False,0,0,0
+33,down,TRACKING,0.0,180.0,180.0,True,False,TRACK,True,0,60,11
+34,down,TRACKING,0.0,180.0,180.0,True,False,TRACK,True,0,60,11
+35,down,TRACKING,0.0,180.0,180.0,True,False,TRACK,True,0,60,11
+36,down_near,TRACKING,0.0,80.0,80.0,True,False,TRACK,True,0,27,11
+37,down_near,TRACKING,0.0,80.0,80.0,True,False,TRACK,True,0,27,11
+38,down_near,TRACKING,0.0,80.0,80.0,True,False,TRACK,True,0,27,11
+39,down_near,TRACKING,0.0,80.0,80.0,True,False,TRACK,True,0,27,11
+40,down_near,TRACKING,0.0,80.0,80.0,True,False,TRACK,True,0,27,11
+41,down_near,TRACKING,0.0,80.0,80.0,True,False,TRACK,True,0,27,11
+42,down_near,TRACKING,0.0,80.0,80.0,True,False,TRACK,True,0,27,11
+43,down_near,TRACKING,0.0,80.0,80.0,True,False,TRACK,True,0,27,11
+44,center,TRACKING,0.0,0.0,0.0,False,True,TRACK,True,0,0,14
+45,center,TRACKING,0.0,0.0,0.0,False,True,TRACK,True,0,0,14
+46,center,TRACKING,0.0,0.0,0.0,False,True,TRACK,True,0,0,14
+47,center,TRACKING,0.0,0.0,0.0,False,True,TRACK,True,0,0,14
+48,center,TRACKING,0.0,0.0,0.0,False,True,TRACK,True,0,0,14
+49,left,TRACKING,-260.0,0.0,260.0,True,False,TRACK,True,-49,0,11
+50,left,TRACKING,-260.0,0.0,260.0,True,False,TRACK,True,-49,0,11
+51,left,TRACKING,-260.0,0.0,260.0,True,False,TRACK,True,-49,0,11
+52,left,TRACKING,-260.0,0.0,260.0,True,False,TRACK,True,-49,0,11
+53,left,TRACKING,-260.0,0.0,260.0,True,False,TRACK,True,-49,0,11
+54,left,TRACKING,-260.0,0.0,260.0,True,False,TRACK,True,-49,0,11
+55,left,TRACKING,-260.0,0.0,260.0,True,False,TRACK,True,-49,0,11
+56,left,TRACKING,-260.0,0.0,260.0,True,False,TRACK,True,-49,0,11
+57,left_near,TRACKING,-120.0,0.0,120.0,True,False,TRACK,True,-22,0,11
+58,left_near,TRACKING,-120.0,0.0,120.0,True,False,TRACK,True,-22,0,11
+59,left_near,TRACKING,-120.0,0.0,120.0,True,False,TRACK,True,-22,0,11
+60,left_near,TRACKING,-120.0,0.0,120.0,True,False,TRACK,True,-22,0,11
+61,left_near,TRACKING,-120.0,0.0,120.0,True,False,TRACK,True,-22,0,11
+62,left_near,TRACKING,-120.0,0.0,120.0,True,False,TRACK,True,-22,0,11
+63,left_near,TRACKING,-120.0,0.0,120.0,True,False,RATE_LIMIT,False,0,0,0
+64,left_near,TRACKING,-120.0,0.0,120.0,True,False,TRACK,True,-22,0,11
+65,center,TRACKING,0.0,0.0,0.0,False,True,TRACK,True,0,0,14
+66,center,TRACKING,0.0,0.0,0.0,False,True,TRACK,True,0,0,14
+67,center,TRACKING,0.0,0.0,0.0,False,True,TRACK,True,0,0,14
+68,center,TRACKING,0.0,0.0,0.0,False,True,TRACK,True,0,0,14
+69,center,TRACKING,0.0,0.0,0.0,False,True,TRACK,True,0,0,14
+70,up,TRACKING,0.0,-180.0,180.0,True,False,TRACK,True,0,-60,11
+71,up,TRACKING,0.0,-180.0,180.0,True,False,TRACK,True,0,-60,11
+72,up,TRACKING,0.0,-180.0,180.0,True,False,TRACK,True,0,-60,11
+73,up,TRACKING,0.0,-180.0,180.0,True,False,TRACK,True,0,-60,11
+74,up,TRACKING,0.0,-180.0,180.0,True,False,TRACK,True,0,-60,11
+75,up,TRACKING,0.0,-180.0,180.0,True,False,TRACK,True,0,-60,11
+76,up,TRACKING,0.0,-180.0,180.0,True,False,TRACK,True,0,-60,11
+77,up,TRACKING,0.0,-180.0,180.0,True,False,TRACK,True,0,-60,11
+78,up_near,TRACKING,0.0,-80.0,80.0,True,False,TRACK,True,0,-27,11
+79,up_near,TRACKING,0.0,-80.0,80.0,True,False,TRACK,True,0,-27,11
+80,up_near,TRACKING,0.0,-80.0,80.0,True,False,TRACK,True,0,-27,11
+81,up_near,TRACKING,0.0,-80.0,80.0,True,False,TRACK,True,0,-27,11
+82,up_near,TRACKING,0.0,-80.0,80.0,True,False,TRACK,True,0,-27,11
+83,up_near,TRACKING,0.0,-80.0,80.0,True,False,TRACK,True,0,-27,11
+84,up_near,TRACKING,0.0,-80.0,80.0,True,False,TRACK,True,0,-27,11
+85,up_near,TRACKING,0.0,-80.0,80.0,True,False,TRACK,True,0,-27,11
+86,center,TRACKING,0.0,0.0,0.0,False,True,RATE_LIMIT,False,0,0,0
+87,center,TRACKING,0.0,0.0,0.0,False,True,TRACK,True,0,0,14
+88,center,TRACKING,0.0,0.0,0.0,False,True,TRACK,True,0,0,14
+89,center,TRACKING,0.0,0.0,0.0,False,True,TRACK,True,0,0,14
+90,center,TRACKING,0.0,0.0,0.0,False,True,TRACK,True,0,0,14
+91,LOST stop,LOST,0.0,0.0,0.0,False,True,STOP,True,0,0,0
+92,LOST stop,LOST,0.0,0.0,0.0,False,True,RATE_LIMIT,False,0,0,0
+93,LOST stop,LOST,0.0,0.0,0.0,False,True,RATE_LIMIT,False,0,0,0
+94,LOST stop,LOST,0.0,0.0,0.0,False,True,RATE_LIMIT,False,0,0,0
+95,LOST stop,LOST,0.0,0.0,0.0,False,True,RATE_LIMIT,False,0,0,0
+96,LOST stop,LOST,0.0,0.0,0.0,False,True,RATE_LIMIT,False,0,0,0
+97,explicit STOP,LOST,0.0,0.0,0.0,False,True,STOP,True,0,0,0

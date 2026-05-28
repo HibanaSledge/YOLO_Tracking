@@ -12,7 +12,7 @@
 2. [instructions/personal_experience_rules.md](personal_experience_rules.md)。
 3. [context/repo-map.md](../context/repo-map.md)、[context/architecture.md](../context/architecture.md)、[context/conventions.md](../context/conventions.md)。
 4. 核心代码：`lock_target.py`、`lock_target_realtime.py`、`perf_utils.py`。
-5. 项目文档：`lock_target_change_log.md`、`lock_target_project_report.md`、`lock_target_parameter_table.md`。
+5. 项目文档：`lock_target_change_log.md`、`lock_target_project_report.md`、`docs/tuning/lock_target_parameter_table.md`。
 6. 运行产物：`runs/lock_target/**`、`runs/lock_target_realtime/**` 下的 summary、frame_metrics、performance。
 7. 执行日志和现场反馈，例如 `debug.log` 或用户描述的实时窗口现象。
 

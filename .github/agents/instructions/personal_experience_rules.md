@@ -1,6 +1,6 @@
 # Personal Experience Rules
 
-本文档由当前可访问的对话上下文、agent 文件夹、`lock_target_change_log.md`、`lock_target_project_report.md`、`lock_target_parameter_table.md`、代表性 `summary.json` / `performance.json` 和 `debug.log` 复盘整理而成。后续会话默认继承本文档。
+本文档由当前可访问的对话上下文、agent 文件夹、`lock_target_change_log.md`、`lock_target_project_report.md`、`docs/tuning/lock_target_parameter_table.md`、代表性 `summary.json` / `performance.json` 和 `debug.log` 复盘整理而成。后续会话默认继承本文档。
 
 ## 1. 执行经验总结
 
@@ -123,7 +123,7 @@
 ## 4. 默认证据源优先级
 
 1. 代码文件：`lock_target.py`、`lock_target_realtime.py`、`perf_utils.py`。
-2. 项目复盘：`lock_target_change_log.md`、`lock_target_project_report.md`、`lock_target_parameter_table.md`。
+2. 项目复盘：`lock_target_change_log.md`、`lock_target_project_report.md`、`docs/tuning/lock_target_parameter_table.md`。
 3. 运行摘要：`runs/lock_target/**/_summary.json`、`runs/lock_target_realtime/**/_summary.json`。
 4. 逐帧质量：`runs/**/_frame_metrics.json`。
 5. 性能证据：`runs/**/_performance.json`。

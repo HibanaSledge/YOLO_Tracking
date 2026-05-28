@@ -10,7 +10,7 @@
 1. 先读 [../context/repo-map.md](../context/repo-map.md) 和 [../context/architecture.md](../context/architecture.md)。
 2. 再按需要读取核心文件：`lock_target.py`、`lock_target_realtime.py`、`perf_utils.py`。
 3. 若涉及阶段演进，读取 `lock_target_change_log.md`。
-4. 若涉及路线判断，读取 `lock_target_project_report.md` 和 `lock_target_parameter_table.md`。
+4. 若涉及路线判断，读取 `lock_target_project_report.md` 和 `docs/tuning/lock_target_parameter_table.md`。
 
 ## Output
 
