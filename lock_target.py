@@ -20,6 +20,7 @@ if str(LOCAL_PACKAGE_PARENT) not in sys.path:
 
 from ultralytics import YOLO  # noqa: E402
 from ultralytics.perf_utils import NullPerformanceRecorder, PerformanceRecorder, round_float  # noqa: E402
+from gimbal.serial_client import GimbalSerialClient  # noqa: E402
 
 
 @dataclass
@@ -148,6 +149,19 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--control-alpha", type=float, default=0.72, help="Smoothing factor for the control center. Higher means steadier but slower.")
     parser.add_argument("--control-max-step", type=float, default=40.0, help="Maximum per-frame control-center movement in pixels.")
     parser.add_argument("--control-deadband", type=float, default=12.0, help="Deadband radius in pixels for pan-tilt control output.")
+    parser.add_argument("--gimbal-port", default=None, help="Serial port used to send binary gimbal tracking commands, e.g. COM4. Disabled by default.")
+    parser.add_argument("--gimbal-mirror-port", action="append", default=[], help="Mirror every gimbal frame to another serial port, e.g. COM10 for VOFA on COM11. Can be used multiple times.")
+    parser.add_argument("--gimbal-baud", type=int, default=115200, help="Gimbal serial baudrate.")
+    parser.add_argument("--gimbal-mirror-baud", type=int, default=None, help="Mirror serial baudrate. Defaults to --gimbal-baud.")
+    parser.add_argument("--gimbal-timeout", type=float, default=0.02, help="Gimbal serial write timeout in seconds.")
+    parser.add_argument("--gimbal-dry-run", action="store_true", help="Build gimbal commands without opening a real serial port.")
+    parser.add_argument("--gimbal-mirror-as-hex-text", action="store_true", help="Send readable AA 55 ... HEX text to mirror ports for VOFA display.")
+    parser.add_argument("--gimbal-command-rate", type=float, default=20.0, help="Maximum gimbal command send rate in Hz.")
+    parser.add_argument("--gimbal-max-speed", type=int, default=500, help="Maximum absolute pan/tilt speed sent to the lower controller.")
+    parser.add_argument("--gimbal-pan-gain", type=float, default=0.8, help="Pan speed gain from normalized x offset to serial command.")
+    parser.add_argument("--gimbal-tilt-gain", type=float, default=0.8, help="Tilt speed gain from normalized y offset to serial command.")
+    parser.add_argument("--gimbal-invert-pan", action="store_true", help="Invert pan command direction if the lower controller direction is opposite.")
+    parser.add_argument("--gimbal-invert-tilt", action="store_true", help="Invert tilt command direction if the lower controller direction is opposite.")
     args = parser.parse_args()
     if args.lightweight:
         args.reid_interval = max(args.reid_interval, 8)
@@ -1023,6 +1037,7 @@ def main() -> None:
     last_score = None
     frame_metrics: list[dict] = []
     perf = PerformanceRecorder(mode="offline") if save_performance_enabled(args) else NullPerformanceRecorder(mode="offline")
+    gimbal = GimbalSerialClient.from_args(args)
     run_start = time.perf_counter()
 
     while True:
@@ -1094,6 +1109,10 @@ def main() -> None:
                     draw_state(display_frame, state, last_score)
 
                 metric = frame_metric(frame_index, fps, frame.shape, state, args.control_deadband)
+                with perf.time_stage("gimbal_serial_ms"):
+                    gimbal_command = gimbal.send_metric(metric)
+                if gimbal_command is not None:
+                    metric["gimbal_command"] = gimbal_command
                 if save_frame_metrics_enabled(args):
                     frame_metrics.append(metric)
                 draw_control_overlay(display_frame, metric)
@@ -1119,6 +1138,7 @@ def main() -> None:
     if writer is not None:
         writer.release()
     cv2.destroyAllWindows()
+    gimbal.close()
 
     total_runtime_sec = time.perf_counter() - run_start
 
@@ -1150,6 +1170,7 @@ def main() -> None:
         "processed_frames": frame_index,
         "runtime_sec": round_float(total_runtime_sec, 3),
         "effective_fps": round_float(frame_index / total_runtime_sec if total_runtime_sec > 0 else 0.0, 3),
+        "gimbal_serial": gimbal.summary(),
     }
     if save_performance_enabled(args):
         performance_report = perf.build_report(summary)

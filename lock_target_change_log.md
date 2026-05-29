@@ -793,3 +793,48 @@
 ### 证据缺口
 
 - 本次整理只做结构与脚本路径级验证，不提供新的调参质量或速度指标。
+
+## 记录 22：corner case 调参实验脚本与计划
+
+### 新增
+
+- 新增 `tools/tuning/run_corner_case_tuning.ps1`，用于对 `Q:\20260528-160426.mp4` 执行 C0-C8 共 9 轮 corner case 调参。
+- 新增 `docs/tuning/corner_case_experiment_plan_20260528_160426.md`，记录每轮参数、动机、风险、观察指标和判定标准。
+- 更新 `docs/tuning/README.md`，加入 corner case 调参脚本、计划文档、输出目录和常用命令。
+
+### 减少或移除
+
+- 无。
+- 本次没有修改 `lock_target.py` 的锁定逻辑，也没有改变默认离线或实时推理行为。
+
+### 技术细节
+
+- 新脚本从自身路径向上查找 `lock_target.py` 来定位仓库根目录，与既有调参脚本保持一致。
+- 新脚本固定同源 baseline C0，再执行 `imgsz`、`conf`、`face-scale-factor`、`face-min-confidence`、重绑定门限、控制平滑和 `mtcnn-interval` 的 corner case 实验。
+- 新脚本将实验输出隔离到 `runs/lock_target_corner_cases/<RunId>/`，将 live log、stdout 和 stderr 写入 `runs/corner_case_tuning_logs/<RunId>/`。
+- 新脚本自动生成 `docs/tuning/corner_case_tuning_progress_<RunId>.md` 和 `docs/tuning/corner_case_tuning_results_<RunId>.md`，避免覆盖 G1-G7 常规调参结果。
+
+### 目的
+
+- 对新输入视频建立同源 baseline，避免跨视频对比导致无法归因。
+- 以参数表中对 corner case 影响最大的参数为核心，形成可复用、可复盘、可继续扩展的实验入口。
+- 同时观察速度、FACE_LOCK/HEAD_PROXY 几何、业务目标连续性和云台控制中心稳定性。
+
+### 有效性证据与指标
+
+- 证据来源：PowerShell parser 静态语法检查。
+- `tools/tuning/run_corner_case_tuning.ps1` 已通过 `POWERSHELL_SYNTAX_OK`。
+- `Q:\20260528-160426.mp4` 当前可访问，检查结果为 `SOURCE_VIDEO_EXISTS`。
+- 仓库根目录下 `lock_target.py` 当前可访问，检查结果为 `ROOT_LOCK_TARGET_OK`。
+
+### 修改后仍存在的问题
+
+- 尚未启动 C0-C8 长实验，因此还没有新视频上的 `summary.json`、`frame_metrics.json` 和 `performance.json` 指标。
+- PowerShell 脚本仍默认使用本机 Python 路径 `C:/Users/Stuart.Cai/AppData/Local/Programs/Python/Python310/python.exe`，迁移到其他机器时需要调整。
+- FACE_LOCK 是否真实命中人脸仍需要视频关键帧人工抽查，不能只看统计数量。
+
+### 证据缺口
+
+- 缺少 C0-C8 真实运行结果。
+- 缺少 C1-C8 相对 C0 的速度、质量和误绑对比结论。
+- 缺少人工关键帧复核记录，无法判断是否存在假 FACE_LOCK。

@@ -1,0 +1,310 @@
+[2026-05-28 16:23:05] Corner-case tuning initialized source=Q:\20260528-160426.mp4 run_id=corner_20260528_160426
+[2026-05-28 16:23:05] Starting C0 corner_baseline params=baseline full
+[2026-05-28 16:31:54] Manual monitor supervisor started for corner-case run_id=corner_20260528_160426
+[2026-05-28 16:31:54] Manual monitor supervisor attaching C0 corner_baseline pid=19120
+[2026-05-28 16:31:55] Manual monitor attached to C0 corner_baseline pid=19120 params=baseline full
+[2026-05-28 16:31:55] Heartbeat C0 pid=19120 mp4_bytes=9437228
+[2026-05-28 16:32:25] Heartbeat C0 pid=19120 mp4_bytes=9961516
+[2026-05-28 16:32:55] Heartbeat C0 pid=19120 mp4_bytes=10223660
+[2026-05-28 16:33:25] Heartbeat C0 pid=19120 mp4_bytes=10747948
+[2026-05-28 16:33:55] Heartbeat C0 pid=19120 mp4_bytes=11010092
+[2026-05-28 16:34:25] Heartbeat C0 pid=19120 mp4_bytes=11534380
+[2026-05-28 16:34:29] Manual monitor attached to C0 corner_baseline pid=19120 params=baseline full
+[2026-05-28 16:34:29] Heartbeat C0 pid=19120 mp4_bytes=11534380
+[2026-05-28 16:34:55] Heartbeat C0 pid=19120 mp4_bytes=11796524
+[2026-05-28 16:34:59] Heartbeat C0 pid=19120 mp4_bytes=11796524
+[2026-05-28 16:35:25] Heartbeat C0 pid=19120 mp4_bytes=12320812
+[2026-05-28 16:35:29] Heartbeat C0 pid=19120 mp4_bytes=12320812
+[2026-05-28 16:35:55] Heartbeat C0 pid=19120 mp4_bytes=12582956
+[2026-05-28 16:35:59] Heartbeat C0 pid=19120 mp4_bytes=12845100
+[2026-05-28 16:36:25] Heartbeat C0 pid=19120 mp4_bytes=13631532
+[2026-05-28 16:36:29] Heartbeat C0 pid=19120 mp4_bytes=13631532
+[2026-05-28 16:36:55] Heartbeat C0 pid=19120 mp4_bytes=14155820
+[2026-05-28 16:36:59] Heartbeat C0 pid=19120 mp4_bytes=14155820
+[2026-05-28 16:37:25] Heartbeat C0 pid=19120 mp4_bytes=14680108
+[2026-05-28 16:37:29] Heartbeat C0 pid=19120 mp4_bytes=14680108
+[2026-05-28 16:37:55] Heartbeat C0 pid=19120 mp4_bytes=15466540
+[2026-05-28 16:37:59] Heartbeat C0 pid=19120 mp4_bytes=15466540
+[2026-05-28 16:38:25] Heartbeat C0 pid=19120 mp4_bytes=16252972
+[2026-05-28 16:38:29] Heartbeat C0 pid=19120 mp4_bytes=16252972
+[2026-05-28 16:38:55] Heartbeat C0 pid=19120 mp4_bytes=16777260
+[2026-05-28 16:38:59] Heartbeat C0 pid=19120 mp4_bytes=16777260
+[2026-05-28 16:39:07] Completed C0 corner_baseline fps=0.812 runtime=953.338 face_lock=748 head_proxy=19 switches=8
+[2026-05-28 16:39:07] Starting C1 corner_img1152 params=--imgsz 1152
+[2026-05-28 16:39:26] Heartbeat C0 pid=19120 mp4_bytes=17044207
+[2026-05-28 16:39:26] Completed C0 corner_baseline fps=0.812 runtime=953.338
+[2026-05-28 16:39:27] Manual monitor supervisor attaching C1 corner_img1152 pid=34040
+[2026-05-28 16:39:27] Manual monitor attached to C1 corner_img1152 pid=34040 params=--imgsz 1152
+[2026-05-28 16:39:27] Heartbeat C1 pid=34040 mp4_bytes=44
+[2026-05-28 16:39:29] Heartbeat C0 pid=19120 mp4_bytes=17044207
+[2026-05-28 16:39:30] Completed C0 corner_baseline fps=0.812 runtime=953.338
+[2026-05-28 16:39:57] Heartbeat C1 pid=34040 mp4_bytes=786476
+[2026-05-28 16:40:27] Heartbeat C1 pid=34040 mp4_bytes=1572908
+[2026-05-28 16:40:57] Heartbeat C1 pid=34040 mp4_bytes=2097196
+[2026-05-28 16:41:27] Heartbeat C1 pid=34040 mp4_bytes=2621484
+[2026-05-28 16:41:57] Heartbeat C1 pid=34040 mp4_bytes=3407916
+[2026-05-28 16:42:27] Heartbeat C1 pid=34040 mp4_bytes=3670060
+[2026-05-28 16:42:57] Heartbeat C1 pid=34040 mp4_bytes=4194348
+[2026-05-28 16:43:27] Heartbeat C1 pid=34040 mp4_bytes=4718636
+[2026-05-28 16:43:57] Heartbeat C1 pid=34040 mp4_bytes=4980780
+[2026-05-28 16:44:27] Heartbeat C1 pid=34040 mp4_bytes=5505068
+[2026-05-28 16:44:58] Heartbeat C1 pid=34040 mp4_bytes=6029356
+[2026-05-28 16:45:28] Heartbeat C1 pid=34040 mp4_bytes=6291500
+[2026-05-28 16:45:58] Heartbeat C1 pid=34040 mp4_bytes=7340076
+[2026-05-28 16:46:28] Heartbeat C1 pid=34040 mp4_bytes=7864364
+[2026-05-28 16:46:58] Heartbeat C1 pid=34040 mp4_bytes=8650796
+[2026-05-28 16:47:28] Heartbeat C1 pid=34040 mp4_bytes=9175084
+[2026-05-28 16:47:58] Heartbeat C1 pid=34040 mp4_bytes=9699372
+[2026-05-28 16:48:28] Heartbeat C1 pid=34040 mp4_bytes=10223660
+[2026-05-28 16:48:58] Heartbeat C1 pid=34040 mp4_bytes=10747948
+[2026-05-28 16:49:28] Heartbeat C1 pid=34040 mp4_bytes=11272236
+[2026-05-28 16:49:58] Heartbeat C1 pid=34040 mp4_bytes=11534380
+[2026-05-28 16:50:28] Heartbeat C1 pid=34040 mp4_bytes=11796524
+[2026-05-28 16:50:58] Heartbeat C1 pid=34040 mp4_bytes=12058668
+[2026-05-28 16:51:28] Heartbeat C1 pid=34040 mp4_bytes=12320812
+[2026-05-28 16:51:58] Heartbeat C1 pid=34040 mp4_bytes=12845100
+[2026-05-28 16:52:29] Heartbeat C1 pid=34040 mp4_bytes=13107244
+[2026-05-28 16:52:59] Heartbeat C1 pid=34040 mp4_bytes=13631532
+[2026-05-28 16:53:29] Heartbeat C1 pid=34040 mp4_bytes=14155820
+[2026-05-28 16:53:59] Heartbeat C1 pid=34040 mp4_bytes=15204396
+[2026-05-28 16:54:29] Heartbeat C1 pid=34040 mp4_bytes=15728684
+[2026-05-28 16:54:59] Heartbeat C1 pid=34040 mp4_bytes=16252972
+[2026-05-28 16:55:29] Heartbeat C1 pid=34040 mp4_bytes=17039404
+[2026-05-28 16:55:59] Heartbeat C1 pid=34040 mp4_bytes=17563692
+[2026-05-28 16:56:22] Completed C1 corner_img1152 fps=0.755 runtime=1025.827 face_lock=724 head_proxy=16 switches=13
+[2026-05-28 16:56:23] Starting C2 corner_conf020 params=--conf 0.20
+[2026-05-28 16:56:29] Heartbeat C1 pid=34040 mp4_bytes=18201514
+[2026-05-28 16:56:30] Completed C1 corner_img1152 fps=0.755 runtime=1025.827
+[2026-05-28 16:56:30] Manual monitor supervisor attaching C2 corner_conf020 pid=37044
+[2026-05-28 16:56:30] Manual monitor attached to C2 corner_conf020 pid=37044 params=--conf 0.20
+[2026-05-28 16:57:00] Heartbeat C2 pid=37044 mp4_bytes=524332
+[2026-05-28 16:57:30] Heartbeat C2 pid=37044 mp4_bytes=1048620
+[2026-05-28 16:58:00] Heartbeat C2 pid=37044 mp4_bytes=2097196
+[2026-05-28 16:58:30] Heartbeat C2 pid=37044 mp4_bytes=2359340
+[2026-05-28 16:59:00] Heartbeat C2 pid=37044 mp4_bytes=2883628
+[2026-05-28 16:59:30] Heartbeat C2 pid=37044 mp4_bytes=3670060
+[2026-05-28 17:00:00] Heartbeat C2 pid=37044 mp4_bytes=3932204
+[2026-05-28 17:00:30] Heartbeat C2 pid=37044 mp4_bytes=4456492
+[2026-05-28 17:01:00] Heartbeat C2 pid=37044 mp4_bytes=4980780
+[2026-05-28 17:01:30] Heartbeat C2 pid=37044 mp4_bytes=5242924
+[2026-05-28 17:02:00] Heartbeat C2 pid=37044 mp4_bytes=6029356
+[2026-05-28 17:02:30] Heartbeat C2 pid=37044 mp4_bytes=6815788
+[2026-05-28 17:03:00] Heartbeat C2 pid=37044 mp4_bytes=7602220
+[2026-05-28 17:03:31] Heartbeat C2 pid=37044 mp4_bytes=8126508
+[2026-05-28 17:04:01] Heartbeat C2 pid=37044 mp4_bytes=8912940
+[2026-05-28 17:04:31] Heartbeat C2 pid=37044 mp4_bytes=9699372
+[2026-05-28 17:05:01] Heartbeat C2 pid=37044 mp4_bytes=10223660
+[2026-05-28 17:05:31] Heartbeat C2 pid=37044 mp4_bytes=10747948
+[2026-05-28 17:06:01] Heartbeat C2 pid=37044 mp4_bytes=11272236
+[2026-05-28 17:06:31] Heartbeat C2 pid=37044 mp4_bytes=11796524
+[2026-05-28 17:07:01] Heartbeat C2 pid=37044 mp4_bytes=12320812
+[2026-05-28 17:07:31] Heartbeat C2 pid=37044 mp4_bytes=12845100
+[2026-05-28 17:08:01] Heartbeat C2 pid=37044 mp4_bytes=13893676
+[2026-05-28 17:08:31] Heartbeat C2 pid=37044 mp4_bytes=14417964
+[2026-05-28 17:09:01] Heartbeat C2 pid=37044 mp4_bytes=15204396
+[2026-05-28 17:09:31] Heartbeat C2 pid=37044 mp4_bytes=15990828
+[2026-05-28 17:10:01] Heartbeat C2 pid=37044 mp4_bytes=16777260
+[2026-05-28 17:10:17] Completed C2 corner_conf020 fps=0.939 runtime=824.391 face_lock=748 head_proxy=19 switches=8
+[2026-05-28 17:10:18] Starting C3 corner_face_scale103 params=--face-scale-factor 1.03
+[2026-05-28 17:10:31] Heartbeat C2 pid=37044 mp4_bytes=17090476
+[2026-05-28 17:10:32] Completed C2 corner_conf020 fps=0.939 runtime=824.391
+[2026-05-28 17:10:32] Manual monitor supervisor attaching C3 corner_face_scale103 pid=37048
+[2026-05-28 17:10:32] Manual monitor attached to C3 corner_face_scale103 pid=37048 params=--face-scale-factor 1.03
+[2026-05-28 17:10:32] Heartbeat C3 pid=37048 mp4_bytes=44
+[2026-05-28 17:11:02] Heartbeat C3 pid=37048 mp4_bytes=524332
+[2026-05-28 17:11:32] Heartbeat C3 pid=37048 mp4_bytes=1310764
+[2026-05-28 17:12:02] Heartbeat C3 pid=37048 mp4_bytes=2097196
+[2026-05-28 17:12:32] Heartbeat C3 pid=37048 mp4_bytes=2621484
+[2026-05-28 17:13:02] Heartbeat C3 pid=37048 mp4_bytes=3145772
+[2026-05-28 17:13:33] Heartbeat C3 pid=37048 mp4_bytes=3670060
+[2026-05-28 17:14:03] Heartbeat C3 pid=37048 mp4_bytes=3932204
+[2026-05-28 17:14:33] Heartbeat C3 pid=37048 mp4_bytes=4194348
+[2026-05-28 17:15:03] Heartbeat C3 pid=37048 mp4_bytes=4718636
+[2026-05-28 17:15:33] Heartbeat C3 pid=37048 mp4_bytes=4980780
+[2026-05-28 17:16:03] Heartbeat C3 pid=37048 mp4_bytes=5505068
+[2026-05-28 17:16:33] Heartbeat C3 pid=37048 mp4_bytes=6291500
+[2026-05-28 17:17:03] Heartbeat C3 pid=37048 mp4_bytes=7077932
+[2026-05-28 17:17:33] Heartbeat C3 pid=37048 mp4_bytes=7602220
+[2026-05-28 17:18:03] Heartbeat C3 pid=37048 mp4_bytes=8126508
+[2026-05-28 17:18:33] Heartbeat C3 pid=37048 mp4_bytes=8650796
+[2026-05-28 17:19:03] Heartbeat C3 pid=37048 mp4_bytes=9175084
+[2026-05-28 17:19:33] Heartbeat C3 pid=37048 mp4_bytes=9699372
+[2026-05-28 17:20:03] Heartbeat C3 pid=37048 mp4_bytes=10223660
+[2026-05-28 17:20:33] Heartbeat C3 pid=37048 mp4_bytes=10747948
+[2026-05-28 17:21:03] Heartbeat C3 pid=37048 mp4_bytes=11010092
+[2026-05-28 17:21:33] Heartbeat C3 pid=37048 mp4_bytes=11272236
+[2026-05-28 17:22:03] Heartbeat C3 pid=37048 mp4_bytes=11796524
+[2026-05-28 17:22:33] Heartbeat C3 pid=37048 mp4_bytes=12320812
+[2026-05-28 17:23:03] Heartbeat C3 pid=37048 mp4_bytes=12845100
+[2026-05-28 17:23:33] Heartbeat C3 pid=37048 mp4_bytes=13631532
+[2026-05-28 17:24:03] Heartbeat C3 pid=37048 mp4_bytes=14155820
+[2026-05-28 17:24:33] Heartbeat C3 pid=37048 mp4_bytes=14680108
+[2026-05-28 17:25:03] Heartbeat C3 pid=37048 mp4_bytes=15204396
+[2026-05-28 17:25:34] Heartbeat C3 pid=37048 mp4_bytes=15728684
+[2026-05-28 17:26:04] Heartbeat C3 pid=37048 mp4_bytes=16515116
+[2026-05-28 17:26:32] Completed C3 corner_face_scale103 fps=0.801 runtime=966.65 face_lock=754 head_proxy=14 switches=8
+[2026-05-28 17:26:32] Starting C4 corner_face_conf025 params=--face-min-confidence 0.25
+[2026-05-28 17:26:34] Heartbeat C3 pid=37048 mp4_bytes=17028940
+[2026-05-28 17:26:35] Completed C3 corner_face_scale103 fps=0.801 runtime=966.65
+[2026-05-28 17:26:35] Manual monitor supervisor attaching C4 corner_face_conf025 pid=38828
+[2026-05-28 17:26:35] Manual monitor attached to C4 corner_face_conf025 pid=38828 params=--face-min-confidence 0.25
+[2026-05-28 17:27:05] Heartbeat C4 pid=38828 mp4_bytes=524332
+[2026-05-28 17:27:35] Heartbeat C4 pid=38828 mp4_bytes=1310764
+[2026-05-28 17:28:05] Heartbeat C4 pid=38828 mp4_bytes=2097196
+[2026-05-28 17:28:35] Heartbeat C4 pid=38828 mp4_bytes=2621484
+[2026-05-28 17:29:05] Heartbeat C4 pid=38828 mp4_bytes=3407916
+[2026-05-28 17:29:35] Heartbeat C4 pid=38828 mp4_bytes=3932204
+[2026-05-28 17:30:05] Heartbeat C4 pid=38828 mp4_bytes=4194348
+[2026-05-28 17:30:35] Heartbeat C4 pid=38828 mp4_bytes=4718636
+[2026-05-28 17:31:05] Heartbeat C4 pid=38828 mp4_bytes=5242924
+[2026-05-28 17:31:35] Heartbeat C4 pid=38828 mp4_bytes=5505068
+[2026-05-28 17:32:05] Heartbeat C4 pid=38828 mp4_bytes=6553644
+[2026-05-28 17:32:35] Heartbeat C4 pid=38828 mp4_bytes=7340076
+[2026-05-28 17:33:05] Heartbeat C4 pid=38828 mp4_bytes=8126508
+[2026-05-28 17:33:36] Heartbeat C4 pid=38828 mp4_bytes=8650796
+[2026-05-28 17:34:06] Heartbeat C4 pid=38828 mp4_bytes=9437228
+[2026-05-28 17:34:36] Heartbeat C4 pid=38828 mp4_bytes=9961516
+[2026-05-28 17:35:06] Heartbeat C4 pid=38828 mp4_bytes=10485804
+[2026-05-28 17:35:36] Heartbeat C4 pid=38828 mp4_bytes=11010092
+[2026-05-28 17:36:06] Heartbeat C4 pid=38828 mp4_bytes=11534380
+[2026-05-28 17:36:36] Heartbeat C4 pid=38828 mp4_bytes=12058668
+[2026-05-28 17:37:06] Heartbeat C4 pid=38828 mp4_bytes=12582956
+[2026-05-28 17:37:36] Heartbeat C4 pid=38828 mp4_bytes=13631532
+[2026-05-28 17:38:06] Heartbeat C4 pid=38828 mp4_bytes=14417964
+[2026-05-28 17:38:36] Heartbeat C4 pid=38828 mp4_bytes=14942252
+[2026-05-28 17:39:06] Heartbeat C4 pid=38828 mp4_bytes=15728684
+[2026-05-28 17:39:36] Heartbeat C4 pid=38828 mp4_bytes=16515116
+[2026-05-28 17:39:53] Completed C4 corner_face_conf025 fps=0.975 runtime=793.773 face_lock=748 head_proxy=19 switches=8
+[2026-05-28 17:39:54] Starting C5 corner_reacq_loose params=--min-appearance 0.30 --reacquire-thresh 0.40
+[2026-05-28 17:40:06] Heartbeat C4 pid=38828 mp4_bytes=17044207
+[2026-05-28 17:40:08] Completed C4 corner_face_conf025 fps=0.975 runtime=793.773
+[2026-05-28 17:40:08] Manual monitor supervisor attaching C5 corner_reacq_loose pid=36728
+[2026-05-28 17:40:08] Manual monitor attached to C5 corner_reacq_loose pid=36728 params=--min-appearance 0.30 --reacquire-thresh 0.40
+[2026-05-28 17:40:08] Heartbeat C5 pid=36728 mp4_bytes=44
+[2026-05-28 17:40:38] Heartbeat C5 pid=36728 mp4_bytes=786476
+[2026-05-28 17:41:08] Heartbeat C5 pid=36728 mp4_bytes=1835052
+[2026-05-28 17:41:38] Heartbeat C5 pid=36728 mp4_bytes=2621484
+[2026-05-28 17:42:08] Heartbeat C5 pid=36728 mp4_bytes=2883628
+[2026-05-28 17:42:38] Heartbeat C5 pid=36728 mp4_bytes=3670060
+[2026-05-28 17:43:08] Heartbeat C5 pid=36728 mp4_bytes=4194348
+[2026-05-28 17:43:38] Heartbeat C5 pid=36728 mp4_bytes=4456492
+[2026-05-28 17:44:08] Heartbeat C5 pid=36728 mp4_bytes=4980780
+[2026-05-28 17:44:38] Heartbeat C5 pid=36728 mp4_bytes=5505068
+[2026-05-28 17:45:08] Heartbeat C5 pid=36728 mp4_bytes=6291500
+[2026-05-28 17:45:38] Heartbeat C5 pid=36728 mp4_bytes=7077932
+[2026-05-28 17:46:08] Heartbeat C5 pid=36728 mp4_bytes=7864364
+[2026-05-28 17:46:38] Heartbeat C5 pid=36728 mp4_bytes=8388652
+[2026-05-28 17:47:08] Heartbeat C5 pid=36728 mp4_bytes=9437228
+[2026-05-28 17:47:38] Heartbeat C5 pid=36728 mp4_bytes=9961516
+[2026-05-28 17:48:08] Heartbeat C5 pid=36728 mp4_bytes=10485804
+[2026-05-28 17:48:38] Heartbeat C5 pid=36728 mp4_bytes=11010092
+[2026-05-28 17:49:08] Heartbeat C5 pid=36728 mp4_bytes=11534380
+[2026-05-28 17:49:39] Heartbeat C5 pid=36728 mp4_bytes=12058668
+[2026-05-28 17:50:09] Heartbeat C5 pid=36728 mp4_bytes=12582956
+[2026-05-28 17:50:39] Heartbeat C5 pid=36728 mp4_bytes=13631532
+[2026-05-28 17:51:09] Heartbeat C5 pid=36728 mp4_bytes=14155820
+[2026-05-28 17:51:39] Heartbeat C5 pid=36728 mp4_bytes=14942252
+[2026-05-28 17:52:09] Heartbeat C5 pid=36728 mp4_bytes=15728684
+[2026-05-28 17:52:39] Heartbeat C5 pid=36728 mp4_bytes=16515116
+[2026-05-28 17:53:00] Completed C5 corner_reacq_loose fps=0.993 runtime=779.494 face_lock=748 head_proxy=19 switches=8
+[2026-05-28 17:53:01] Starting C6 corner_reacq_strict params=--min-appearance 0.40 --reacquire-thresh 0.50
+[2026-05-28 17:53:09] Heartbeat C5 pid=36728 mp4_bytes=17044207
+[2026-05-28 17:53:10] Completed C5 corner_reacq_loose fps=0.993 runtime=779.494
+[2026-05-28 17:53:11] Manual monitor supervisor attaching C6 corner_reacq_strict pid=36040
+[2026-05-28 17:53:11] Manual monitor attached to C6 corner_reacq_strict pid=36040 params=--min-appearance 0.40 --reacquire-thresh 0.50
+[2026-05-28 17:53:11] Heartbeat C6 pid=36040 mp4_bytes=44
+[2026-05-28 17:53:41] Heartbeat C6 pid=36040 mp4_bytes=786476
+[2026-05-28 17:54:11] Heartbeat C6 pid=36040 mp4_bytes=1835052
+[2026-05-28 17:54:41] Heartbeat C6 pid=36040 mp4_bytes=2359340
+[2026-05-28 17:55:11] Heartbeat C6 pid=36040 mp4_bytes=2883628
+[2026-05-28 17:55:41] Heartbeat C6 pid=36040 mp4_bytes=3670060
+[2026-05-28 17:56:11] Heartbeat C6 pid=36040 mp4_bytes=3932204
+[2026-05-28 17:56:41] Heartbeat C6 pid=36040 mp4_bytes=4456492
+[2026-05-28 17:57:11] Heartbeat C6 pid=36040 mp4_bytes=4980780
+[2026-05-28 17:57:41] Heartbeat C6 pid=36040 mp4_bytes=5242924
+[2026-05-28 17:58:11] Heartbeat C6 pid=36040 mp4_bytes=6291500
+[2026-05-28 17:58:41] Heartbeat C6 pid=36040 mp4_bytes=7077932
+[2026-05-28 17:59:11] Heartbeat C6 pid=36040 mp4_bytes=7864364
+[2026-05-28 17:59:41] Heartbeat C6 pid=36040 mp4_bytes=8388652
+[2026-05-28 18:00:11] Heartbeat C6 pid=36040 mp4_bytes=9175084
+[2026-05-28 18:00:42] Heartbeat C6 pid=36040 mp4_bytes=9699372
+[2026-05-28 18:01:12] Heartbeat C6 pid=36040 mp4_bytes=10485804
+[2026-05-28 18:01:42] Heartbeat C6 pid=36040 mp4_bytes=11010092
+[2026-05-28 18:02:12] Heartbeat C6 pid=36040 mp4_bytes=11272236
+[2026-05-28 18:02:42] Heartbeat C6 pid=36040 mp4_bytes=11796524
+[2026-05-28 18:03:12] Heartbeat C6 pid=36040 mp4_bytes=12320812
+[2026-05-28 18:03:42] Heartbeat C6 pid=36040 mp4_bytes=13107244
+[2026-05-28 18:04:12] Heartbeat C6 pid=36040 mp4_bytes=13893676
+[2026-05-28 18:04:42] Heartbeat C6 pid=36040 mp4_bytes=14680108
+[2026-05-28 18:05:12] Heartbeat C6 pid=36040 mp4_bytes=15204396
+[2026-05-28 18:05:42] Heartbeat C6 pid=36040 mp4_bytes=16252972
+[2026-05-28 18:06:12] Heartbeat C6 pid=36040 mp4_bytes=16777260
+[2026-05-28 18:06:17] Completed C6 corner_reacq_strict fps=0.982 runtime=788.452 face_lock=748 head_proxy=19 switches=8
+[2026-05-28 18:06:18] Starting C7 corner_control_stable params=--control-alpha 0.82 --control-max-step 25
+[2026-05-28 18:06:42] Heartbeat C6 pid=36040 mp4_bytes=17044207
+[2026-05-28 18:06:44] Completed C6 corner_reacq_strict fps=0.982 runtime=788.452
+[2026-05-28 18:06:44] Manual monitor supervisor attaching C7 corner_control_stable pid=36856
+[2026-05-28 18:06:44] Manual monitor attached to C7 corner_control_stable pid=36856 params=--control-alpha 0.82 --control-max-step 25
+[2026-05-28 18:06:44] Heartbeat C7 pid=36856 mp4_bytes=262188
+[2026-05-28 18:07:14] Heartbeat C7 pid=36856 mp4_bytes=1048620
+[2026-05-28 18:07:45] Heartbeat C7 pid=36856 mp4_bytes=2097196
+[2026-05-28 18:08:15] Heartbeat C7 pid=36856 mp4_bytes=2621484
+[2026-05-28 18:08:45] Heartbeat C7 pid=36856 mp4_bytes=3407916
+[2026-05-28 18:09:15] Heartbeat C7 pid=36856 mp4_bytes=3932204
+[2026-05-28 18:09:45] Heartbeat C7 pid=36856 mp4_bytes=4194348
+[2026-05-28 18:10:15] Heartbeat C7 pid=36856 mp4_bytes=4718636
+[2026-05-28 18:10:45] Heartbeat C7 pid=36856 mp4_bytes=5242924
+[2026-05-28 18:11:15] Heartbeat C7 pid=36856 mp4_bytes=5767212
+[2026-05-28 18:11:45] Heartbeat C7 pid=36856 mp4_bytes=6553644
+[2026-05-28 18:12:15] Heartbeat C7 pid=36856 mp4_bytes=7340076
+[2026-05-28 18:12:45] Heartbeat C7 pid=36856 mp4_bytes=8126508
+[2026-05-28 18:13:15] Heartbeat C7 pid=36856 mp4_bytes=8650796
+[2026-05-28 18:13:45] Heartbeat C7 pid=36856 mp4_bytes=9437228
+[2026-05-28 18:14:15] Heartbeat C7 pid=36856 mp4_bytes=9961516
+[2026-05-28 18:14:45] Heartbeat C7 pid=36856 mp4_bytes=10747948
+[2026-05-28 18:15:15] Heartbeat C7 pid=36856 mp4_bytes=11010092
+[2026-05-28 18:15:45] Heartbeat C7 pid=36856 mp4_bytes=11534380
+[2026-05-28 18:16:15] Heartbeat C7 pid=36856 mp4_bytes=12058668
+[2026-05-28 18:16:45] Heartbeat C7 pid=36856 mp4_bytes=12582956
+[2026-05-28 18:17:15] Heartbeat C7 pid=36856 mp4_bytes=13631532
+[2026-05-28 18:17:45] Heartbeat C7 pid=36856 mp4_bytes=14417964
+[2026-05-28 18:18:16] Heartbeat C7 pid=36856 mp4_bytes=14942252
+[2026-05-28 18:18:46] Heartbeat C7 pid=36856 mp4_bytes=15728684
+[2026-05-28 18:19:16] Heartbeat C7 pid=36856 mp4_bytes=16515116
+[2026-05-28 18:19:34] Completed C7 corner_control_stable fps=0.98 runtime=789.735 face_lock=748 head_proxy=19 switches=8
+[2026-05-28 18:19:36] Starting C8 corner_mtcnn2 params=--mtcnn-interval 2
+[2026-05-28 18:19:46] Heartbeat C7 pid=36856 mp4_bytes=17053367
+[2026-05-28 18:19:48] Completed C7 corner_control_stable fps=0.98 runtime=789.735
+[2026-05-28 18:19:48] Manual monitor supervisor attaching C8 corner_mtcnn2 pid=38808
+[2026-05-28 18:19:48] Manual monitor attached to C8 corner_mtcnn2 pid=38808 params=--mtcnn-interval 2
+[2026-05-28 18:19:48] Heartbeat C8 pid=38808 mp4_bytes=44
+[2026-05-28 18:20:18] Heartbeat C8 pid=38808 mp4_bytes=786476
+[2026-05-28 18:20:48] Heartbeat C8 pid=38808 mp4_bytes=1835052
+[2026-05-28 18:21:18] Heartbeat C8 pid=38808 mp4_bytes=2621484
+[2026-05-28 18:21:48] Heartbeat C8 pid=38808 mp4_bytes=3145772
+[2026-05-28 18:22:18] Heartbeat C8 pid=38808 mp4_bytes=3932204
+[2026-05-28 18:22:48] Heartbeat C8 pid=38808 mp4_bytes=4194348
+[2026-05-28 18:23:19] Heartbeat C8 pid=38808 mp4_bytes=4718636
+[2026-05-28 18:23:49] Heartbeat C8 pid=38808 mp4_bytes=5242924
+[2026-05-28 18:24:19] Heartbeat C8 pid=38808 mp4_bytes=6553644
+[2026-05-28 18:24:49] Heartbeat C8 pid=38808 mp4_bytes=7864364
+[2026-05-28 18:25:19] Heartbeat C8 pid=38808 mp4_bytes=8912940
+[2026-05-28 18:25:49] Heartbeat C8 pid=38808 mp4_bytes=9699372
+[2026-05-28 18:26:19] Heartbeat C8 pid=38808 mp4_bytes=10223660
+[2026-05-28 18:26:49] Heartbeat C8 pid=38808 mp4_bytes=11010092
+[2026-05-28 18:27:19] Heartbeat C8 pid=38808 mp4_bytes=11796524
+[2026-05-28 18:27:49] Heartbeat C8 pid=38808 mp4_bytes=12320812
+[2026-05-28 18:28:19] Heartbeat C8 pid=38808 mp4_bytes=12845100
+[2026-05-28 18:28:49] Heartbeat C8 pid=38808 mp4_bytes=13369388
+[2026-05-28 18:29:19] Heartbeat C8 pid=38808 mp4_bytes=13893676
+[2026-05-28 18:29:49] Heartbeat C8 pid=38808 mp4_bytes=14680108
+[2026-05-28 18:30:19] Heartbeat C8 pid=38808 mp4_bytes=15728684
+[2026-05-28 18:30:49] Heartbeat C8 pid=38808 mp4_bytes=16515116
+[2026-05-28 18:31:19] Heartbeat C8 pid=38808 mp4_bytes=17039404
+[2026-05-28 18:31:49] Heartbeat C8 pid=38808 mp4_bytes=17563692
+[2026-05-28 18:32:19] Heartbeat C8 pid=38808 mp4_bytes=18612268
+[2026-05-28 18:32:46] Completed C8 corner_mtcnn2 fps=0.988 runtime=783.675 face_lock=713 head_proxy=54 switches=8
+[2026-05-28 18:32:49] All corner-case experiments completed successfully.
+[2026-05-28 18:32:49] Heartbeat C8 pid=38808 mp4_bytes=19256303
+[2026-05-28 18:32:51] Completed C8 corner_mtcnn2 fps=0.988 runtime=783.675
+[2026-05-28 18:32:51] Manual monitor supervisor finished: all C0-C8 outputs are complete.

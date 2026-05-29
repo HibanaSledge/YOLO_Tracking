@@ -47,9 +47,12 @@ def build_frame(msg_type: int, sequence: int, payload: bytes = b"") -> bytes:
 @dataclass
 class GimbalSerialConfig:
     port: str | None = None
+    mirror_ports: list[str] | None = None
     baudrate: int = 115200
+    mirror_baudrate: int | None = None
     timeout: float = 0.02
     dry_run: bool = False
+    mirror_as_hex_text: bool = False
     command_rate_hz: float = 20.0
     max_speed: int = 500
     pan_gain: float = 0.8
@@ -61,25 +64,32 @@ class GimbalSerialConfig:
 class GimbalSerialClient:
     def __init__(self, config: GimbalSerialConfig) -> None:
         self.config = config
-        self.enabled = bool(config.port) or config.dry_run
+        self.mirror_ports = list(config.mirror_ports or [])
+        self.enabled = bool(config.port) or bool(self.mirror_ports) or config.dry_run
         self.sequence = 0
         self.serial_port: Any | None = None
+        self.mirror_serial_ports: list[Any] = []
         self.sent_packets = 0
         self.failed_packets = 0
         self.last_send_time = 0.0
         self.last_stop_time = 0.0
         self.open_error: str | None = None
-        if self.enabled and not config.dry_run:
+        if self.enabled and not config.dry_run and config.port:
             self._open_serial()
+        if not config.dry_run and self.mirror_ports:
+            self._open_mirror_serials()
 
     @classmethod
     def from_args(cls, args: Any) -> "GimbalSerialClient":
         return cls(
             GimbalSerialConfig(
                 port=getattr(args, "gimbal_port", None),
+                mirror_ports=list(getattr(args, "gimbal_mirror_port", None) or []),
                 baudrate=int(getattr(args, "gimbal_baud", 115200)),
+                mirror_baudrate=getattr(args, "gimbal_mirror_baud", None),
                 timeout=float(getattr(args, "gimbal_timeout", 0.02)),
                 dry_run=bool(getattr(args, "gimbal_dry_run", False)),
+                mirror_as_hex_text=bool(getattr(args, "gimbal_mirror_as_hex_text", False)),
                 command_rate_hz=float(getattr(args, "gimbal_command_rate", 20.0)),
                 max_speed=int(getattr(args, "gimbal_max_speed", 500)),
                 pan_gain=float(getattr(args, "gimbal_pan_gain", 0.8)),
@@ -101,8 +111,32 @@ class GimbalSerialClient:
             )
         except Exception as exc:  # pragma: no cover - depends on local serial hardware/package
             self.open_error = str(exc)
-            self.enabled = False
+            self.enabled = bool(self.mirror_ports) or self.config.dry_run
             self.serial_port = None
+
+    def _open_mirror_serials(self) -> None:
+        try:
+            import serial  # type: ignore
+
+            mirror_baudrate = self.config.mirror_baudrate or self.config.baudrate
+            for port in self.mirror_ports:
+                self.mirror_serial_ports.append(
+                    serial.Serial(
+                        port,
+                        baudrate=mirror_baudrate,
+                        timeout=self.config.timeout,
+                        write_timeout=self.config.timeout,
+                    )
+                )
+        except Exception as exc:  # pragma: no cover - depends on local serial hardware/package
+            self.open_error = str(exc)
+            self.enabled = bool(self.serial_port) or self.config.dry_run
+            for mirror_port in self.mirror_serial_ports:
+                try:
+                    mirror_port.close()
+                except Exception:
+                    pass
+            self.mirror_serial_ports = []
 
     def _next_sequence(self) -> int:
         self.sequence = (self.sequence + 1) & 0xFFFF
@@ -112,15 +146,23 @@ class GimbalSerialClient:
         if not self.enabled:
             return False
         frame = build_frame(msg_type, self._next_sequence(), payload)
+        wrote_any = False
         try:
+            if self.serial_port is not None:
+                self.serial_port.write(frame)
+                wrote_any = True
+            for mirror_port in self.mirror_serial_ports:
+                if self.config.mirror_as_hex_text:
+                    mirror_port.write((frame.hex(" ").upper() + "\n").encode("ascii"))
+                else:
+                    mirror_port.write(frame)
+                wrote_any = True
             if self.config.dry_run:
+                wrote_any = True
+            if wrote_any:
                 self.sent_packets += 1
                 return True
-            if self.serial_port is None:
-                return False
-            self.serial_port.write(frame)
-            self.sent_packets += 1
-            return True
+            return False
         except Exception as exc:  # pragma: no cover - depends on serial hardware
             self.failed_packets += 1
             self.open_error = str(exc)
@@ -226,13 +268,22 @@ class GimbalSerialClient:
             except Exception:  # pragma: no cover - depends on serial hardware
                 pass
             self.serial_port = None
+        for mirror_port in self.mirror_serial_ports:
+            try:
+                mirror_port.close()
+            except Exception:  # pragma: no cover - depends on serial hardware
+                pass
+        self.mirror_serial_ports = []
 
     def summary(self) -> dict:
         return {
             "enabled": self.enabled,
             "port": self.config.port,
+            "mirror_ports": self.mirror_ports,
             "baudrate": self.config.baudrate,
+            "mirror_baudrate": self.config.mirror_baudrate or self.config.baudrate,
             "dry_run": self.config.dry_run,
+            "mirror_as_hex_text": self.config.mirror_as_hex_text,
             "command_rate_hz": self.config.command_rate_hz,
             "max_speed": self.config.max_speed,
             "pan_gain": self.config.pan_gain,

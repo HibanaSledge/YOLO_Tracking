@@ -1,0 +1,30 @@
+{
+  "source": "Q:\\20260528-160426.mp4",
+  "output_video": "E:\\Downloads\\ultralytics\\runs\\lock_target_corner_cases\\corner_20260528_160426\\corner_control_stable\\20260528-160426_locked.mp4",
+  "frame_metrics_json": "E:\\Downloads\\ultralytics\\runs\\lock_target_corner_cases\\corner_20260528_160426\\corner_control_stable\\20260528-160426_frame_metrics.json",
+  "performance_json": "E:\\Downloads\\ultralytics\\runs\\lock_target_corner_cases\\corner_20260528_160426\\corner_control_stable\\20260528-160426_performance.json",
+  "selected_at_frame": 1,
+  "target_initialized": true,
+  "target_name": "TARGET-1",
+  "final_tracker_id": 1,
+  "tracker_switches": 8,
+  "reacquired_count": 2,
+  "lost_frames": 0,
+  "face_detected_frames": 719,
+  "face_miss_frames": 0,
+  "total_face_misses": 25,
+  "max_face_miss_streak": 12,
+  "total_updates": 744,
+  "final_control_state": "TRACKING",
+  "final_lock_mode": "FACE_LOCK",
+  "final_filtered_target_center": {
+    "x": 416.83,
+    "y": 653.6
+  },
+  "control_alpha": 0.82,
+  "control_max_step": 25.0,
+  "control_deadband": 12.0,
+  "processed_frames": 774,
+  "runtime_sec": 789.735,
+  "effective_fps": 0.98
+}

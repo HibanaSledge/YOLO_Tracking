@@ -8,19 +8,25 @@
 - `offline_tuning_progress.md`：最近一次离线调参执行进度和 live log 摘要。
 - `offline_tuning_results.md`：baseline 与 G1-G7 的统一指标表，包含速度/质量影响判断。
 - `offline_tuning_analysis_report.md`：七轮离线调参中文最终分析报告。
+- `corner_case_experiment_plan_20260528_160426.md`：针对 `Q:\20260528-160426.mp4` 的 C0-C8 corner case 调参计划。
+- `corner_case_tuning_progress_<RunId>.md`：corner case 调参执行进度，脚本运行后生成。
+- `corner_case_tuning_results_<RunId>.md`：corner case 调参统一指标表，脚本运行后生成。
 
 ## 可复用脚本
 
 - `tools/tuning/run_offline_tuning.ps1`：从头运行 G1-G7 离线调参。
 - `tools/tuning/continue_offline_tuning_after_g1.ps1`：等待 G1 完成后自动续跑 G2-G7。
 - `tools/tuning/monitor_manual_offline_experiment.ps1`：监控手动启动的单轮实验进程并更新进度/结果。
+- `tools/tuning/run_corner_case_tuning.ps1`：对新输入 `Q:\20260528-160426.mp4` 运行 C0-C8 corner case 调参。
 
-三个脚本会从自身位置向上查找 `lock_target.py` 来定位仓库根目录，因此移动到 `tools/tuning/` 后仍可复用。
+这些脚本会从自身位置向上查找 `lock_target.py` 来定位仓库根目录，因此移动到 `tools/tuning/` 后仍可复用。
 
 ## 输出目录
 
 - `runs/lock_target_tuning/`：G1-G7 实验输出目录。
 - `runs/offline_tuning_logs/`：调参 live log、stdout、stderr 和合并日志。
+- `runs/lock_target_corner_cases/<RunId>/`：corner case C0-C8 实验输出目录。
+- `runs/corner_case_tuning_logs/<RunId>/`：corner case live log、stdout 和 stderr。
 
 ## 常用入口
 
@@ -40,4 +46,16 @@
 
 ```powershell
 .\tools\tuning\monitor_manual_offline_experiment.ps1 -ProcessId <PID> -ExperimentId G1 -ExperimentName detect_img1152 -ParamsText "--imgsz 1152"
+```
+
+如果需要运行新视频 corner case 调参：
+
+```powershell
+.\tools\tuning\run_corner_case_tuning.ps1 -SourceVideo "Q:\20260528-160426.mp4" -RunId corner_20260528_160426
+```
+
+如果需要覆盖已有同名输出：
+
+```powershell
+.\tools\tuning\run_corner_case_tuning.ps1 -SourceVideo "Q:\20260528-160426.mp4" -RunId corner_20260528_160426 -Force
 ```

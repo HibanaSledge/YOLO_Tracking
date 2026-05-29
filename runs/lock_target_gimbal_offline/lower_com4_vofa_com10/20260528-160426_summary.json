@@ -1,0 +1,50 @@
+{
+  "source": "Q:\\20260528-160426.mp4",
+  "output_video": "E:\\Downloads\\ultralytics\\runs\\lock_target_gimbal_offline\\lower_com4_vofa_com10\\20260528-160426_locked.mp4",
+  "frame_metrics_json": "E:\\Downloads\\ultralytics\\runs\\lock_target_gimbal_offline\\lower_com4_vofa_com10\\20260528-160426_frame_metrics.json",
+  "performance_json": "E:\\Downloads\\ultralytics\\runs\\lock_target_gimbal_offline\\lower_com4_vofa_com10\\20260528-160426_performance.json",
+  "selected_at_frame": 1,
+  "target_initialized": true,
+  "target_name": "TARGET-1",
+  "final_tracker_id": 1,
+  "tracker_switches": 8,
+  "reacquired_count": 2,
+  "lost_frames": 0,
+  "face_detected_frames": 719,
+  "face_miss_frames": 0,
+  "total_face_misses": 25,
+  "max_face_miss_streak": 12,
+  "total_updates": 744,
+  "final_control_state": "TRACKING",
+  "final_lock_mode": "FACE_LOCK",
+  "final_filtered_target_center": {
+    "x": 415.92,
+    "y": 653.78
+  },
+  "control_alpha": 0.72,
+  "control_max_step": 40.0,
+  "control_deadband": 12.0,
+  "processed_frames": 774,
+  "runtime_sec": 832.466,
+  "effective_fps": 0.93,
+  "gimbal_serial": {
+    "enabled": true,
+    "port": "COM4",
+    "mirror_ports": [
+      "COM10"
+    ],
+    "baudrate": 115200,
+    "mirror_baudrate": 115200,
+    "dry_run": false,
+    "mirror_as_hex_text": true,
+    "command_rate_hz": 20.0,
+    "max_speed": 500,
+    "pan_gain": 0.8,
+    "tilt_gain": 0.8,
+    "invert_pan": false,
+    "invert_tilt": false,
+    "sent_packets": 775,
+    "failed_packets": 0,
+    "open_error": null
+  }
+}

@@ -11,7 +11,24 @@ param(
     [Parameter(Mandatory = $true)]
     [string]$ParamsText,
 
-    [int]$PollSeconds = 30
+    [int]$PollSeconds = 30,
+
+    [ValidateSet('offline', 'corner')]
+    [string]$ExperimentSet = 'offline',
+
+    [string]$SourceVideo = '',
+
+    [string]$ProjectName = '',
+
+    [string]$ProgressFileName = '',
+
+    [string]$ResultsFileName = '',
+
+    [string]$LogDirRelative = '',
+
+    [string]$LiveLogFileName = '',
+
+    [string]$RunId = ''
 )
 
 $ErrorActionPreference = 'Stop'
@@ -26,27 +43,65 @@ while (-not (Test-Path (Join-Path $Root 'lock_target.py'))) {
     $Root = $Parent
 }
 $Python = 'C:/Users/Stuart.Cai/AppData/Local/Programs/Python/Python310/python.exe'
-$SourceVideo = 'Q:\20260521-120258.mp4'
+if ([string]::IsNullOrWhiteSpace($SourceVideo)) {
+    if ($ExperimentSet -eq 'corner') { $SourceVideo = 'Q:\20260528-160426.mp4' }
+    else { $SourceVideo = 'Q:\20260521-120258.mp4' }
+}
+if ([string]::IsNullOrWhiteSpace($RunId) -and $ExperimentSet -eq 'corner') { $RunId = 'corner_20260528_160426' }
+if ([string]::IsNullOrWhiteSpace($ProjectName)) {
+    if ($ExperimentSet -eq 'corner') { $ProjectName = "runs/lock_target_corner_cases/$RunId" }
+    else { $ProjectName = 'runs/lock_target_tuning' }
+}
+if ([string]::IsNullOrWhiteSpace($ProgressFileName)) {
+    if ($ExperimentSet -eq 'corner') { $ProgressFileName = "corner_case_tuning_progress_$RunId.md" }
+    else { $ProgressFileName = 'offline_tuning_progress.md' }
+}
+if ([string]::IsNullOrWhiteSpace($ResultsFileName)) {
+    if ($ExperimentSet -eq 'corner') { $ResultsFileName = "corner_case_tuning_results_$RunId.md" }
+    else { $ResultsFileName = 'offline_tuning_results.md' }
+}
+if ([string]::IsNullOrWhiteSpace($LogDirRelative)) {
+    if ($ExperimentSet -eq 'corner') { $LogDirRelative = "runs/corner_case_tuning_logs/$RunId" }
+    else { $LogDirRelative = 'runs/offline_tuning_logs' }
+}
+if ([string]::IsNullOrWhiteSpace($LiveLogFileName)) {
+    if ($ExperimentSet -eq 'corner') { $LiveLogFileName = 'corner_case_tuning_live.log' }
+    else { $LiveLogFileName = 'offline_tuning_live.log' }
+}
 $SourceStem = [System.IO.Path]::GetFileNameWithoutExtension($SourceVideo)
-$ProjectName = 'runs/lock_target_tuning'
 $DocsTuningDir = Join-Path $Root 'docs/tuning'
-$ProgressFile = Join-Path $DocsTuningDir 'offline_tuning_progress.md'
-$ResultsFile = Join-Path $DocsTuningDir 'offline_tuning_results.md'
-$LogDir = Join-Path $Root 'runs/offline_tuning_logs'
-$LiveLog = Join-Path $LogDir 'offline_tuning_live.log'
+$ProgressFile = Join-Path $DocsTuningDir $ProgressFileName
+$ResultsFile = Join-Path $DocsTuningDir $ResultsFileName
+$LogDir = Join-Path $Root $LogDirRelative
+$LiveLog = Join-Path $LogDir $LiveLogFileName
 
 New-Item -ItemType Directory -Path $DocsTuningDir -Force | Out-Null
 New-Item -ItemType Directory -Path $LogDir -Force | Out-Null
 
-$experiments = @(
-    [pscustomobject]@{ id = 'G1'; name = 'detect_img1152'; params = '--imgsz 1152'; note = 'Detect upsize' },
-    [pscustomobject]@{ id = 'G2'; name = 'face_recall_boost'; params = '--face-scale-factor 1.03 --face-min-confidence 0.25'; note = 'Face recall boost' },
-    [pscustomobject]@{ id = 'G3'; name = 'reacquire_loose'; params = '--min-appearance 0.32 --reacquire-thresh 0.42'; note = 'Looser reacquire' },
-    [pscustomobject]@{ id = 'G4'; name = 'reacquire_strict'; params = '--min-appearance 0.38 --reacquire-thresh 0.48'; note = 'Stricter reacquire' },
-    [pscustomobject]@{ id = 'G5'; name = 'reid_interval_8'; params = '--reid-interval 8'; note = 'Lower ReID refresh' },
-    [pscustomobject]@{ id = 'G6'; name = 'mtcnn_interval_3'; params = '--mtcnn-interval 3'; note = 'Lower MTCNN refresh' },
-    [pscustomobject]@{ id = 'G7'; name = 'light_balanced'; params = '--reid-interval 4 --mtcnn-interval 2'; note = 'Balanced light preset' }
-)
+if ($ExperimentSet -eq 'corner') {
+    $experiments = @(
+        [pscustomobject]@{ id = 'C0'; name = 'corner_baseline'; params = 'baseline full'; note = 'Same-source baseline' },
+        [pscustomobject]@{ id = 'C1'; name = 'corner_img1152'; params = '--imgsz 1152'; note = 'Detect upsize' },
+        [pscustomobject]@{ id = 'C2'; name = 'corner_conf020'; params = '--conf 0.20'; note = 'Weak-detection recall' },
+        [pscustomobject]@{ id = 'C3'; name = 'corner_face_scale103'; params = '--face-scale-factor 1.03'; note = 'Classical face recall' },
+        [pscustomobject]@{ id = 'C4'; name = 'corner_face_conf025'; params = '--face-min-confidence 0.25'; note = 'MTCNN face recall' },
+        [pscustomobject]@{ id = 'C5'; name = 'corner_reacq_loose'; params = '--min-appearance 0.30 --reacquire-thresh 0.40'; note = 'Looser reacquire' },
+        [pscustomobject]@{ id = 'C6'; name = 'corner_reacq_strict'; params = '--min-appearance 0.40 --reacquire-thresh 0.50'; note = 'Stricter reacquire' },
+        [pscustomobject]@{ id = 'C7'; name = 'corner_control_stable'; params = '--control-alpha 0.82 --control-max-step 25'; note = 'Stable control center' },
+        [pscustomobject]@{ id = 'C8'; name = 'corner_mtcnn2'; params = '--mtcnn-interval 2'; note = 'MTCNN interval boundary' }
+    )
+}
+else {
+    $experiments = @(
+        [pscustomobject]@{ id = 'G1'; name = 'detect_img1152'; params = '--imgsz 1152'; note = 'Detect upsize' },
+        [pscustomobject]@{ id = 'G2'; name = 'face_recall_boost'; params = '--face-scale-factor 1.03 --face-min-confidence 0.25'; note = 'Face recall boost' },
+        [pscustomobject]@{ id = 'G3'; name = 'reacquire_loose'; params = '--min-appearance 0.32 --reacquire-thresh 0.42'; note = 'Looser reacquire' },
+        [pscustomobject]@{ id = 'G4'; name = 'reacquire_strict'; params = '--min-appearance 0.38 --reacquire-thresh 0.48'; note = 'Stricter reacquire' },
+        [pscustomobject]@{ id = 'G5'; name = 'reid_interval_8'; params = '--reid-interval 8'; note = 'Lower ReID refresh' },
+        [pscustomobject]@{ id = 'G6'; name = 'mtcnn_interval_3'; params = '--mtcnn-interval 3'; note = 'Lower MTCNN refresh' },
+        [pscustomobject]@{ id = 'G7'; name = 'light_balanced'; params = '--reid-interval 4 --mtcnn-interval 2'; note = 'Balanced light preset' }
+    )
+}
 
 function Write-LiveLog {
     param([string]$Message)
@@ -132,6 +187,43 @@ function Write-ResultsTable {
         $baselineLight,
         [array]$rows
     )
+
+    if ($ExperimentSet -eq 'corner') {
+        $baseline = $rows | Where-Object { $_.id -eq 'C0' } | Select-Object -First 1
+        $lines = @(
+            '# Corner Case Tuning Results',
+            '',
+            "- Source video: $SourceVideo",
+            "- Run ID: $RunId",
+            "- Project: $ProjectName",
+            "- Live log: $LogDirRelative/$LiveLogFileName",
+            '',
+            '## Experiment Table',
+            '',
+            '| ID | Name | Params | Runtime Sec | FPS | FACE_LOCK | HEAD_PROXY | LOST | Tracker Switches | Reacquired | Face Detected | Face Misses | Embedding Calls | MTCNN Calls | Quality vs C0 | Speed vs C0 |',
+            '| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |'
+        )
+
+        foreach ($row in $rows) {
+            if ($null -ne $baseline) {
+                $quality = Compare-Quality -baseline $baseline -row $row
+                $speed = Compare-Speed -baseline $baseline -row $row
+            }
+            else {
+                $quality = 'pending C0 baseline'
+                $speed = 'pending C0 baseline'
+            }
+            $lines += "| $($row.id) | $($row.name) | $($row.params) | $([math]::Round($row.runtime_sec, 3)) | $([math]::Round($row.fps, 3)) | $($row.face_lock) | $($row.head_proxy) | $($row.lost) | $($row.tracker_switches) | $($row.reacquired) | $($row.face_detected) | $($row.face_misses) | $($row.embedding_calls) | $($row.mtcnn_calls) | $quality | $speed |"
+        }
+
+        $lines += ''
+        $lines += '## Notes'
+        $lines += ''
+        $lines += '- Monitor output is updated by tools/tuning/monitor_manual_offline_experiment.ps1 in corner mode.'
+        $lines += '- Final conclusions still require summary.json, frame_metrics.json, performance.json, and manual key-frame review.'
+        Set-Content -Path $ResultsFile -Value $lines -Encoding UTF8
+        return
+    }
 
     $lines = @(
         '# Offline Tuning Results',
@@ -224,8 +316,10 @@ function Update-ProgressFile {
     )
 
     $experimentRows = Get-ExperimentRows -PidAlive $PidAlive -HeartbeatNote $HeartbeatNote
+    $progressTitle = '# Offline Tuning Progress'
+    if ($ExperimentSet -eq 'corner') { $progressTitle = '# Corner Case Tuning Progress' }
     $lines = @(
-        '# Offline Tuning Progress',
+        $progressTitle,
         '',
         '## Status',
         '',
@@ -234,8 +328,8 @@ function Update-ProgressFile {
         "- Current experiment: $CurrentExperiment",
         "- Source video: $SourceVideo",
         "- Python: $Python",
-        "- Live log: runs/offline_tuning_logs/offline_tuning_live.log",
-        "- Results table: docs/tuning/offline_tuning_results.md",
+        "- Live log: $LogDirRelative/$LiveLogFileName",
+        "- Results table: docs/tuning/$ResultsFileName",
         ''
     )
     if ($ExtraNote) {
@@ -260,8 +354,12 @@ function Update-ProgressFile {
     Set-Content -Path $ProgressFile -Value $lines -Encoding UTF8
 }
 
-$baselineFull = Load-RunMetrics -SummaryPath (Join-Path $Root 'runs/lock_target/offline_run/20260521-120258_summary.json') -PerformancePath (Join-Path $Root 'runs/lock_target/offline_run/20260521-120258_performance.json') -FrameMetricsPath (Join-Path $Root 'runs/lock_target/offline_run/20260521-120258_frame_metrics.json') -Id 'baseline_full' -Name 'offline_run' -Params 'baseline full'
-$baselineLight = Load-RunMetrics -SummaryPath (Join-Path $Root 'runs/lock_target/offline_run_light/20260521-120258_summary.json') -PerformancePath (Join-Path $Root 'runs/lock_target/offline_run_light/20260521-120258_performance.json') -FrameMetricsPath (Join-Path $Root 'runs/lock_target/offline_run_light/20260521-120258_frame_metrics.json') -Id 'baseline_light' -Name 'offline_run_light' -Params 'lightweight preset'
+$baselineFull = $null
+$baselineLight = $null
+if ($ExperimentSet -eq 'offline') {
+    $baselineFull = Load-RunMetrics -SummaryPath (Join-Path $Root 'runs/lock_target/offline_run/20260521-120258_summary.json') -PerformancePath (Join-Path $Root 'runs/lock_target/offline_run/20260521-120258_performance.json') -FrameMetricsPath (Join-Path $Root 'runs/lock_target/offline_run/20260521-120258_frame_metrics.json') -Id 'baseline_full' -Name 'offline_run' -Params 'baseline full'
+    $baselineLight = Load-RunMetrics -SummaryPath (Join-Path $Root 'runs/lock_target/offline_run_light/20260521-120258_summary.json') -PerformancePath (Join-Path $Root 'runs/lock_target/offline_run_light/20260521-120258_performance.json') -FrameMetricsPath (Join-Path $Root 'runs/lock_target/offline_run_light/20260521-120258_frame_metrics.json') -Id 'baseline_light' -Name 'offline_run_light' -Params 'lightweight preset'
+}
 
 $outputVideo = Join-Path $Root (Join-Path $ProjectName (Join-Path $ExperimentName ($SourceStem + '_locked.mp4')))
 $lastSize = -1
