@@ -1,16 +1,29 @@
 # Offline Tuning Workspace
 
-本目录保存离线单目标锁定调参相关的参数表、进度、结果和最终分析报告。可复用执行脚本统一放在 `tools/tuning/`，运行输出保留在 `runs/` 下。
+本目录保存离线单目标锁定调参相关的参数表、进度、结果和最终分析报告。当前文档体系已经覆盖三类实验：早期 G1-G7 离线调参、后续 C0-C8 corner case 补充实验，以及最新 P0-P11 priority sweep。可复用执行脚本统一放在 `tools/tuning/`，运行输出保留在 `runs/` 下。
 
 ## 文件说明
 
 - `lock_target_parameter_table.md`：参数优先级、调参路线和 corner case 记录。
 - `offline_tuning_progress.md`：最近一次离线调参执行进度和 live log 摘要。
 - `offline_tuning_results.md`：baseline 与 G1-G7 的统一指标表，包含速度/质量影响判断。
-- `offline_tuning_analysis_report.md`：七轮离线调参中文最终分析报告。
+- `offline_tuning_analysis_report.md`：主分析报告，已汇总 G1-G7、C0-C8 和 P0-P11，并补充主要指标解释、观感映射和人工关键帧复核建议。
 - `corner_case_experiment_plan_20260528_160426.md`：针对 `Q:\20260528-160426.mp4` 的 C0-C8 corner case 调参计划。
 - `corner_case_tuning_progress_<RunId>.md`：corner case 调参执行进度，脚本运行后生成。
 - `corner_case_tuning_results_<RunId>.md`：corner case 调参统一指标表，脚本运行后生成。
+
+## 建议阅读顺序
+
+1. 先看 `offline_tuning_analysis_report.md` 第 1.1 节，理解 `FACE_LOCK`、`HEAD_PROXY`、`LOST`、`SEARCHING`、`Tracker Switches` 等指标的真实含义，以及这些指标在画面观感上的对应关系。
+2. 再看 `offline_tuning_results.md` 或各轮结果表，快速比较速度、质量、连续性指标的变化趋势。
+3. 最后回到 `offline_tuning_analysis_report.md` 中对应实验章节，确认结论是否建立在 `summary.json`、`frame_metrics.json`、`performance.json` 和人工关键帧复核之上。
+
+## 判读原则
+
+- 不把 tracker id 连续性直接等同于业务目标身份连续性。
+- 不把 `HEAD_PROXY` 当作真实 `FACE_LOCK` 成功。
+- 看到 `FACE_LOCK` 增加时，仍要结合关键帧人工复核，确认是否真的锁在目标脸上，而不是旁人脸、误检脸或后脑代理。
+- 涉及轻量化或实时性结论时，必须同时看 `FPS`、`Runtime Sec`、各阶段平均耗时，以及质量指标是否同步恶化。
 
 ## 可复用脚本
 

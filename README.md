@@ -174,7 +174,7 @@ py -3.10 lock_target_realtime.py --camera 0 --camera-width 960 --camera-height 5
 
 ## 新任务 2：离线调参脚本与结果归档
 
-已将前面 G1-G7 离线调参任务产生的脚本、实时进度监控脚本、参数表、结果表和最终报告按用途归档，后续调参实验可以复用。
+已将离线调参任务产生的脚本、实时进度监控脚本、参数表、结果表和分析报告按用途归档，当前文档同时覆盖早期 G1-G7、后续 C0-C8 corner case，以及最新 P0-P11 priority sweep，后续调参实验可以继续复用这套入口。
 
 ### 调参脚本
 
@@ -194,7 +194,9 @@ py -3.10 lock_target_realtime.py --camera 0 --camera-width 960 --camera-height 5
 - [docs/tuning/lock_target_parameter_table.md](docs/tuning/lock_target_parameter_table.md)：参数优先级、调参路线和 corner case。
 - [docs/tuning/offline_tuning_progress.md](docs/tuning/offline_tuning_progress.md)：最近调参进度和 live log 摘要。
 - [docs/tuning/offline_tuning_results.md](docs/tuning/offline_tuning_results.md)：baseline 与 G1-G7 的统一指标表。
-- [docs/tuning/offline_tuning_analysis_report.md](docs/tuning/offline_tuning_analysis_report.md)：七轮调参中文最终报告。
+- [docs/tuning/offline_tuning_analysis_report.md](docs/tuning/offline_tuning_analysis_report.md)：主调参分析报告，已汇总 G1-G7、C0-C8、P0-P11，并补充 `FACE_LOCK` / `HEAD_PROXY` 等指标解释、观感映射和人工关键帧复核建议。
+
+阅读这些调参文档时，建议先看 [docs/tuning/offline_tuning_analysis_report.md](docs/tuning/offline_tuning_analysis_report.md) 开头的指标解释，再回看结果表。这里的原则是：不能把 tracker id 连续性直接当成业务目标连续性，也不能把 `HEAD_PROXY` 视为真实的人脸锁定成功；所有质量结论都需要结合关键帧人工复核。
 
 ### 调参输出
 
