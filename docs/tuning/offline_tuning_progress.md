@@ -12,6 +12,17 @@
 
 - Note: G2-G7 auto-resume completed successfully.
 
+## Completed Summary
+
+- 本文档记录的 G1-G7 常规离线调参已经全部完成，当前职责主要是保留执行过程和完成状态。
+- 从后续总分析看，这一阶段最重要的结论不是直接选出最终参数，而是先定位了 `imgsz`、ReID 刷新、人脸检测刷新和重绑定阈值各自的影响方向。
+- 当前应结合 [docs/tuning/offline_tuning_analysis_report.md](docs/tuning/offline_tuning_analysis_report.md) 一起阅读，避免只根据本页日志把某个单轮实验误判为最终答案。
+
+## Next Step
+
+- 如果需要当前可执行结论，请转到主报告中的 C0-C8 和 P0-P11 分析，而不要停留在 G1-G7 单阶段判断。
+- 如果需要复盘执行过程，本页保留的 heartbeat 和 completed 日志仍可用于确认实验是否完整落盘。
+
 ## Planned Experiments
 
 | ID | Name | Parameter Changes | Status | Notes |

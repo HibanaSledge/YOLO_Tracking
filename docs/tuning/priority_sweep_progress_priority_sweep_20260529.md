@@ -12,6 +12,17 @@
 
 - Note: Priority sweep experiments completed successfully.
 
+## Completed Summary
+
+- P0-P11 priority sweep 已全部完成，当前这是离线调参链路中最接近“下一步默认候选筛选”的一轮实验。
+- 从总分析口径看，P4、P5、P6、P11 是当前最值得继续复核的方向，但这些结果仍不能脱离人工关键帧复核单独成立。
+- 本页的职责是保留 sweep 计划和执行日志；真正的工程结论应以 [docs/tuning/offline_tuning_analysis_report.md](docs/tuning/offline_tuning_analysis_report.md) 中对应章节为准。
+
+## Next Step
+
+- 如果当前目标是选默认方案，先做 P4、P5、P6、P11 的人工关键帧复核。
+- 如果当前目标是继续扩参，先确认现有候选的真收益与假收益，再决定是否新增实验，而不是继续盲目 sweep。
+
 ## Planned Experiments
 
 | ID | Name | Phase | Model | ReID Model | Params | Status | Direction | Risk |

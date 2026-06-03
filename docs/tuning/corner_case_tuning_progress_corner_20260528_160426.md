@@ -12,6 +12,17 @@
 
 - Note: Completed C8. Results table updated.
 
+## Completed Summary
+
+- C0-C8 corner case 调参已经全部完成，本页当前主要用于保留执行顺序、完成时间和落盘状态。
+- 这一阶段的核心价值是把评估场景从早期基线视频推进到更具遮挡、转头和控制稳定性挑战的 source 上，为后续 priority sweep 提供更有针对性的参数方向。
+- 其中与人脸尺度、MTCNN 调用频率、控制稳定性相关的观察，已经被吸收到主分析报告中，后续判断应以总报告为准。
+
+## Next Step
+
+- 继续判断参数优劣时，应优先参考后续 P0-P11 的 priority sweep，而不是只看 C0-C8 的单轮结果。
+- 如果要复盘本阶段执行是否完整，本页日志和对应 results 文档仍是最直接的核验入口。
+
 ## Planned Experiments
 
 | ID | Name | Parameter Changes | Status | Notes |

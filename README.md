@@ -7,9 +7,17 @@
 - 离线视频单目标人脸锁定：由 [lock_target.py](lock_target.py) 提供。
 - 实时摄像头单目标人脸锁定：由 [lock_target_realtime.py](lock_target_realtime.py) 提供。
 - 性能与质量证据输出：summary、frame_metrics、performance 统一落盘。
-- 七轮离线调参实验与中文分析报告：见 [docs/tuning/](docs/tuning/)。
+- 离线调参文档已覆盖 G1-G7、C0-C8、P0-P11 三阶段实验，并提供中文分析报告与指标解释：见 [docs/tuning/](docs/tuning/)。
 - 云台 tracking 串口通信协议与上位机发送链路：见 [gimbal/](gimbal/) 和 [docs/gimbal/](docs/gimbal/)。
 - 调参脚本、云台脚本、文档和运行产物已按任务分类整理。
+
+## 建议阅读顺序
+
+如果当前目标是快速理解项目现状，建议按下面顺序阅读：
+
+1. 先看 [lock_target_project_report.md](lock_target_project_report.md)，了解项目阶段、核心技术路线、当前瓶颈和下一步建议。
+2. 再看 [docs/tuning/offline_tuning_analysis_report.md](docs/tuning/offline_tuning_analysis_report.md)，重点阅读开头的指标解释以及 G1-G7、C0-C8、P0-P11 对比结论。
+3. 最后按需回看 [docs/tuning/offline_tuning_progress.md](docs/tuning/offline_tuning_progress.md)、[docs/tuning/corner_case_tuning_progress_corner_20260528_160426.md](docs/tuning/corner_case_tuning_progress_corner_20260528_160426.md)、[docs/tuning/priority_sweep_progress_priority_sweep_20260529.md](docs/tuning/priority_sweep_progress_priority_sweep_20260529.md) 获取执行日志与阶段性结论。
 
 ## 目录结构
 
