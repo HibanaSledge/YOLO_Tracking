@@ -24,6 +24,24 @@ def clamp_int(value: float, lower: int, upper: int) -> int:
     return int(max(lower, min(upper, round(value))))
 
 
+def clamp_float(value: float, lower: float, upper: float) -> float:
+    return float(max(lower, min(upper, value)))
+
+
+def tristate_value(value: Any, default: int = 0xFF) -> int:
+    if value is None:
+        return default
+    if isinstance(value, str):
+        normalized = value.strip().lower()
+        if normalized in {"keep", "hold", "none", "no-op", "noop", "255", "0xff"}:
+            return 0xFF
+        if normalized in {"on", "enable", "enabled", "true", "1", "0x01"}:
+            return 0x01
+        if normalized in {"off", "disable", "disabled", "false", "0", "0x00"}:
+            return 0x00
+    return int(value) & 0xFF
+
+
 def crc16_modbus(data: bytes) -> int:
     crc = 0xFFFF
     for byte in data:
@@ -44,21 +62,69 @@ def build_frame(msg_type: int, sequence: int, payload: bytes = b"") -> bytes:
     return HEADER + body + struct.pack("<H", checksum)
 
 
+def checksum8(data: bytes) -> int:
+    return sum(data) & 0xFF
+
+
+def build_qgimbal_control_frame(
+    yaw_speed: float,
+    pitch_speed: float,
+    laser_enabled: int = 0xFF,
+    enabled: int = 0xFF,
+    stability_enabled: int = 0xFF,
+) -> bytes:
+    payload = struct.pack(
+        "<ffBBB",
+        clamp_float(yaw_speed, -50.0, 50.0),
+        clamp_float(pitch_speed, -50.0, 50.0),
+        laser_enabled & 0xFF,
+        enabled & 0xFF,
+        stability_enabled & 0xFF,
+    )
+    return payload + bytes([checksum8(payload)])
+
+
+def parse_qgimbal_telemetry_frame(data: bytes) -> dict[str, Any] | None:
+    if len(data) != 36 or data[0:2] != b"\xAA\xFF":
+        return None
+    if checksum8(data[:35]) != data[35]:
+        return None
+    imu_yaw, imu_pitch, imu_roll = struct.unpack_from("<fff", data, 4)
+    yaw_imu_angle, pitch_imu_angle = struct.unpack_from("<ff", data, 16)
+    yaw_motor_angle, pitch_motor_angle = struct.unpack_from("<ff", data, 24)
+    return {
+        "imu_yaw": imu_yaw,
+        "imu_pitch": imu_pitch,
+        "imu_roll": imu_roll,
+        "yaw_imu_angle": yaw_imu_angle,
+        "pitch_imu_angle": pitch_imu_angle,
+        "yaw_motor_angle": yaw_motor_angle,
+        "pitch_motor_angle": pitch_motor_angle,
+        "laser_enabled": data[32],
+        "enabled": data[33],
+        "stability_enabled": data[34],
+    }
+
+
 @dataclass
 class GimbalSerialConfig:
     port: str | None = None
     mirror_ports: list[str] | None = None
-    baudrate: int = 115200
+    protocol: str = "qgimbal"
+    baudrate: int = 1152000
     mirror_baudrate: int | None = None
     timeout: float = 0.02
     dry_run: bool = False
     mirror_as_hex_text: bool = False
     command_rate_hz: float = 20.0
-    max_speed: int = 500
+    max_speed: float = 50.0
     pan_gain: float = 0.8
     tilt_gain: float = 0.8
     invert_pan: bool = False
     invert_tilt: bool = False
+    laser_enabled: int = 0xFF
+    enabled_state: int = 0x01
+    stability_enabled: int = 0xFF
 
 
 class GimbalSerialClient:
@@ -85,17 +151,21 @@ class GimbalSerialClient:
             GimbalSerialConfig(
                 port=getattr(args, "gimbal_port", None),
                 mirror_ports=list(getattr(args, "gimbal_mirror_port", None) or []),
-                baudrate=int(getattr(args, "gimbal_baud", 115200)),
+                protocol=str(getattr(args, "gimbal_protocol", "qgimbal")),
+                baudrate=int(getattr(args, "gimbal_baud", 1152000)),
                 mirror_baudrate=getattr(args, "gimbal_mirror_baud", None),
                 timeout=float(getattr(args, "gimbal_timeout", 0.02)),
                 dry_run=bool(getattr(args, "gimbal_dry_run", False)),
                 mirror_as_hex_text=bool(getattr(args, "gimbal_mirror_as_hex_text", False)),
                 command_rate_hz=float(getattr(args, "gimbal_command_rate", 20.0)),
-                max_speed=int(getattr(args, "gimbal_max_speed", 500)),
+                max_speed=float(getattr(args, "gimbal_max_speed", 50.0)),
                 pan_gain=float(getattr(args, "gimbal_pan_gain", 0.8)),
                 tilt_gain=float(getattr(args, "gimbal_tilt_gain", 0.8)),
                 invert_pan=bool(getattr(args, "gimbal_invert_pan", False)),
                 invert_tilt=bool(getattr(args, "gimbal_invert_tilt", False)),
+                laser_enabled=tristate_value(getattr(args, "gimbal_laser", "keep")),
+                enabled_state=tristate_value(getattr(args, "gimbal_enabled", "on")),
+                stability_enabled=tristate_value(getattr(args, "gimbal_stability", "keep")),
             )
         )
 
@@ -142,10 +212,9 @@ class GimbalSerialClient:
         self.sequence = (self.sequence + 1) & 0xFFFF
         return self.sequence
 
-    def _write_frame(self, msg_type: int, payload: bytes = b"") -> bool:
+    def _write_bytes(self, frame: bytes) -> bool:
         if not self.enabled:
             return False
-        frame = build_frame(msg_type, self._next_sequence(), payload)
         wrote_any = False
         try:
             if self.serial_port is not None:
@@ -168,6 +237,22 @@ class GimbalSerialClient:
             self.open_error = str(exc)
             return False
 
+    def _write_frame(self, msg_type: int, payload: bytes = b"") -> bool:
+        frame = build_frame(msg_type, self._next_sequence(), payload)
+        return self._write_bytes(frame)
+
+    def _write_qgimbal_control(self, yaw_speed: float, pitch_speed: float, *, stop: bool = False) -> bool:
+        if stop:
+            laser_enabled = 0xFF
+            enabled = 0xFF
+            stability_enabled = 0xFF
+        else:
+            laser_enabled = self.config.laser_enabled
+            enabled = self.config.enabled_state
+            stability_enabled = self.config.stability_enabled
+        frame = build_qgimbal_control_frame(yaw_speed, pitch_speed, laser_enabled, enabled, stability_enabled)
+        return self._write_bytes(frame)
+
     def send_stop(self, reason: str = "STOP", min_interval_sec: float = 0.5) -> dict | None:
         if not self.enabled:
             return None
@@ -175,6 +260,19 @@ class GimbalSerialClient:
         if now - self.last_stop_time < min_interval_sec:
             return None
         self.last_stop_time = now
+        if self.config.protocol == "qgimbal":
+            ok = self._write_qgimbal_control(0.0, 0.0, stop=True)
+            return {
+                "sent": ok,
+                "protocol": "qgimbal",
+                "msg_type": "CONTROL_STOP",
+                "state": reason,
+                "yaw_speed_rpm": 0.0,
+                "pitch_speed_rpm": 0.0,
+                "laser_enabled": 0xFF,
+                "enabled": 0xFF,
+                "stability_enabled": 0xFF,
+            }
         state_code = STATE_CODES.get(reason, STATE_CODES.get("LOST", 4))
         payload = struct.pack("<B", state_code)
         ok = self._write_frame(MSG_STOP, payload)
@@ -234,6 +332,27 @@ class GimbalSerialClient:
         if metric.get("filtered_target_center") is not None:
             flags |= 0x08
 
+        if self.config.protocol == "qgimbal":
+            yaw_speed = clamp_float(pan, -50.0, 50.0)
+            pitch_speed = clamp_float(tilt, -50.0, 50.0)
+            self.last_send_time = now
+            ok = self._write_qgimbal_control(yaw_speed, pitch_speed)
+            return {
+                "sent": ok,
+                "protocol": "qgimbal",
+                "msg_type": "CONTROL",
+                "state": state,
+                "flags": flags,
+                "yaw_speed_rpm": round(yaw_speed, 3),
+                "pitch_speed_rpm": round(pitch_speed, 3),
+                "dx_px": dx_px,
+                "dy_px": dy_px,
+                "distance_px": distance,
+                "laser_enabled": self.config.laser_enabled,
+                "enabled": self.config.enabled_state,
+                "stability_enabled": self.config.stability_enabled,
+            }
+
         payload = struct.pack(
             "<BBIhhhhH",
             STATE_CODES.get(state, 0),
@@ -249,6 +368,7 @@ class GimbalSerialClient:
         ok = self._write_frame(MSG_TRACK, payload)
         return {
             "sent": ok,
+            "protocol": "vision-v1",
             "msg_type": "TRACK",
             "state": state,
             "flags": flags,
@@ -280,6 +400,7 @@ class GimbalSerialClient:
             "enabled": self.enabled,
             "port": self.config.port,
             "mirror_ports": self.mirror_ports,
+            "protocol": self.config.protocol,
             "baudrate": self.config.baudrate,
             "mirror_baudrate": self.config.mirror_baudrate or self.config.baudrate,
             "dry_run": self.config.dry_run,
@@ -290,6 +411,9 @@ class GimbalSerialClient:
             "tilt_gain": self.config.tilt_gain,
             "invert_pan": self.config.invert_pan,
             "invert_tilt": self.config.invert_tilt,
+            "laser_enabled": self.config.laser_enabled,
+            "enabled_state": self.config.enabled_state,
+            "stability_enabled": self.config.stability_enabled,
             "sent_packets": self.sent_packets,
             "failed_packets": self.failed_packets,
             "open_error": self.open_error,

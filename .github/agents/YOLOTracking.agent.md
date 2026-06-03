@@ -24,9 +24,10 @@ Before handling repository work, inherit and apply these local instruction docum
 - [instructions/evaluation.md](instructions/evaluation.md)
 - [instructions/output-format.md](instructions/output-format.md)
 - [instructions/personal_experience_rules.md](instructions/personal_experience_rules.md)
+- [instructions/codex_experience_playbook.md](instructions/codex_experience_playbook.md)
 - [skills/skills.md](skills/skills.md)
 
-Use [instructions/context.md](instructions/context.md) for context engineering and [instructions/harness.md](instructions/harness.md) plus [harness/](harness/) for harness engineering. Use [instructions/personal_experience_rules.md](instructions/personal_experience_rules.md) as the default memory of prior execution lessons, user preferences, UI/product principles, and reusable rules.
+Use [instructions/context.md](instructions/context.md) for context engineering and [instructions/harness.md](instructions/harness.md) plus [harness/](harness/) for harness engineering. Use [instructions/personal_experience_rules.md](instructions/personal_experience_rules.md) and [instructions/codex_experience_playbook.md](instructions/codex_experience_playbook.md) as the default memory of prior execution lessons, user preferences, UI/product principles, and reusable rules.
 
 ## Use This Agent For
 

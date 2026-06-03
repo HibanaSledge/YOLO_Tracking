@@ -11,7 +11,7 @@ ROOT = Path(__file__).resolve().parents[2]
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
-from gimbal.serial_client import MSG_STOP, MSG_TRACK, STATE_CODES, build_frame
+from gimbal.serial_client import MSG_STOP, MSG_TRACK, STATE_CODES, build_frame, build_qgimbal_control_frame
 
 
 def parse_args() -> argparse.Namespace:
@@ -21,7 +21,8 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--list-ports", action="store_true", help="List available serial ports and exit.")
     parser.add_argument("--port", default=None, help="Serial port, for example COM4. If omitted, only prints HEX frames.")
     parser.add_argument("--mirror-port", action="append", default=[], help="Mirror every frame to another serial port, for example COM10 for VOFA on a virtual COM pair. Can be used multiple times.")
-    parser.add_argument("--baud", type=int, default=115200, help="Serial baudrate.")
+    parser.add_argument("--protocol", choices=("qgimbal", "vision-v1"), default="qgimbal", help="Serial protocol to generate. qgimbal is the MCU 12-byte control frame.")
+    parser.add_argument("--baud", type=int, default=1152000, help="Serial baudrate.")
     parser.add_argument("--mirror-baud", type=int, default=None, help="Mirror serial baudrate. Defaults to --baud.")
     parser.add_argument("--rate", type=float, default=20.0, help="Frame send/print rate in Hz.")
     parser.add_argument("--count", type=int, default=20, help="Number of TRACK frames to generate. Use 0 for infinite.")
@@ -31,7 +32,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--max-offset-x", type=int, default=320, help="Maximum absolute random dx in pixels.")
     parser.add_argument("--max-offset-y", type=int, default=560, help="Maximum absolute random dy in pixels.")
     parser.add_argument("--deadband", type=float, default=12.0, help="Deadband radius in pixels.")
-    parser.add_argument("--max-speed", type=int, default=500, help="Maximum absolute pan/tilt speed.")
+    parser.add_argument("--max-speed", type=float, default=50.0, help="Maximum absolute pan/tilt speed. QGimbal uses rpm and clamps to +/-50.")
     parser.add_argument("--pan-gain", type=float, default=0.8, help="Pan gain from normalized x offset.")
     parser.add_argument("--tilt-gain", type=float, default=0.8, help="Tilt gain from normalized y offset.")
     parser.add_argument("--invert-pan", action="store_true", help="Invert pan speed direction.")
@@ -59,7 +60,7 @@ def build_track_payload(
     half_width: float,
     half_height: float,
     deadband: float,
-    max_speed: int,
+    max_speed: float,
     pan_gain: float,
     tilt_gain: float,
     invert_pan: bool,
@@ -111,6 +112,45 @@ def build_track_payload(
         "tilt_speed": tilt_speed,
     }
     return payload, info
+
+
+def build_qgimbal_control(
+    *,
+    dx: int,
+    dy: int,
+    half_width: float,
+    half_height: float,
+    deadband: float,
+    max_speed: float,
+    pan_gain: float,
+    tilt_gain: float,
+    invert_pan: bool,
+    invert_tilt: bool,
+) -> tuple[bytes, dict]:
+    distance = (float(dx) * float(dx) + float(dy) * float(dy)) ** 0.5
+    deadband_active = distance <= deadband
+    control_active = not deadband_active
+
+    yaw = 0.0 if not control_active else float(dx) / max(half_width, 1.0) * max_speed * pan_gain
+    pitch = 0.0 if not control_active else float(dy) / max(half_height, 1.0) * max_speed * tilt_gain
+    if invert_pan:
+        yaw = -yaw
+    if invert_tilt:
+        pitch = -pitch
+
+    yaw_speed = max(-50.0, min(50.0, yaw))
+    pitch_speed = max(-50.0, min(50.0, pitch))
+    frame = build_qgimbal_control_frame(yaw_speed, pitch_speed, 0xFF, 0x01, 0xFF)
+    info = {
+        "dx": clamp_int(dx, -32768, 32767),
+        "dy": clamp_int(dy, -32768, 32767),
+        "distance_px": clamp_int(distance, 0, 65535),
+        "control_active": control_active,
+        "deadband_active": deadband_active,
+        "yaw_speed": round(yaw_speed, 3),
+        "pitch_speed": round(pitch_speed, 3),
+    }
+    return frame, info
 
 
 def open_serial(port: str | None, baud: int):
@@ -180,20 +220,34 @@ def main() -> None:
             sequence = (sequence + 1) & 0xFFFF
             dx = rng.randint(-abs(args.max_offset_x), abs(args.max_offset_x))
             dy = rng.randint(-abs(args.max_offset_y), abs(args.max_offset_y))
-            payload, info = build_track_payload(
-                frame_index=frame_index,
-                dx=dx,
-                dy=dy,
-                half_width=args.half_width,
-                half_height=args.half_height,
-                deadband=args.deadband,
-                max_speed=args.max_speed,
-                pan_gain=args.pan_gain,
-                tilt_gain=args.tilt_gain,
-                invert_pan=args.invert_pan,
-                invert_tilt=args.invert_tilt,
-            )
-            frame = build_frame(MSG_TRACK, sequence, payload)
+            if args.protocol == "qgimbal":
+                frame, info = build_qgimbal_control(
+                    dx=dx,
+                    dy=dy,
+                    half_width=args.half_width,
+                    half_height=args.half_height,
+                    deadband=args.deadband,
+                    max_speed=args.max_speed,
+                    pan_gain=args.pan_gain,
+                    tilt_gain=args.tilt_gain,
+                    invert_pan=args.invert_pan,
+                    invert_tilt=args.invert_tilt,
+                )
+            else:
+                payload, info = build_track_payload(
+                    frame_index=frame_index,
+                    dx=dx,
+                    dy=dy,
+                    half_width=args.half_width,
+                    half_height=args.half_height,
+                    deadband=args.deadband,
+                    max_speed=args.max_speed,
+                    pan_gain=args.pan_gain,
+                    tilt_gain=args.tilt_gain,
+                    invert_pan=args.invert_pan,
+                    invert_tilt=args.invert_tilt,
+                )
+                frame = build_frame(MSG_TRACK, sequence, payload)
             frame_hex = spaced_hex(frame)
             write_frame(serial_port, frame, frame_hex, args.send_hex_text)
             for mirror_port in mirror_ports:
@@ -211,9 +265,8 @@ def main() -> None:
                             f"dy={info['dy']}",
                             f"dist={info['distance_px']}",
                             f"active={int(info['control_active'])}",
-                            f"flags=0x{info['flags']:02X}",
-                            f"pan={info['pan_speed']}",
-                            f"tilt={info['tilt_speed']}",
+                            f"yaw={info.get('yaw_speed', info.get('pan_speed'))}",
+                            f"pitch={info.get('pitch_speed', info.get('tilt_speed'))}",
                             f"hex={frame_hex}",
                         ]
                     ),
@@ -223,8 +276,11 @@ def main() -> None:
 
         if args.include_stop:
             sequence = (sequence + 1) & 0xFFFF
-            payload = struct.pack("<B", STATE_CODES["LOST"])
-            frame = build_frame(MSG_STOP, sequence, payload)
+            if args.protocol == "qgimbal":
+                frame = build_qgimbal_control_frame(0.0, 0.0, 0xFF, 0xFF, 0xFF)
+            else:
+                payload = struct.pack("<B", STATE_CODES["LOST"])
+                frame = build_frame(MSG_STOP, sequence, payload)
             frame_hex = spaced_hex(frame)
             write_frame(serial_port, frame, frame_hex, args.send_hex_text)
             for mirror_port in mirror_ports:

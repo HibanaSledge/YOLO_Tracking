@@ -22,6 +22,7 @@ argument-hint: Describe the code task, run folder, experiment, bug, report, comp
 - [instructions/evaluation.md](instructions/evaluation.md)
 - [instructions/output-format.md](instructions/output-format.md)
 - [instructions/personal_experience_rules.md](instructions/personal_experience_rules.md)
+- [instructions/codex_experience_playbook.md](instructions/codex_experience_playbook.md)
 
 ### Skills
 
